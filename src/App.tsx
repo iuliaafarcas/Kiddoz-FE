@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import { ThemeProvider, createTheme } from "@mui/material";
-import Login from "./pages/LoginPage";
 import AppRouter from "./routes/AppRoutes";
 import { BrowserRouter } from "react-router-dom";
 function App() {
@@ -29,10 +28,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <AppRouter />
-        {/* <Navbar />
-      <TypeNavbar />
-      <MainPage /> */}
-        {/* <Login /> */}
       </BrowserRouter>
     </ThemeProvider>
   );

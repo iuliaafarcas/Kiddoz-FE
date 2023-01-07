@@ -7,15 +7,15 @@ const Login = () => {
     <Box
       sx={{
         backgroundImage: `url(${background})`,
+        backgroundRepeat: "no-repeat",
         position: "fixed",
         top: "0",
         left: "0",
         minWidth: "100%",
         minHeight: "100%",
+        backgroundSize: "cover",
       }}
-    >
-      gi{" "}
-    </Box>
+    ></Box>
   );
 };
 export default Login;

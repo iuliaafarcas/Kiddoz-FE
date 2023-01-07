@@ -6,11 +6,12 @@ export const NavbarStyled = styled(Box)(({ theme }) => {
     backgroundColor: theme.palette.secondary.light,
     height: "80px",
     width: "100%",
-    position: "fixed",
     top: 0,
     overflow: "hidden",
     display: "flex",
     flexDirection: "row",
+    position: "fixed",
+
     // justifyContent: "space-between",
   };
 });
@@ -20,10 +21,10 @@ export const TypeNavbarStyled = styled(Box)(({ theme }) => {
     backgroundColor: theme.palette.primary.main,
     height: "45px",
     width: "100%",
+    top: "80px",
     position: "fixed",
     overflow: "hidden",
-    marginTop: "70px",
-    // display: "flex",
+    display: "flex",
     flexDirection: "row",
     // justifyContent: "space-between",
   };
