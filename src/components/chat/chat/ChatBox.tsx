@@ -16,7 +16,7 @@ import { Box } from "@mui/system";
 import { ChatMessageDto } from "../../model/ChatMessageDto";
 import SendIcon from "@mui/icons-material/Send";
 
-export default function Chat() {
+export default function Chat({ chatPerson }: { chatPerson: String }) {
   const [chatMessages, setChatMessages] = useState<ChatMessageDto[]>([]);
   const [user] = useState("Iulia Farcas");
   const [message, setMessage] = useState("");
@@ -87,10 +87,10 @@ export default function Chat() {
         <Paper elevation={5}>
           <Box p={3}>
             <Typography variant="h4" gutterBottom>
-              {user}
+              {chatPerson}
             </Typography>
             <Divider />
-            <Grid container spacing={4} alignItems="center">
+            <Grid container spacing={4} alignItems="right">
               <Grid item xs={12} sx={{ height: "20rem" }}>
                 <List sx={{ height: "18rem", overflow: "auto" }}>
                   {listChatMessages}
