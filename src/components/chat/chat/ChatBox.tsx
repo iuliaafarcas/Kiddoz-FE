@@ -17,9 +17,7 @@ import { ChatMessageDto } from "../../model/ChatMessageDto";
 import SendIcon from "@mui/icons-material/Send";
 
 export default function Chat() {
-  const [chatMessages, setChatMessages] = useState([
-    new ChatMessageDto("John", "Hi!"),
-  ]);
+  const [chatMessages, setChatMessages] = useState<ChatMessageDto[]>([]);
   const [user] = useState("Iulia Farcas");
   const [message, setMessage] = useState("");
   const webSocket = useRef<WebSocket | null>(null);
@@ -63,7 +61,9 @@ export default function Chat() {
         { user: chatMessageDto.user, message: chatMessageDto.message },
       ]);
       if (scrollBottomRef.current) {
-        scrollBottomRef.current!.scrollIntoView({ behavior: "smooth" });
+        scrollBottomRef.current!.scrollIntoView({
+          behavior: "smooth",
+        });
       }
     };
   }, [chatMessages]);
@@ -95,6 +95,7 @@ export default function Chat() {
                 <List sx={{ height: "18rem", overflow: "auto" }}>
                   {listChatMessages}
                   <ListItem ref={scrollBottomRef}></ListItem>
+                  <ListItem> </ListItem>
                 </List>
               </Grid>
 
