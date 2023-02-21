@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useCallback, useMemo } from "react";
 import { Grid } from "@mui/material";
 import { Button } from "@mui/material";
 import {
@@ -10,32 +9,15 @@ import {
   GridStyled,
 } from "./StyledComponents";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-enum LoginFormFields {
-  email = "email",
-  password = "password",
-}
-const LoginBox = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const formFieldsManagers = useMemo(
-    () => ({
-      [LoginFormFields.email]: email,
-      [LoginFormFields.password]: password,
-    }),
-    [email, password]
-  );
-
-  const onInputChange = useCallback(
-    (event) => {
-      formFieldsManagers[event.target.name].setValue(event.target.value);
-      console.log(LoginFormFields.email);
-    },
-    [formFieldsManagers]
-  );
-
+const RegisterBox = () => {
+  let navigate = useNavigate();
+  // const classes = useStyles();
   const handleSubmit = (event: any) => {
     window.location.href = "/recommendations";
+    // event.preventDefault();
+    // Add your logic for handling the form submission here
   };
 
   return (
@@ -45,7 +27,7 @@ const LoginBox = () => {
           textAlign: "left",
           marginLeft: "40px",
           color: "black",
-          marginTop: "-230px",
+          marginTop: "-120px",
         }}
       >
         <TitleStyled
@@ -53,7 +35,7 @@ const LoginBox = () => {
           id="loginFormTitle"
           sx={{ fontSize: "30px", lineHeight: "40px", fontStyle: "regular" }}
         >
-          Login
+          Register
         </TitleStyled>
       </Grid>
 
@@ -61,16 +43,57 @@ const LoginBox = () => {
         <GridColorStyled
           item
           xs={4}
-          sx={{ marginLeft: "-40px", marginTop: "-150px" }}
+          sx={{ marginLeft: "-40px", marginTop: "-60px" }}
+        >
+          <TextFieldRegisterUserStyled
+            id="firstNameFormEmailField"
+            required
+            label="First name"
+            // name={LoginFormFields.email}
+            // helperText={email.errors}
+            // error={email.hasErrors}
+            // onChange={onInputChange}
+            // onBlur={email.validate}
+            // value={email.value}
+            variant="outlined"
+            placeholder="John"
+            autoComplete="off"
+          />
+        </GridColorStyled>
+
+        <GridColorStyled
+          item
+          xs={4}
+          sx={{ marginLeft: "-40px", marginTop: "25px" }}
+        >
+          <TextFieldRegisterUserStyled
+            id="lastNameFormEmailField"
+            required
+            label="Last name"
+            // name={LoginFormFields.email}
+            // helperText={email.errors}
+            // error={email.hasErrors}
+            // onChange={onInputChange}
+            // onBlur={email.validate}
+            // value={email.value}
+            variant="outlined"
+            placeholder="Doe"
+            autoComplete="off"
+          />
+        </GridColorStyled>
+        <GridColorStyled
+          item
+          xs={4}
+          sx={{ marginLeft: "-40px", marginTop: "25px" }}
         >
           <TextFieldRegisterUserStyled
             id="loginFormEmailField"
             required
             label="Email"
             // name={LoginFormFields.email}
-            // helperText="Email must have the right format and cannot be empty"
+            // helperText={email.errors}
             // error={email.hasErrors}
-            onChange={onInputChange}
+            // onChange={onInputChange}
             // onBlur={email.validate}
             // value={email.value}
             variant="outlined"
@@ -81,7 +104,7 @@ const LoginBox = () => {
         <GridColorStyled
           item
           xs={4}
-          sx={{ marginLeft: "-40px", marginTop: "30px" }}
+          sx={{ marginLeft: "-40px", marginTop: "25px" }}
         >
           <TextFieldRegisterUserStyled
             id="passwordFormEmailField"
@@ -90,7 +113,26 @@ const LoginBox = () => {
             // name={LoginFormFields.email}
             // helperText={email.errors}
             // error={email.hasErrors}
-            onChange={onInputChange}
+            // onChange={onInputChange}
+            // onBlur={email.validate}
+            // value={email.value}
+            variant="outlined"
+            autoComplete="off"
+          />
+        </GridColorStyled>
+        <GridColorStyled
+          item
+          xs={4}
+          sx={{ marginLeft: "-40px", marginTop: "25px" }}
+        >
+          <TextFieldRegisterUserStyled
+            id="confirmPasswordFormEmailField"
+            required
+            label="Confirm password"
+            // name={LoginFormFields.email}
+            // helperText={email.errors}
+            // error={email.hasErrors}
+            // onChange={onInputChange}
             // onBlur={email.validate}
             // value={email.value}
             variant="outlined"
@@ -98,25 +140,6 @@ const LoginBox = () => {
           />
         </GridColorStyled>
       </Grid>
-
-      <GridColorStyled
-        item
-        xs={4}
-        sx={{
-          marginTop: "20px",
-          fontFamily: "Inter",
-          fontWeight: "25px",
-          fontStyle: "regular",
-          color: "#0F3597",
-        }}
-      >
-        <Link
-          to="/register"
-          style={{ textDecoration: "none", color: "#0F3597" }}
-        >
-          <Grid>Don't have an account yet? Let's create one!</Grid>
-        </Link>
-      </GridColorStyled>
 
       <GridStyled
         item
@@ -150,11 +173,11 @@ const LoginBox = () => {
           type="submit"
           onClick={handleSubmit}
         >
-          Login
+          Create account
         </Button>
       </GridStyled>
     </GridGlobalStyled>
   );
 };
 
-export default LoginBox;
+export default RegisterBox;

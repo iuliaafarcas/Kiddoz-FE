@@ -1,8 +1,8 @@
 import React from "react";
 import { Box } from "@mui/material";
 import background from "../assets/background.png";
-import LoginBox from "../components/login/LoginBox";
-const Login = () => {
+import RegisterBox from "../components/register/RegisterBox";
+const Register = () => {
   return (
     <Box
       sx={{
@@ -16,8 +16,8 @@ const Login = () => {
         backgroundSize: "cover",
       }}
     >
-      <LoginBox />
+      <RegisterBox />
     </Box>
   );
 };
-export default Login;
+export default Register;
