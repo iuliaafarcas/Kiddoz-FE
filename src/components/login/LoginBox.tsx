@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useCallback, useMemo } from "react";
+import React, { ChangeEventHandler } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { Grid } from "@mui/material";
 import { Button } from "@mui/material";
 import {
@@ -12,12 +12,31 @@ import {
 import { Link } from "react-router-dom";
 
 enum LoginFormFields {
-  email = "email",
-  password = "password",
+  email = "userEmail",
+  password = "userPassword",
 }
 const LoginBox = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  useEffect(() => {
+    setPassword("");
+    setEmail("");
+  }, []);
+  const isValidEmail = (email: string) => {
+    if (emailRegex.test(email) === false) setEmailError("Invalid email format");
+    else setEmailError("");
+  };
+
+  const isValidPassword = (password: string) => {
+    if (password.length < 5)
+      setPasswordError("Password must be at least 5 characters long");
+    else setPasswordError("");
+  };
+
   const formFieldsManagers = useMemo(
     () => ({
       [LoginFormFields.email]: email,
@@ -27,15 +46,18 @@ const LoginBox = () => {
   );
 
   const onInputChange = useCallback(
-    (event) => {
-      formFieldsManagers[event.target.name].setValue(event.target.value);
-      console.log(LoginFormFields.email);
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (event.target.name === "email") setEmail(event.target.value);
+      else if (event.target.name === "password")
+        setPassword(event.target.value);
+      console.log(event.target.value);
     },
     [formFieldsManagers]
   );
 
   const handleSubmit = (event: any) => {
-    window.location.href = "/recommendations";
+    if (emailError === "" && passwordError === "")
+      window.location.href = "/recommendations";
   };
 
   return (
@@ -68,11 +90,11 @@ const LoginBox = () => {
             required
             label="Email"
             // name={LoginFormFields.email}
-            // helperText="Email must have the right format and cannot be empty"
+            helperText={emailError}
             // error={email.hasErrors}
             onChange={onInputChange}
-            // onBlur={email.validate}
-            // value={email.value}
+            onBlur={(event) => isValidEmail(event.target.value)}
+            // value={email}
             variant="outlined"
             placeholder="johndoe@yahoo.com"
             autoComplete="off"
@@ -87,11 +109,12 @@ const LoginBox = () => {
             id="passwordFormEmailField"
             required
             label="Password"
+            type="password"
             // name={LoginFormFields.email}
-            // helperText={email.errors}
+            helperText={passwordError}
             // error={email.hasErrors}
             onChange={onInputChange}
-            // onBlur={email.validate}
+            onBlur={(event) => isValidPassword(event.target.value)}
             // value={email.value}
             variant="outlined"
             autoComplete="off"

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const GridGlobalStyled = styled(Grid)(() => {
   return {
     width: "550px",
-    height: "650px",
+    height: "670px",
     backgroundColor: "#FFFFFF",
     borderRadius: "12px",
     color: "white",

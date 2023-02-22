@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { useState } from "react";
 import { Grid } from "@mui/material";
 import { Button } from "@mui/material";
 import {
@@ -12,14 +13,100 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const RegisterBox = () => {
-  let navigate = useNavigate();
-  // const classes = useStyles();
-  const handleSubmit = (event: any) => {
-    window.location.href = "/recommendations";
-    // event.preventDefault();
-    // Add your logic for handling the form submission here
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
+  const [matchPasswordError, setMatchPasswordError] = useState("");
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // useEffect(() => {
+  //   setPassword("");
+  //   setEmail("");
+  // }, []);
+  const isValidEmail = (email: string) => {
+    if (emailRegex.test(email) === false || email === "")
+      setEmailError("Invalid email format");
+    else setEmailError("");
   };
 
+  const isValidPassword = (password: string) => {
+    if (password.length < 5 || password === "")
+      setPasswordError("Password must be at least 5 characters long");
+    else setPasswordError("");
+  };
+  const isValidFirstName = (name: string) => {
+    if (name === "") setFirstNameError("First name is required");
+    else setFirstNameError("");
+  };
+
+  const isValidLastName = (name: string) => {
+    if (name === "") setLastNameError("Last name is required");
+    else setLastNameError("");
+  };
+  const doesPasswordsMatch = (password: string, confirmPassword: string) => {
+    if (password != confirmPassword)
+      setMatchPasswordError("Passwords don't match");
+    else setMatchPasswordError("");
+  };
+
+  const handleSubmit = (event: any) => {
+    // isValidEmail(email);
+    // isValidPassword(password);
+    // isValidFirstName(firstName);
+    // isValidLastName(lastName);
+    // doesPasswordsMatch(password, confirmPassword);
+    console.log(
+      firstName,
+      emailError,
+      passwordError,
+      firstNameError,
+      lastNameError,
+      matchPasswordError
+    );
+
+    console.log(
+      firstName,
+      emailError,
+      passwordError,
+      firstNameError,
+      lastNameError,
+      matchPasswordError
+    );
+    if (
+      email !== "" &&
+      firstName !== "" &&
+      lastName !== "" &&
+      password !== "" &&
+      confirmPassword !== "" &&
+      emailError === "" &&
+      passwordError === "" &&
+      firstNameError === "" &&
+      lastNameError === "" &&
+      matchPasswordError === ""
+    )
+      window.location.href = "/recommendations";
+  };
+  const onInputChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (event.target.name === "email") setEmail(event.target.value);
+      else if (event.target.name === "firstName")
+        setFirstName(event.target.value);
+      else if (event.target.name === "lastName")
+        setLastName(event.target.value);
+      else if (event.target.name === "password")
+        setPassword(event.target.value);
+      else if (event.target.name === "confirmPassword")
+        setConfirmPassword(event.target.value);
+    },
+    []
+  );
   return (
     <GridGlobalStyled container spacing={2} columns={2} id="loginForm">
       <Grid
@@ -27,7 +114,7 @@ const RegisterBox = () => {
           textAlign: "left",
           marginLeft: "40px",
           color: "black",
-          marginTop: "-120px",
+          marginTop: "-110px",
         }}
       >
         <TitleStyled
@@ -43,18 +130,18 @@ const RegisterBox = () => {
         <GridColorStyled
           item
           xs={4}
-          sx={{ marginLeft: "-40px", marginTop: "-60px" }}
+          sx={{ marginLeft: "-40px", marginTop: "-50px" }}
         >
           <TextFieldRegisterUserStyled
             id="firstNameFormEmailField"
             required
             label="First name"
             // name={LoginFormFields.email}
-            // helperText={email.errors}
+            helperText={firstNameError}
             // error={email.hasErrors}
-            // onChange={onInputChange}
-            // onBlur={email.validate}
-            // value={email.value}
+            onChange={onInputChange}
+            onBlur={(event) => isValidFirstName(event.target.value)}
+            // value={firstName}
             variant="outlined"
             placeholder="John"
             autoComplete="off"
@@ -64,17 +151,17 @@ const RegisterBox = () => {
         <GridColorStyled
           item
           xs={4}
-          sx={{ marginLeft: "-40px", marginTop: "25px" }}
+          sx={{ marginLeft: "-40px", marginTop: "20px" }}
         >
           <TextFieldRegisterUserStyled
             id="lastNameFormEmailField"
             required
             label="Last name"
             // name={LoginFormFields.email}
-            // helperText={email.errors}
+            helperText={lastNameError}
             // error={email.hasErrors}
-            // onChange={onInputChange}
-            // onBlur={email.validate}
+            onChange={onInputChange}
+            onBlur={(event) => isValidLastName(event.target.value)}
             // value={email.value}
             variant="outlined"
             placeholder="Doe"
@@ -84,17 +171,17 @@ const RegisterBox = () => {
         <GridColorStyled
           item
           xs={4}
-          sx={{ marginLeft: "-40px", marginTop: "25px" }}
+          sx={{ marginLeft: "-40px", marginTop: "20px" }}
         >
           <TextFieldRegisterUserStyled
             id="loginFormEmailField"
             required
             label="Email"
             // name={LoginFormFields.email}
-            // helperText={email.errors}
+            helperText={emailError}
             // error={email.hasErrors}
-            // onChange={onInputChange}
-            // onBlur={email.validate}
+            onChange={onInputChange}
+            onBlur={(event) => isValidEmail(event.target.value)}
             // value={email.value}
             variant="outlined"
             placeholder="johndoe@yahoo.com"
@@ -104,17 +191,18 @@ const RegisterBox = () => {
         <GridColorStyled
           item
           xs={4}
-          sx={{ marginLeft: "-40px", marginTop: "25px" }}
+          sx={{ marginLeft: "-40px", marginTop: "20px" }}
         >
           <TextFieldRegisterUserStyled
             id="passwordFormEmailField"
             required
             label="Password"
+            type="password"
             // name={LoginFormFields.email}
-            // helperText={email.errors}
+            helperText={passwordError}
             // error={email.hasErrors}
-            // onChange={onInputChange}
-            // onBlur={email.validate}
+            onChange={onInputChange}
+            onBlur={(event) => isValidPassword(event.target.value)}
             // value={email.value}
             variant="outlined"
             autoComplete="off"
@@ -123,17 +211,18 @@ const RegisterBox = () => {
         <GridColorStyled
           item
           xs={4}
-          sx={{ marginLeft: "-40px", marginTop: "25px" }}
+          sx={{ marginLeft: "-40px", marginTop: "20px" }}
         >
           <TextFieldRegisterUserStyled
             id="confirmPasswordFormEmailField"
             required
             label="Confirm password"
+            type="password"
             // name={LoginFormFields.email}
-            // helperText={email.errors}
+            helperText={matchPasswordError}
             // error={email.hasErrors}
-            // onChange={onInputChange}
-            // onBlur={email.validate}
+            onChange={onInputChange}
+            onBlur={(event) => doesPasswordsMatch(event.target.value, password)}
             // value={email.value}
             variant="outlined"
             autoComplete="off"
