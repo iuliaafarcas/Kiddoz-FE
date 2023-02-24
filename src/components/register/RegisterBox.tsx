@@ -57,11 +57,22 @@ const RegisterBox = () => {
   };
 
   const handleSubmit = (event: any) => {
-    // isValidEmail(email);
-    // isValidPassword(password);
-    // isValidFirstName(firstName);
-    // isValidLastName(lastName);
-    // doesPasswordsMatch(password, confirmPassword);
+    if (email === "") setEmailError("Field must not be empty");
+    if (password === "") setPasswordError("Field must not be empty");
+    if (firstName === "") setFirstNameError("Field must not be empty");
+    if (lastName === "") setLastNameError("Field must not be empty");
+
+    if (email !== "") setEmailError("");
+    if (password !== "") setPasswordError("");
+    if (firstName !== "") setFirstNameError("");
+    if (lastName !== "") setLastNameError("");
+
+    isValidEmail(email);
+    isValidPassword(password);
+    isValidFirstName(firstName);
+    isValidLastName(lastName);
+    doesPasswordsMatch(password, confirmPassword);
+
     console.log(
       firstName,
       emailError,
@@ -136,12 +147,11 @@ const RegisterBox = () => {
             id="firstNameFormEmailField"
             required
             label="First name"
-            // name={LoginFormFields.email}
             helperText={firstNameError}
-            // error={email.hasErrors}
-            onChange={onInputChange}
+            onChange={(event) => {
+              setFirstName(event.target.value);
+            }}
             onBlur={(event) => isValidFirstName(event.target.value)}
-            // value={firstName}
             variant="outlined"
             placeholder="John"
             autoComplete="off"
@@ -157,12 +167,11 @@ const RegisterBox = () => {
             id="lastNameFormEmailField"
             required
             label="Last name"
-            // name={LoginFormFields.email}
             helperText={lastNameError}
-            // error={email.hasErrors}
-            onChange={onInputChange}
+            onChange={(event) => {
+              setLastName(event.target.value);
+            }}
             onBlur={(event) => isValidLastName(event.target.value)}
-            // value={email.value}
             variant="outlined"
             placeholder="Doe"
             autoComplete="off"
@@ -180,7 +189,7 @@ const RegisterBox = () => {
             // name={LoginFormFields.email}
             helperText={emailError}
             // error={email.hasErrors}
-            onChange={onInputChange}
+            onChange={(event) => setEmail(event.target.value)}
             onBlur={(event) => isValidEmail(event.target.value)}
             // value={email.value}
             variant="outlined"
@@ -201,7 +210,7 @@ const RegisterBox = () => {
             // name={LoginFormFields.email}
             helperText={passwordError}
             // error={email.hasErrors}
-            onChange={onInputChange}
+            onChange={(event) => setPassword(event.target.value)}
             onBlur={(event) => isValidPassword(event.target.value)}
             // value={email.value}
             variant="outlined"
@@ -221,7 +230,7 @@ const RegisterBox = () => {
             // name={LoginFormFields.email}
             helperText={matchPasswordError}
             // error={email.hasErrors}
-            onChange={onInputChange}
+            onChange={(event) => setConfirmPassword(event.target.value)}
             onBlur={(event) => doesPasswordsMatch(event.target.value, password)}
             // value={email.value}
             variant="outlined"
@@ -259,7 +268,7 @@ const RegisterBox = () => {
           //   email.hasErrors
           // }
           // onClick={handleClick}
-          type="submit"
+          type="button"
           onClick={handleSubmit}
         >
           Create account

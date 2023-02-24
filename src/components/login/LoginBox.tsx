@@ -1,5 +1,5 @@
-import React, { ChangeEventHandler } from "react";
-import { useState, useCallback, useMemo, useEffect } from "react";
+import React from "react";
+import { useState } from "react";
 import { Grid } from "@mui/material";
 import { Button } from "@mui/material";
 import {
@@ -11,21 +11,14 @@ import {
 } from "./StyledComponents";
 import { Link } from "react-router-dom";
 
-enum LoginFormFields {
-  email = "userEmail",
-  password = "userPassword",
-}
 const LoginBox = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  useEffect(() => {
-    setPassword("");
-    setEmail("");
-  }, []);
   const isValidEmail = (email: string) => {
     if (emailRegex.test(email) === false) setEmailError("Invalid email format");
     else setEmailError("");
@@ -37,26 +30,22 @@ const LoginBox = () => {
     else setPasswordError("");
   };
 
-  const formFieldsManagers = useMemo(
-    () => ({
-      [LoginFormFields.email]: email,
-      [LoginFormFields.password]: password,
-    }),
-    [email, password]
-  );
-
-  const onInputChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (event.target.name === "email") setEmail(event.target.value);
-      else if (event.target.name === "password")
-        setPassword(event.target.value);
-      console.log(event.target.value);
-    },
-    [formFieldsManagers]
-  );
-
   const handleSubmit = (event: any) => {
-    if (emailError === "" && passwordError === "")
+    if (email === "") setEmailError("Field must not be empty");
+    if (password === "") setPasswordError("Field must not be empty");
+
+    if (email !== "") setEmailError("");
+    if (password !== "") setPasswordError("");
+
+    isValidEmail(email);
+    isValidPassword(password);
+    console.log("email:", email, "pa:", password, emailError, passwordError);
+    if (
+      emailError === "" &&
+      passwordError === "" &&
+      email !== "" &&
+      password !== ""
+    )
       window.location.href = "/recommendations";
   };
 
@@ -89,12 +78,11 @@ const LoginBox = () => {
             id="loginFormEmailField"
             required
             label="Email"
-            // name={LoginFormFields.email}
             helperText={emailError}
-            // error={email.hasErrors}
-            onChange={onInputChange}
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }}
             onBlur={(event) => isValidEmail(event.target.value)}
-            // value={email}
             variant="outlined"
             placeholder="johndoe@yahoo.com"
             autoComplete="off"
@@ -110,12 +98,11 @@ const LoginBox = () => {
             required
             label="Password"
             type="password"
-            // name={LoginFormFields.email}
             helperText={passwordError}
-            // error={email.hasErrors}
-            onChange={onInputChange}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
             onBlur={(event) => isValidPassword(event.target.value)}
-            // value={email.value}
             variant="outlined"
             autoComplete="off"
           />
@@ -164,13 +151,7 @@ const LoginBox = () => {
             backgroundColor: "#264653",
             borderRadius: "12px",
           }}
-          // disabled={
-          //   !(email.value && password.value) ||
-          //   password.hasErrors ||
-          //   email.hasErrors
-          // }
-          // onClick={handleClick}
-          type="submit"
+          type="button"
           onClick={handleSubmit}
         >
           Login
