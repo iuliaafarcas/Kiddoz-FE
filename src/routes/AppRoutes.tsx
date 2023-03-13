@@ -6,6 +6,7 @@ import FavoritesPage from "../pages/FavoritesPage";
 import ProfilePage from "../pages/ProfilePage";
 import Login from "../pages/LoginPage";
 import Register from "../pages/RegisterPage";
+import RecommendationPage from "../pages/RecommendationPage";
 
 export default function AppRouter() {
   return (
@@ -15,6 +16,8 @@ export default function AppRouter() {
       <Route path="register" element={<Register />} />
       <Route path="chat" element={<ChatPage />} />
       <Route path="recommendations" element={<RecommendationsPage />} />
+      <Route path="recommendation" element={<RecommendationPage />} />
+
       <Route path="favorites" element={<FavoritesPage />} />
       <Route path="profile" element={<ProfilePage />} />
     </Routes>

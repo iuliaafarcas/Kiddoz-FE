@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material";
 import BottomSection from "./detailSection/BottomSection";
 import MiddleSection from "./detailSection/MiddleSection";
+import RateCard from "./detailSection/RateCard";
 import TopSection from "./detailSection/TopSection";
 
 const DetailSection = () => {
@@ -8,16 +9,16 @@ const DetailSection = () => {
     <>
       <Grid
         sx={{
-          width: "370px",
-          height: "240px",
-          borderRadius: "20px",
-          marginTop: "10px",
-          marginLeft: "10px",
+          width: "540px",
+          height: "300px",
+          background: "white",
         }}
       >
         <TopSection />
         <MiddleSection />
         <BottomSection />
+
+        <RateCard />
       </Grid>
     </>
   );
