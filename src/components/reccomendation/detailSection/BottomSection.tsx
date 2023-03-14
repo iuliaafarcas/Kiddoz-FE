@@ -1,5 +1,7 @@
 import { Box, Grid, Typography } from "@mui/material";
 import specialist from "../../../assets/specialist.jpg";
+import { Link } from "react-router-dom";
+
 const BottomSection = () => {
   return (
     <>
@@ -30,9 +32,11 @@ const BottomSection = () => {
           />
 
           <Grid sx={{ marginLeft: "5px" }}>
-            <Typography sx={{ fontSize: "12px", color: "black" }}>
-              Valentino Del More
-            </Typography>
+            <Link to="/specialist" style={{ textDecoration: "none" }}>
+              <Typography sx={{ fontSize: "12px", color: "black" }}>
+                Valentino Del More
+              </Typography>
+            </Link>
             <Typography
               sx={{
                 marginTop: "-3px",

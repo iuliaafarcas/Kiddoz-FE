@@ -6,7 +6,7 @@ const PicSection = () => {
     <>
       <Grid
         sx={{
-          width: "400px",
+          width: "500px",
           height: "300px",
           backgroundColor: "white",
         }}
@@ -14,7 +14,7 @@ const PicSection = () => {
         <Box
           component="img"
           sx={{
-            width: "400px",
+            width: "500px",
             height: "300px",
             borderRadius: "20px",
             marginTop: "15px",

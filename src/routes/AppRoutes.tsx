@@ -7,6 +7,7 @@ import ProfilePage from "../pages/ProfilePage";
 import Login from "../pages/LoginPage";
 import Register from "../pages/RegisterPage";
 import RecommendationPage from "../pages/RecommendationPage";
+import SpecialistPage from "../pages/SpecialistPage";
 
 export default function AppRouter() {
   return (
@@ -17,7 +18,7 @@ export default function AppRouter() {
       <Route path="chat" element={<ChatPage />} />
       <Route path="recommendations" element={<RecommendationsPage />} />
       <Route path="recommendation" element={<RecommendationPage />} />
-
+      <Route path="specialist" element={<SpecialistPage />} />
       <Route path="favorites" element={<FavoritesPage />} />
       <Route path="profile" element={<ProfilePage />} />
     </Routes>
