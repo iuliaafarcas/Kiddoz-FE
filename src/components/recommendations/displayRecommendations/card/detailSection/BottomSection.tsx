@@ -1,8 +1,10 @@
 import { Box, Grid, Typography } from "@mui/material";
 import specialist from "../../../../../assets/specialist.jpg";
-import { FaRegThumbsUp } from "react-icons/fa";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const BottomSection = () => {
-  const noLikes = 2.089;
+  const noLikes = 4.5;
   return (
     <>
       <Grid
@@ -57,21 +59,22 @@ const BottomSection = () => {
           paddingBottom: "10px",
         }}
       >
-        <FaRegThumbsUp
-          stroke="black"
-          stroke-width="30px"
-          size="15px"
-          cursor="pointer"
-          style={{ float: "right" }}
+        <FontAwesomeIcon
+          icon={faStar}
+          style={{
+            color: "#F4A261",
+            width: "15px",
+            height: "15px",
+            marginRight: "5px",
+          }}
         />
         <Typography
           sx={{
-            fontSize: "10px",
+            fontSize: "12px",
             color: "black",
-            marginLeft: "5px",
           }}
         >
-          {noLikes} people like this
+          {noLikes}
         </Typography>
       </Grid>
     </>

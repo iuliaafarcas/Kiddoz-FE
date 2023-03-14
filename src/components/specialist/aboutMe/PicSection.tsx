@@ -12,8 +12,8 @@ const PicSection = () => {
       <Box
         component="img"
         sx={{
-          width: "250px",
-          height: "250px",
+          width: "210px",
+          height: "210px",
           backgroundColor: "purple",
           borderRadius: "100%",
         }}

@@ -8,7 +8,7 @@ const AboutMe = () => {
       sx={{
         marginTop: "150px",
         width: "1250px",
-        height: "300px",
+        height: "240px",
         display: "flex",
         flexDirection: "row",
       }}
