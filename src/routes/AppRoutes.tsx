@@ -8,6 +8,8 @@ import Login from "../pages/LoginPage";
 import Register from "../pages/RegisterPage";
 import RecommendationPage from "../pages/RecommendationPage";
 import SpecialistPage from "../pages/SpecialistPage";
+import CreateRecommendationPage from "../pages/CreateRecommendationPage";
+import SpecialistsPage from "../pages/SpecialistsPage";
 
 export default function AppRouter() {
   return (
@@ -19,8 +21,10 @@ export default function AppRouter() {
       <Route path="recommendations" element={<RecommendationsPage />} />
       <Route path="recommendation" element={<RecommendationPage />} />
       <Route path="specialist" element={<SpecialistPage />} />
+      <Route path="specialists" element={<SpecialistsPage />} />
       <Route path="favorites" element={<FavoritesPage />} />
       <Route path="profile" element={<ProfilePage />} />
+      <Route path="create" element={<CreateRecommendationPage />} />
     </Routes>
   );
 }

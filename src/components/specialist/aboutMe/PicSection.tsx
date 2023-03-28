@@ -1,5 +1,5 @@
 import { Box, Grid } from "@mui/material";
-import specialist from "../../../assets/specialist.jpg";
+import specialist from "../../../assets/specialistSquare.jpg";
 const PicSection = () => {
   return (
     <Grid
