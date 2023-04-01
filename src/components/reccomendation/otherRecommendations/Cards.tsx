@@ -8,7 +8,7 @@ const Cards = () => {
       sx={{
         height: "200px",
         width: "970px",
-        marginBottom: "50px",
+        marginBottom: "100px",
         marginTop: "20px",
         display: "flex",
         flexDirection: "row",

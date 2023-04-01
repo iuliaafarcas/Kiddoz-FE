@@ -10,8 +10,8 @@ const Cards = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        marginLeft: "425px",
-        marginTop: "180px",
+        marginLeft: "450px",
+        marginTop: "150px",
         alignItems: "center",
         justifyContent: "center",
       }}

@@ -14,7 +14,6 @@ const PicSection = () => {
         sx={{
           width: "210px",
           height: "210px",
-          backgroundColor: "purple",
           borderRadius: "100%",
         }}
         src={specialist}

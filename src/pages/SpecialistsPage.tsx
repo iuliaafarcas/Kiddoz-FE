@@ -6,7 +6,7 @@ import Specialists from "../components/specialist/display/displaySpecialists/Spe
 const SpecialistsPage = () => {
   return (
     <>
-      <Grid sx={{ background: "#F6F6F6" }}>
+      <Grid sx={{ background: "#white" }}>
         <Navbar />
         <TypeNavbar />
         <Specialists />

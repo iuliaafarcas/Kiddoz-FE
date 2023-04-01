@@ -3,12 +3,13 @@ import { Box, Grid, Typography } from "@mui/material";
 import specialistSquare from "../../../../assets/specialistSquare.jpg";
 import { faComments } from "@fortawesome/free-regular-svg-icons";
 import { FaBookmark } from "react-icons/fa";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 const SpecialistCard = () => {
   return (
     <Grid
       sx={{
-        width: "220px",
+        width: "200px",
         height: "260px",
         backgroundColor: "white",
         borderRadius: "20px",
@@ -16,6 +17,8 @@ const SpecialistCard = () => {
         flexDirection: "column",
         // alignItems: "center",
         boxShadow: 3,
+        marginRight: "40px",
+        marginBottom: "40px",
       }}
     >
       <Grid
@@ -27,22 +30,12 @@ const SpecialistCard = () => {
           marginTop: "10px",
         }}
       >
-        {/* <Grid
-          sx={{
-            height: "25px",
-            width: "45px",
-            marginRight: "10px",
-            backgroundColor: "#F4A261",
-          }}
-        ></Grid> */}
-
         <Grid>
           <Box
             component="img"
             sx={{
               width: "100px",
               height: "100px",
-              backgroundColor: "purple",
               borderRadius: "100%",
               boxShadow: 5,
               marginTop: "20px",
@@ -51,19 +44,43 @@ const SpecialistCard = () => {
             src={specialistSquare}
           />
         </Grid>
-        <Grid sx={{ height: "30px", width: "45px" }}>
-          <FaBookmark
+        <Grid
+          sx={{
+            height: "30px",
+            width: "45px",
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
+          {/* <FaBookmark
             stroke="#F4A261"
-            stroke-width="40px"
+            strokeWidth="40px"
             color="#F4A261"
             size="25px"
             cursor="pointer"
-            style={{ float: "right" }}
+            style={{
+              float: "right",
+              height: "50px",
+              marginTop: "-17px",
+              marginRight: "10px",
+            }}
+          /> */}
+          <FontAwesomeIcon
+            icon={faStar}
+            style={{
+              color: "#F4A261",
+              width: "20px",
+              height: "20px",
+              marginLeft: "-2px",
+            }}
           />
+          <Typography sx={{ marginLeft: "2px", fontSize: "14px" }}>
+            4.5
+          </Typography>
         </Grid>
       </Grid>
       <Typography
-        sx={{ fontSize: "20px", textAlign: "center", marginTop: "30px" }}
+        sx={{ fontSize: "18px", textAlign: "center", marginTop: "30px" }}
       >
         <b>Saalvadore de More </b>
       </Typography>
@@ -76,7 +93,7 @@ const SpecialistCard = () => {
         sx={{
           marginTop: "15px",
           height: "50px",
-          width: "220px",
+          width: "200px",
           backgroundColor: "#2A9D8F",
           borderRadius: "0 0 20px 20px",
           display: "flex",

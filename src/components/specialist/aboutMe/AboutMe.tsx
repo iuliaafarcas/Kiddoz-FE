@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
-import DetailSection from "./aboutMe/DetailSection";
-import PicSection from "./aboutMe/PicSection";
+import DetailSection from "./DetailSection";
+import PicSection from "./PicSection";
 
 const AboutMe = () => {
   return (

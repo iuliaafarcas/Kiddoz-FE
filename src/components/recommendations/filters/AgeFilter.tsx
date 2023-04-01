@@ -1,9 +1,5 @@
 import { Grid } from "@mui/material";
-import {
-  FormControlLabelStyled,
-  TitleStyled,
-  FormControlStyled,
-} from "./StyledComponents";
+import { FormControlLabelStyled, FormControlStyled } from "./StyledComponents";
 import FormGroup from "@mui/material/FormGroup";
 import Checkbox from "@mui/material/Checkbox";
 
@@ -12,17 +8,29 @@ const AgeFilter = () => {
     <>
       <Grid
         sx={{
-          width: "220px",
-          height: "250px",
-          borderRadius: "10px",
+          width: "200px",
+          height: "230px",
           background: "white",
-          padingTop: "20px",
         }}
       >
-        <Grid sx={{ borderTop: "40px", paddingTop: "10px" }}>
-          <TitleStyled variant="h5" id="loginFormTitle">
+        <Grid>
+          <Grid
+            sx={{
+              height: "30px",
+              width: "100%",
+              borderColor: "black",
+              border: 1,
+              marginBottom: "10px",
+              paddingLeft: "10px",
+              cursor: "pointer",
+              display: "flex",
+              flexDirection: "row",
+              color: "white",
+              backgroundColor: "#264653",
+            }}
+          >
             <b>Age</b>
-          </TitleStyled>
+          </Grid>
         </Grid>
         <Grid sx={{ marginLeft: "20px", marginTop: "15px" }}>
           <FormGroup>
