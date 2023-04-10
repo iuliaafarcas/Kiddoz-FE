@@ -1,40 +1,33 @@
 import { Box, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import specialistAndChild from "../../../assets/specialistChild.jpg";
+import { useContext, useEffect, useState } from "react";
 import Cards from "../../reccomendation/otherRecommendations/Cards";
+import {
+  SpecialistContext,
+  SpecialistContextModel,
+} from "../../context/SpecialistContext";
 const InterestsSection = () => {
-  const interests = [
-    "Limits",
-    "Parenting",
-    "Bullying",
-    "Children fears",
-    "Relation between siblings ",
-    "Relation parent-children",
+  const { specialistObject } = useContext(
+    SpecialistContext
+  ) as SpecialistContextModel;
+  const [interests, setInterests] = useState<Array<string>>([]);
+  function trimStringByComma(str: string): string[] {
+    let trimmedStrList: string[] = str.split(",").map((s) => s.trim());
+    return trimmedStrList;
+  }
 
-    "Limits",
-    "Parenting",
-    "Bullying",
-    "Children fears",
-    "Relation between siblings",
-    "Relation parent-children",
-  ];
+  useEffect(() => {
+    setInterests(trimStringByComma(specialistObject.domainOfActivities));
+  }, [specialistObject]);
+
   return (
     <Grid sx={{ width: "1250px", height: "300px" }}>
       <Typography sx={{ fontSize: "20px" }}>
         <b>About me</b>
       </Typography>
       <Typography sx={{ fontSize: "16px", marginTop: "10px" }}>
-        I am ambitious and driven. I thrive on challenge and constantly set
-        goals for myself, so I have something to strive towards. I am not
-        comfortable with settling, and I am always looking for an opportunity to
-        do better and achieve greatness. In my previous role, I was promoted
-        three times in less than two years.I am highly organised. I always take
-        notes, and I use a series of tools to help myself stay on top of
-        deadlines. I like to keep a clean workspace and create a logical filing
-        method so I am always able to find what I need. I find this increases
-        efficiency and also helps the rest of the team stay on track. In my last
-        role, I created a new filing process that increased departmental
-        efficiency by 25 percent.
+        {specialistObject.description}
       </Typography>
       <Grid sx={{ display: "flex", flexDirection: "row", marginTop: "25px" }}>
         <Grid sx={{ display: "flex" }}>

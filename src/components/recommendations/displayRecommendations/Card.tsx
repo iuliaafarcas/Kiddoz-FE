@@ -15,6 +15,7 @@ const Card = () => {
             borderRadius: "20px",
             borderColor: "black",
             marginBottom: "30px",
+            boxShadow: 2,
           }}
           display="flex"
           flexDirection="row"

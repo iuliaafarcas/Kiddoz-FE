@@ -22,7 +22,14 @@ const MiddleSection = () => {
           marginBottom: "7px",
         }}
       >
-        <Typography sx={{ fontSize: "12px", color: "black" }}>
+        <Typography
+          sx={{
+            fontSize: "12px",
+            color: "black",
+            fontFamily:
+              'system-ui,"Segoe UI",roboto,"Noto Sans",oxygen,ubuntu,cantarell,"Fira Sans","Droid Sans","Helvetica Neue",arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
+          }}
+        >
           Game played by two teams of six players each, in which an inflated
           ball is volleyed over a high net. Each team tries to ...
         </Typography>

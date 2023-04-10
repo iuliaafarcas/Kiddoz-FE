@@ -4,7 +4,16 @@ import RateCard from "./RateCard";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import specialistAndChild from "../../../assets/specialistChild.jpg";
+import {
+  SpecialistContext,
+  SpecialistContextModel,
+} from "../../context/SpecialistContext";
+import { useContext } from "react";
+
 const DetailSection = () => {
+  const { specialistObject } = useContext(
+    SpecialistContext
+  ) as SpecialistContextModel;
   return (
     <Grid
       sx={{
@@ -17,7 +26,9 @@ const DetailSection = () => {
       <Grid sx={{ display: "flex", flexDirection: "row" }}>
         <Grid sx={{ width: "470px" }}>
           <Typography sx={{ fontSize: "30px" }}>
-            <b>Valentino Del More</b>
+            <b>
+              {specialistObject.firstName} {specialistObject.lastName}
+            </b>
           </Typography>
         </Grid>
         <Grid sx={{ marginTop: "10px" }}>
@@ -36,27 +47,16 @@ const DetailSection = () => {
       <Grid sx={{ display: "flex", flexDirection: "row" }}>
         <Grid>
           <Typography sx={{ fontSize: "16px", marginTop: "-7px" }}>
-            profesional sports trainer
+            {specialistObject.occupation}
           </Typography>
           <Typography sx={{ marginTop: "10px", color: "grey" }}>
-            <i> "Only he who can see the invisible can do the impossible"</i>
+            <i>{specialistObject.quote}</i>
           </Typography>
           <Grid sx={{ display: "flex", flexDirection: "row" }}>
             <RateCard />
             <LetsChat />
           </Grid>
         </Grid>
-        {/* <Grid sx={{ display: "flex", marginLeft: "130px", marginTop: "-70px" }}>
-          <Box
-            component="img"
-            sx={{
-              width: "230px",
-              height: "230px",
-              // marginTop: "430px",
-            }}
-            src={specialistAndChild}
-          />
-        </Grid> */}
       </Grid>
     </Grid>
   );

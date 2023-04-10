@@ -1,6 +1,14 @@
 import { Box, Grid } from "@mui/material";
 import specialist from "../../../assets/specialistSquare.jpg";
+import {
+  SpecialistContext,
+  SpecialistContextModel,
+} from "../../context/SpecialistContext";
+import { useContext } from "react";
 const PicSection = () => {
+  const { specialistObject } = useContext(
+    SpecialistContext
+  ) as SpecialistContextModel;
   return (
     <Grid
       sx={{
@@ -16,7 +24,7 @@ const PicSection = () => {
           height: "210px",
           borderRadius: "100%",
         }}
-        src={specialist}
+        src={specialistObject.image}
       />
     </Grid>
   );

@@ -3,6 +3,8 @@ export default interface Benefit {
   readonly name: string;
 }
 
+// export const emptyBenefits: Benefit[] = [];
+
 export const Benefits: Benefit[] = [
   { id: 1, name: "weight loss" },
   { id: 2, name: "weight loss" },

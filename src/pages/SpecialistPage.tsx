@@ -1,14 +1,17 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import Specialist from "../components/specialist/aboutMe/Specialist";
 import TypeNavbar from "../components/TypeNavbar";
+import ViewSpecialist from "../components/specialist/aboutMe/ViewSpecialist";
+import { SpecialistContextProvider } from "../components/context/SpecialistContext";
 
 const SpecialistPage = () => {
   return (
     <>
       <Navbar />
       <TypeNavbar />
-      <Specialist />
+      <SpecialistContextProvider>
+        <ViewSpecialist />
+      </SpecialistContextProvider>
     </>
   );
 };

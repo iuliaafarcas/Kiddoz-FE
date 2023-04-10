@@ -1,25 +1,72 @@
 import { Box, Grid, Typography } from "@mui/material";
 import specialist from "../../../assets/specialist.jpg";
 import { Link } from "react-router-dom";
+import {
+  RecommendationContext,
+  RecommendationContextModel,
+} from "../../context/RecommendationContext";
+import { useCallback, useContext, useEffect, useState } from "react";
+import SpecialistService from "../../../api/SpecialistService";
 
 const BottomSection = () => {
+  const { RecommendationObject } = useContext(
+    RecommendationContext
+  ) as RecommendationContextModel;
+
+  const [specialistFirstName, setSpecialistFirstName] = useState("");
+  const [specialistLastName, setSpecialistLastName] = useState("");
+  const [specialistOcupation, setSpecialistOcupation] = useState("");
+  const [specialistImage, setSpecialistImage] = useState("");
+
+  const fetchSpecialist = useCallback(async () => {
+    console.log("in fetchSpecialist");
+    const id = RecommendationObject.specialist;
+    console.log(RecommendationObject);
+    try {
+      const response = await SpecialistService.getSpecialistById(
+        RecommendationObject.specialist.id!
+      );
+      setSpecialistFirstName(response.data.firstName);
+      setSpecialistLastName(response.data.lastName);
+      setSpecialistOcupation(response.data.occupation);
+      setSpecialistImage(response.data.image);
+    } catch (e) {
+      console.log(e);
+    }
+  }, [RecommendationObject.specialist.id]);
+
+  useEffect(() => {
+    fetchSpecialist();
+  }, [fetchSpecialist]);
+
   return (
     <>
       <Grid
         sx={{
-          width: "370px",
-          height: "50px",
+          width: "250px",
+          height: "70px",
           marginTop: "10px",
-          borderRadius: "20px",
-          marginLeft: "40px",
+          borderRadius: "12px",
+          marginLeft: "30px",
+          border: 2,
+          borderColor: "#264653",
         }}
       >
-        <Typography sx={{ fontSize: "10px", color: "gray" }}>
+        <Typography
+          sx={{
+            fontSize: "10px",
+            color: "gray",
+            paddingLeft: "10px",
+            paddingTop: "5px",
+          }}
+        >
           {" "}
           Recommended by
         </Typography>
 
-        <Grid sx={{ display: "flex", flexDirection: "row" }}>
+        <Grid
+          sx={{ display: "flex", flexDirection: "row", paddingLeft: "10px" }}
+        >
           <Box
             component="img"
             sx={{
@@ -28,13 +75,13 @@ const BottomSection = () => {
               borderRadius: "100px",
               marginTop: "4px",
             }}
-            src={specialist}
+            src={specialistImage}
           />
 
           <Grid sx={{ marginLeft: "5px" }}>
             <Link to="/specialist" style={{ textDecoration: "none" }}>
               <Typography sx={{ fontSize: "12px", color: "black" }}>
-                Valentino Del More
+                {specialistFirstName} {specialistLastName}
               </Typography>
             </Link>
             <Typography
@@ -45,7 +92,7 @@ const BottomSection = () => {
                 marginLeft: "3px",
               }}
             >
-              professional sports trainer
+              {specialistOcupation}
             </Typography>
           </Grid>
         </Grid>

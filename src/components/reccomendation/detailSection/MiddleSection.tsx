@@ -1,26 +1,21 @@
 import { Grid } from "@mui/material";
+import {
+  RecommendationContext,
+  RecommendationContextModel,
+} from "../../context/RecommendationContext";
+import { useContext } from "react";
 
 const MiddleSection = () => {
-  var arr = [
-    "weight loss",
-    "building muscle",
-    "teamwork",
-    "communication",
-    "communication",
-    "team work",
-    "weight loss",
-    "building muscle",
-    "teamwork",
-    "communication",
-    "communication",
-    "team work",
-  ];
+  const { RecommendationObject } = useContext(
+    RecommendationContext
+  ) as RecommendationContextModel;
+  var arr = RecommendationObject.benefits;
 
   return (
     <>
       <Grid
         sx={{
-          height: "90px",
+          height: "100px",
           width: "540px",
           marginTop: "10px",
           marginLeft: "30px",
@@ -34,21 +29,21 @@ const MiddleSection = () => {
             <>
               <Grid
                 item
-                key={element}
+                key={element.id}
                 sx={{
                   fontSize: "11px",
                   color: "white ",
-                  height: "22px",
                   marginRight: "10px",
-                  maxWidth: "100px",
+                  minWidth: "100px",
                   background: "#2A9D8F",
                   paddingLeft: "10px",
                   paddingRight: "10px",
-                  paddingTop: "3px",
+                  paddingTop: "2px",
                   borderRadius: "20px",
+                  marginBottom: "3px",
                 }}
               >
-                {element}
+                {element.name}
               </Grid>
             </>
           );
