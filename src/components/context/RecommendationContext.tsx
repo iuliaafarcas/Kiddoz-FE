@@ -13,9 +13,14 @@ export const RecommendationContext = createContext<RecommendationContextModel>({
   setRecommendationObject: undefined,
 });
 
-export const RecommendationContextProvider = ({ children }: any | null) => {
+export const RecommendationContextProvider = ({
+  children,
+  value,
+}: any | null) => {
   const [RecommendationObjectData, setRecommendationObjectData] =
-    useState<RecommendationInterface>(emptyRecommendation);
+    useState<RecommendationInterface>(
+      value === undefined ? emptyRecommendation : value
+    );
   const contextValue = useMemo(() => {
     return {
       RecommendationObject: RecommendationObjectData,

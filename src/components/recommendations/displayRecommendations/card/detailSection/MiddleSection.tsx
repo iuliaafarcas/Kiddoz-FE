@@ -1,14 +1,40 @@
 import { Grid, Typography } from "@mui/material";
+import {
+  RecommendationContext,
+  RecommendationContextModel,
+} from "../../../../context/RecommendationContext";
+import { useContext, useEffect, useState } from "react";
+import Benefit from "../../../../../interfaces/Benefits";
 
 const MiddleSection = () => {
-  var arr = [
-    "weight loss",
-    "building muscle",
-    "teamwork",
-    "communication",
-    "communication",
-    "team work",
-  ];
+  const { RecommendationObject } = useContext(
+    RecommendationContext
+  ) as RecommendationContextModel;
+  const [description, setDescription] = useState("");
+  const [benefits, setBenefits] = useState<Benefit[]>([]);
+
+  function trimStringTo20Characters(inputString: string): string {
+    const maxLength = 125; // Maximum length of 20 characters
+    let trimmedString = inputString.trim(); // Trim leading and trailing whitespace
+
+    if (trimmedString.length > maxLength) {
+      // If the trimmed string is longer than 20 characters, truncate it and add ellipsis at the end
+      trimmedString = trimmedString.substring(0, maxLength - 3) + "...";
+    }
+
+    return trimmedString;
+  }
+  function chooseBenefits(benefits: Benefit[]) {
+    benefits.sort((a, b) => {
+      return a.name.length - b.name.length;
+    });
+    return benefits;
+  }
+
+  useEffect(() => {
+    setDescription(trimStringTo20Characters(RecommendationObject.description));
+    setBenefits(chooseBenefits(RecommendationObject.benefits).slice(0, 5));
+  }, [RecommendationObject]);
 
   return (
     <>
@@ -30,8 +56,7 @@ const MiddleSection = () => {
               'system-ui,"Segoe UI",roboto,"Noto Sans",oxygen,ubuntu,cantarell,"Fira Sans","Droid Sans","Helvetica Neue",arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
           }}
         >
-          Game played by two teams of six players each, in which an inflated
-          ball is volleyed over a high net. Each team tries to ...
+          {description}
         </Typography>
       </Grid>
       <Grid
@@ -40,18 +65,18 @@ const MiddleSection = () => {
         flexDirection="row"
         flexWrap="wrap"
       >
-        {arr.map((element) => {
+        {benefits.map((element) => {
           return (
             <>
               <Grid
                 item
-                key={element}
+                key={element.id}
                 sx={{
                   fontSize: "11px",
                   color: "white ",
                   height: "22px",
                   marginRight: "10px",
-                  maxWidth: "100px",
+                  minWidth: "100px",
                   background: "#2A9D8F",
                   paddingLeft: "10px",
                   paddingRight: "10px",
@@ -59,7 +84,7 @@ const MiddleSection = () => {
                   borderRadius: "20px",
                 }}
               >
-                {element}
+                {element.name}
               </Grid>
             </>
           );

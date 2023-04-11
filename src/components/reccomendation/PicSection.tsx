@@ -1,5 +1,4 @@
 import { Grid, Box } from "@mui/material";
-import volei from "../../assets/volei.jpg";
 import { useContext } from "react";
 import {
   RecommendationContext,
@@ -14,7 +13,7 @@ const PicSection = () => {
     <>
       <Grid
         sx={{
-          width: "500px",
+          width: "480px",
           height: "300px",
           backgroundColor: "white",
         }}
@@ -22,7 +21,7 @@ const PicSection = () => {
         <Box
           component="img"
           sx={{
-            width: "500px",
+            width: "480px",
             height: "330px",
             borderRadius: "20px",
             marginTop: "15px",

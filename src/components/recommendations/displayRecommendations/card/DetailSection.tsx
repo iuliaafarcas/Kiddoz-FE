@@ -2,6 +2,11 @@ import { Grid } from "@mui/material";
 import BottomSection from "./detailSection/BottomSection";
 import MiddleSection from "./detailSection/MiddleSection";
 import TopSection from "./detailSection/TopSection";
+import {
+  RecommendationContext,
+  RecommendationContextModel,
+} from "../../../context/RecommendationContext";
+import { useContext } from "react";
 
 const DetailSection = () => {
   return (

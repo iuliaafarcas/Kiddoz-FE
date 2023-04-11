@@ -73,23 +73,6 @@ const RegisterBox = () => {
     isValidLastName(lastName);
     doesPasswordsMatch(password, confirmPassword);
 
-    console.log(
-      firstName,
-      emailError,
-      passwordError,
-      firstNameError,
-      lastNameError,
-      matchPasswordError
-    );
-
-    console.log(
-      firstName,
-      emailError,
-      passwordError,
-      firstNameError,
-      lastNameError,
-      matchPasswordError
-    );
     if (
       email !== "" &&
       firstName !== "" &&

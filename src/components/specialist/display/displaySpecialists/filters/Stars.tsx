@@ -12,8 +12,6 @@ const Stars = (noStars: number) => {
       }}
     >
       {[...Array(noStars)].map((e, i) => {
-        console.log("ajuns");
-
         return (
           <FontAwesomeIcon
             key={"star" + i.toString}

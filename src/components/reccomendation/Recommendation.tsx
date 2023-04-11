@@ -12,36 +12,37 @@ import RecommendationService from "../../api/RecommendationService";
 import RecommendationInterface from "../../interfaces/RecommendationInterface";
 
 const Recommendation = () => {
-  const { setRecommendationObject } = useContext(
-    RecommendationContext
-  ) as RecommendationContextModel;
-  const id = 102;
-  const fetchRecommendation = useCallback(async () => {
-    try {
-      const response = await RecommendationService.getRecommendationById(id);
-      const currentRecommendation: RecommendationInterface = {
-        title: response.data.title,
-        description: response.data.description,
-        fromAge: response.data.fromAge,
-        fromUnitAge: response.data.fromUnitAge,
-        toAge: response.data.toAge,
-        toUnitAge: response.data.toUnitAge,
-        type: response.data.type,
-        image: response.data.image,
-        specialist: response.data.specialist,
-        benefits: response.data.benefits,
-      };
-      console.log(currentRecommendation);
+  // const { RecommendationObject, setRecommendationObject } = useContext(
+  //   RecommendationContext
+  // ) as RecommendationContextModel;
 
-      setRecommendationObject?.(currentRecommendation);
-    } catch (e) {
-      console.log(e);
-    }
-  }, [id]);
+  // const fetchRecommendation = useCallback(async () => {
+  //   try {
+  //     const response = await RecommendationService.getRecommendationById(
+  //       RecommendationObject.id!
+  //     );
+  //     const currentRecommendation: RecommendationInterface = {
+  //       title: response.data.title,
+  //       description: response.data.description,
+  //       fromAge: response.data.fromAge,
+  //       fromUnitAge: response.data.fromUnitAge,
+  //       toAge: response.data.toAge,
+  //       toUnitAge: response.data.toUnitAge,
+  //       type: response.data.type,
+  //       image: response.data.image,
+  //       specialist: response.data.specialist,
+  //       benefits: response.data.benefits,
+  //     };
 
-  useEffect(() => {
-    fetchRecommendation();
-  }, [setRecommendationObject, fetchRecommendation]);
+  //     setRecommendationObject?.(currentRecommendation);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }, [RecommendationObject, setRecommendationObject]);
+
+  // useEffect(() => {
+  //   fetchRecommendation();
+  // }, [setRecommendationObject, fetchRecommendation]);
 
   return (
     <Grid

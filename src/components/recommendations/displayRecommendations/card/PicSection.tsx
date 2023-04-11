@@ -1,7 +1,15 @@
 import { Grid, Box } from "@mui/material";
 import volei from "../../../../assets/volei.jpg";
+import {
+  RecommendationContext,
+  RecommendationContextModel,
+} from "../../../context/RecommendationContext";
+import { useContext } from "react";
 
 const PicSection = () => {
+  const { RecommendationObject } = useContext(
+    RecommendationContext
+  ) as RecommendationContextModel;
   return (
     <>
       <Grid
@@ -22,7 +30,7 @@ const PicSection = () => {
             borderRadius: "20px",
             marginRight: "10px",
           }}
-          src={volei}
+          src={RecommendationObject.image}
         />
       </Grid>
     </>

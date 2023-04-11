@@ -19,9 +19,7 @@ const BottomSection = () => {
   const [specialistImage, setSpecialistImage] = useState("");
 
   const fetchSpecialist = useCallback(async () => {
-    console.log("in fetchSpecialist");
     const id = RecommendationObject.specialist;
-    console.log(RecommendationObject);
     try {
       const response = await SpecialistService.getSpecialistById(
         RecommendationObject.specialist.id!
@@ -44,18 +42,17 @@ const BottomSection = () => {
       <Grid
         sx={{
           width: "250px",
-          height: "70px",
+          height: "65px",
           marginTop: "10px",
           borderRadius: "12px",
           marginLeft: "30px",
-          border: 2,
-          borderColor: "#264653",
+          backgroundColor: "#white",
         }}
       >
         <Typography
           sx={{
             fontSize: "10px",
-            color: "gray",
+            color: "grey",
             paddingLeft: "10px",
             paddingTop: "5px",
           }}

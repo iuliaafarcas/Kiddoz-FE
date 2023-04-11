@@ -17,7 +17,6 @@ const ViewSpecialist = () => {
   const id = 253;
 
   const fetchSpecialist = useCallback(async () => {
-    console.log("in fetchSpecialist");
     try {
       const response = await SpecialistService.getSpecialistById(id);
       const currentSpecialist: SpecialistInterface = {
@@ -32,7 +31,6 @@ const ViewSpecialist = () => {
         image: response.data.image,
         domainOfActivities: response.data.domainOfActivities,
       };
-      console.log(currentSpecialist);
 
       setSpecialistObject?.(currentSpecialist);
     } catch (e) {

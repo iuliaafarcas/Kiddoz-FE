@@ -1,12 +1,19 @@
 import { Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { FaBookmark } from "react-icons/fa";
+import {
+  RecommendationContext,
+  RecommendationContextModel,
+} from "../../../../context/RecommendationContext";
+import { useContext } from "react";
 const TopSection = () => {
+  const { RecommendationObject } = useContext(
+    RecommendationContext
+  ) as RecommendationContextModel;
   return (
     <>
       <Grid
         sx={{
-          //   background: "purple",
           width: "370px",
           height: "65px",
           borderRadius: "20px",
@@ -18,7 +25,7 @@ const TopSection = () => {
           sx={{
             width: "50px",
             background: "#264653",
-            borderRadius: "20px",
+            borderRadius: "12px",
             textAlign: "center",
             paddingTop: "10px",
           }}
@@ -28,24 +35,22 @@ const TopSection = () => {
           </Typography>
 
           <Typography sx={{ fontSize: "20px", color: "white" }}>
-            <b>6+</b>
+            <b>{RecommendationObject.fromAge}+</b>
           </Typography>
         </Grid>
 
         <Grid sx={{ width: "200px", marginLeft: "20px" }}>
           <Typography sx={{ fontSize: "20px", color: "black" }}>
-            <b>Volleyball</b>
+            <b>{RecommendationObject.title}</b>
           </Typography>
           <Typography sx={{ fontSize: "12px", color: "black" }}>
-            Sport
+            {RecommendationObject.type}
           </Typography>
         </Grid>
         <Grid sx={{ width: "100px", paddingRight: "20px" }}>
           <FaBookmark
             stroke="black"
-            stroke-width="40px"
-            // width="100px"
-            // height="100px"
+            strokeWidth="40px"
             color="white"
             size="25px"
             cursor="pointer"
