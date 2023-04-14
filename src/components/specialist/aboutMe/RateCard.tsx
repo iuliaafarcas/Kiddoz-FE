@@ -37,6 +37,7 @@ const RateCard = () => {
           {starNo.map((element) => {
             return (
               <FaRegStar
+                key={element}
                 style={{
                   marginTop: "5px",
                   width: "30px",
@@ -48,17 +49,6 @@ const RateCard = () => {
             );
           })}
         </Grid>
-        {/* 
-        <FaRegStar
-          style={{
-            marginTop: "5px",
-            width: "40px",
-            height: "20px",
-            color: "white",
-            cursor: "pointer",
-          }}
-        /> */}
-        {/* </Button> */}
       </Grid>
     </>
   );

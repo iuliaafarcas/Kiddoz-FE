@@ -67,26 +67,27 @@ const MiddleSection = () => {
       >
         {benefits.map((element) => {
           return (
-            <>
-              <Grid
-                item
-                key={element.id}
-                sx={{
-                  fontSize: "11px",
-                  color: "white ",
-                  height: "22px",
-                  marginRight: "10px",
-                  minWidth: "100px",
-                  background: "#2A9D8F",
-                  paddingLeft: "10px",
-                  paddingRight: "10px",
-                  paddingTop: "3px",
-                  borderRadius: "20px",
-                }}
-              >
-                {element.name}
-              </Grid>
-            </>
+            <Grid
+              item
+              key={element.id}
+              sx={{
+                fontSize: "11px",
+                color: "white ",
+                height: "22px",
+                marginRight: "10px",
+                minWidth: "70px",
+                background: "#2A9D8F",
+                paddingLeft: "10px",
+                paddingRight: "10px",
+                borderRadius: "20px",
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {element.name}
+            </Grid>
           );
         })}
       </Grid>

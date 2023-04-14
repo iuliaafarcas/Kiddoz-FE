@@ -14,8 +14,8 @@ const Cards = () => {
         flexDirection: "row",
       }}
     >
-      {arr.map(() => {
-        return <Card />;
+      {arr.map((element) => {
+        return <Card key={element} />;
       })}
     </Grid>
   );

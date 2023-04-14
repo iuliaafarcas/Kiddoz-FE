@@ -1,37 +1,48 @@
 import { Pagination } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Card from "./Card";
-import { useCallback, useContext, useEffect, useState } from "react";
-import {
-  RecommendationContext,
-  RecommendationContextModel,
-  RecommendationContextProvider,
-} from "../../context/RecommendationContext";
+import { useEffect, useState } from "react";
+import { RecommendationContextProvider } from "../../context/RecommendationContext";
 import RecommendationService from "../../../api/RecommendationService";
 import RecommendationInterface from "../../../interfaces/RecommendationInterface";
 
 const Cards = () => {
-  // const { RecommendationObject, setRecommendationObject } = useContext(
-  //   RecommendationContext
-  // ) as RecommendationContextModel;
-
   const [recommendations, setRecommendations] =
     useState<RecommendationInterface[]>();
+  const [page, setPage] = useState(1);
+  const [noRecommendations, setNoRecommendations] = useState(0);
+  const [noPages, setNoPages] = useState(0);
+  const noItemsPerPage = 10;
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setPage(value);
+  };
 
   useEffect(() => {
     // Fetch data from backend API
     const fetchRecommendations = async () => {
       try {
-        const response = await RecommendationService.getRecommendationsPaged(0); // Pass the desired page number as an argument
-        setRecommendations(response.data);
+        const response = await RecommendationService.getRecommendationsPaged(
+          page
+        ); // Pass the desired page number as an argument
+        setRecommendations(response.data[1]);
+        setNoRecommendations(response.data[0]);
       } catch (error) {
         console.error("Error fetching recommendations:", error);
       }
     };
-    fetchRecommendations();
-  }, []);
 
-  const arr = [1, 2, 3, 4, 5, 6, 7];
+    fetchRecommendations();
+    setNoPages(
+      noRecommendations % noItemsPerPage === 0
+        ? Math.floor(noRecommendations / noItemsPerPage)
+        : Math.floor(noRecommendations / noItemsPerPage) + 1
+    );
+    console.log(noRecommendations % noItemsPerPage === 0);
+  }, [noRecommendations, page]);
+
   return (
     <Grid
       sx={{
@@ -46,14 +57,20 @@ const Cards = () => {
       <Grid>
         {recommendations?.map((element) => {
           return (
-            <RecommendationContextProvider value={element}>
+            <RecommendationContextProvider value={element} key={element.id}>
               <Card />
             </RecommendationContextProvider>
           );
         })}
       </Grid>
       <Grid sx={{ alignContent: "center", marginBottom: "30px" }}>
-        <Pagination count={5} variant="outlined" color="primary" />
+        <Pagination
+          count={noPages}
+          page={page}
+          onChange={handlePageChange}
+          variant="outlined"
+          color="primary"
+        />
       </Grid>
     </Grid>
   );

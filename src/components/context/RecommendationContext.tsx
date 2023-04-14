@@ -34,3 +34,22 @@ export const RecommendationContextProvider = ({
     </RecommendationContext.Provider>
   );
 };
+
+export const RecommendationFullContextProvider = ({
+  children,
+  value,
+  setValue,
+}: any | null) => {
+  const contextValue = useMemo(() => {
+    return {
+      RecommendationObject: value,
+      setRecommendationObject: setValue,
+    };
+  }, [value, setValue]);
+
+  return (
+    <RecommendationContext.Provider value={contextValue}>
+      {children}
+    </RecommendationContext.Provider>
+  );
+};

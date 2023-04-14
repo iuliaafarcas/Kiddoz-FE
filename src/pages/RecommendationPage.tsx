@@ -7,14 +7,17 @@ import {
   RecommendationContext,
   RecommendationContextModel,
   RecommendationContextProvider,
+  RecommendationFullContextProvider,
 } from "../components/context/RecommendationContext";
 import RecommendationService from "../api/RecommendationService";
 import { useParams } from "react-router-dom";
-import RecommendationInterface from "../interfaces/RecommendationInterface";
+import RecommendationInterface, {
+  emptyRecommendation,
+} from "../interfaces/RecommendationInterface";
 
 const RecommendationPage = () => {
   const [recommendation, setRecommendation] =
-    useState<RecommendationInterface>();
+    useState<RecommendationInterface>(emptyRecommendation);
 
   const { id } = useParams();
 
@@ -46,7 +49,10 @@ const RecommendationPage = () => {
   }, [setRecommendation, fetchRecommendation]);
 
   return (
-    <RecommendationContextProvider value={recommendation}>
+    <RecommendationFullContextProvider
+      value={recommendation}
+      setValue={setRecommendation}
+    >
       <Grid
         sx={{
           background: "#f5f5f5",
@@ -58,7 +64,7 @@ const RecommendationPage = () => {
         <TypeNavbar />
         <Recommendation />
       </Grid>
-    </RecommendationContextProvider>
+    </RecommendationFullContextProvider>
   );
 };
 export default RecommendationPage;

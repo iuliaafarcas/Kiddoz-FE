@@ -12,38 +12,6 @@ import RecommendationService from "../../api/RecommendationService";
 import RecommendationInterface from "../../interfaces/RecommendationInterface";
 
 const Recommendation = () => {
-  // const { RecommendationObject, setRecommendationObject } = useContext(
-  //   RecommendationContext
-  // ) as RecommendationContextModel;
-
-  // const fetchRecommendation = useCallback(async () => {
-  //   try {
-  //     const response = await RecommendationService.getRecommendationById(
-  //       RecommendationObject.id!
-  //     );
-  //     const currentRecommendation: RecommendationInterface = {
-  //       title: response.data.title,
-  //       description: response.data.description,
-  //       fromAge: response.data.fromAge,
-  //       fromUnitAge: response.data.fromUnitAge,
-  //       toAge: response.data.toAge,
-  //       toUnitAge: response.data.toUnitAge,
-  //       type: response.data.type,
-  //       image: response.data.image,
-  //       specialist: response.data.specialist,
-  //       benefits: response.data.benefits,
-  //     };
-
-  //     setRecommendationObject?.(currentRecommendation);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }, [RecommendationObject, setRecommendationObject]);
-
-  // useEffect(() => {
-  //   fetchRecommendation();
-  // }, [setRecommendationObject, fetchRecommendation]);
-
   return (
     <Grid
       sx={{ display: "flex", flexDirection: "column", marginLeft: "100px" }}

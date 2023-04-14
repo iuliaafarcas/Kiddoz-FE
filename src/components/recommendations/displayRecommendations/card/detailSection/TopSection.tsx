@@ -39,11 +39,26 @@ const TopSection = () => {
           </Typography>
         </Grid>
 
-        <Grid sx={{ width: "200px", marginLeft: "20px" }}>
-          <Typography sx={{ fontSize: "20px", color: "black" }}>
+        <Grid
+          sx={{
+            width: "200px",
+            height: "60px",
+            marginLeft: "20px",
+            marginTop: "5px",
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: "20px",
+              color: "black",
+              lineHeight: "1.2rem",
+            }}
+          >
             <b>{RecommendationObject.title}</b>
           </Typography>
-          <Typography sx={{ fontSize: "12px", color: "black" }}>
+          <Typography
+            sx={{ fontSize: "12px", color: "black", marginTop: "7px" }}
+          >
             {RecommendationObject.type}
           </Typography>
         </Grid>

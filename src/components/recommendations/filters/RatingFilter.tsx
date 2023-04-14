@@ -42,7 +42,7 @@ const RatingFilter = () => {
         {noStars.map((element) => {
           return (
             <Grid
-              key={"arr" + element.toString()}
+              key={element}
               sx={{
                 height: "30px",
                 width: "170px",

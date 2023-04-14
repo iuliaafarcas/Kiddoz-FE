@@ -14,7 +14,7 @@ const Stars = (noStars: number) => {
       {[...Array(noStars)].map((e, i) => {
         return (
           <FontAwesomeIcon
-            key={"star" + i.toString}
+            key={i}
             icon={faStar}
             style={{
               color: "#F4A261",

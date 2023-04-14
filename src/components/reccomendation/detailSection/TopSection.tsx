@@ -33,22 +33,8 @@ const TopSection = () => {
           <Typography sx={{ fontSize: "12px", color: "black" }}>
             {RecommendationObject.type}
           </Typography>
-          {/* <Typography sx={{ fontSize: "12px", color: "black" }}>
-            Recommended age: {RecommendationObject.fromAge} +
-          </Typography> */}
         </Grid>
-        {/* <Grid
-          sx={{ width: "540px", paddingRight: "20px", marginRight: "15px" }}
-        >
-          <FaBookmark
-            stroke="black"
-            strokeWidth="40px"
-            color="white"
-            size="25px"
-            cursor="pointer"
-            style={{ float: "right" }}
-          />
-        </Grid> */}
+
         <Grid
           sx={{
             width: "50px",
@@ -56,6 +42,7 @@ const TopSection = () => {
             borderRadius: "8px",
             textAlign: "center",
             paddingTop: "10px",
+            marginRight: "-10px",
           }}
         >
           <Typography sx={{ fontSize: "10px", color: "white" }}>

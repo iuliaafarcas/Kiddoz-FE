@@ -38,6 +38,7 @@ const RateCard = () => {
           {starNo.map((element) => {
             return (
               <FaRegStar
+                key={element}
                 style={{
                   marginTop: "5px",
                   width: "30px",

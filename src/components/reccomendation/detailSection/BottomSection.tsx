@@ -19,19 +19,21 @@ const BottomSection = () => {
   const [specialistImage, setSpecialistImage] = useState("");
 
   const fetchSpecialist = useCallback(async () => {
-    const id = RecommendationObject.specialist;
-    try {
-      const response = await SpecialistService.getSpecialistById(
-        RecommendationObject.specialist.id!
-      );
-      setSpecialistFirstName(response.data.firstName);
-      setSpecialistLastName(response.data.lastName);
-      setSpecialistOcupation(response.data.occupation);
-      setSpecialistImage(response.data.image);
-    } catch (e) {
-      console.log(e);
+    const specialist = RecommendationObject.specialist;
+    if (specialist.id !== 0) {
+      try {
+        const response = await SpecialistService.getSpecialistById(
+          RecommendationObject.specialist.id!
+        );
+        setSpecialistFirstName(response.data.firstName);
+        setSpecialistLastName(response.data.lastName);
+        setSpecialistOcupation(response.data.occupation);
+        setSpecialistImage(response.data.image);
+      } catch (e) {
+        console.log(e);
+      }
     }
-  }, [RecommendationObject.specialist.id]);
+  }, [RecommendationObject]);
 
   useEffect(() => {
     fetchSpecialist();

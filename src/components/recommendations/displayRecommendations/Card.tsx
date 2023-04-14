@@ -13,30 +13,6 @@ const Card = () => {
   const { RecommendationObject, setRecommendationObject } = useContext(
     RecommendationContext
   ) as RecommendationContextModel;
-  // const fetchRecommendation = useCallback(async () => {
-  //   try {
-  //     const response = await RecommendationService.getRecommendationById(
-  //       recommendation.id!
-  //     );
-  //     const currentRecommendation: RecommendationInterface = {
-  //       title: response.data.title,
-  //       description: response.data.description,
-  //       fromAge: response.data.fromAge,
-  //       fromUnitAge: response.data.fromUnitAge,
-  //       toAge: response.data.toAge,
-  //       toUnitAge: response.data.toUnitAge,
-  //       type: response.data.type,
-  //       image: response.data.image,
-  //       specialist: response.data.specialist,
-  //       benefits: response.data.benefits,
-  //     };
-
-  //     setRecommendationObject?.(currentRecommendation);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }, [id]);
-
 
   return (
     <>

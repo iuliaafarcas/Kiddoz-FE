@@ -4,12 +4,13 @@ import {
   RecommendationContext,
   RecommendationContextModel,
 } from "../../../context/RecommendationContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 const PicSection = () => {
   const { RecommendationObject } = useContext(
     RecommendationContext
   ) as RecommendationContextModel;
+
   return (
     <>
       <Grid
