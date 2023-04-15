@@ -7,7 +7,7 @@ const AboutMe = () => {
     <Grid
       sx={{
         marginTop: "150px",
-        width: "1250px",
+        width: "1100px",
         height: "240px",
         display: "flex",
         flexDirection: "row",

@@ -13,9 +13,11 @@ export const SpecialistContext = createContext<SpecialistContextModel>({
   setSpecialistObject: undefined,
 });
 
-export const SpecialistContextProvider = ({ children }: any | null) => {
+export const SpecialistContextProvider = ({ children, value }: any | null) => {
   const [specialistObjectData, setSpecialistObjectData] =
-    useState<SpecialistInterface>(emptySpecialist);
+    useState<SpecialistInterface>(
+      value === undefined ? emptySpecialist : value
+    );
   const contextValue = useMemo(() => {
     return {
       specialistObject: specialistObjectData,

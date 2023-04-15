@@ -40,7 +40,6 @@ const Cards = () => {
         ? Math.floor(noRecommendations / noItemsPerPage)
         : Math.floor(noRecommendations / noItemsPerPage) + 1
     );
-    console.log(noRecommendations % noItemsPerPage === 0);
   }, [noRecommendations, page]);
 
   return (

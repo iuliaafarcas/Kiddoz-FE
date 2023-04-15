@@ -20,7 +20,7 @@ export default function AppRouter() {
       <Route path="chat" element={<ChatPage />} />
       <Route path="recommendations" element={<RecommendationsPage />} />
       <Route path="recommendation/:id" element={<RecommendationPage />} />
-      <Route path="specialist" element={<SpecialistPage />} />
+      <Route path="specialist/:id" element={<SpecialistPage />} />
       <Route path="specialists" element={<SpecialistsPage />} />
       <Route path="favorites" element={<FavoritesPage />} />
       <Route path="profile" element={<ProfilePage />} />

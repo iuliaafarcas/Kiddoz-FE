@@ -10,6 +10,11 @@ class RecommendationService {
   getOtherRecommendations(id: number) {
     return httpConfig.get(`/recommendations/otherRecommendations/${id}`);
   }
+  getRecommendationsBySpecialist(id: number) {
+    return httpConfig.get(
+      `/recommendations/getRecommendationsBySpecialist/${id}`
+    );
+  }
 }
 
 export default new RecommendationService();

@@ -2,10 +2,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box, Grid, Typography } from "@mui/material";
 import specialistSquare from "../../../../assets/specialistSquare.jpg";
 import { faComments } from "@fortawesome/free-regular-svg-icons";
-import { FaBookmark } from "react-icons/fa";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import {
+  SpecialistContext,
+  SpecialistContextModel,
+} from "../../../context/SpecialistContext";
+import { useContext, useEffect } from "react";
 
 const SpecialistCard = () => {
+  const { specialistObject } = useContext(
+    SpecialistContext
+  ) as SpecialistContextModel;
+
+  const handleClick = () => {
+    window.scrollTo(0, 0);
+    window.location.href = "/specialist/" + specialistObject.id!;
+  };
   return (
     <Grid
       sx={{
@@ -15,7 +27,6 @@ const SpecialistCard = () => {
         borderRadius: "20px",
         display: "flex",
         flexDirection: "column",
-        // alignItems: "center",
         boxShadow: 3,
         marginRight: "40px",
         marginBottom: "40px",
@@ -41,7 +52,7 @@ const SpecialistCard = () => {
               marginTop: "20px",
               marginLeft: "50px",
             }}
-            src={specialistSquare}
+            src={specialistObject.image}
           />
         </Grid>
         <Grid
@@ -52,19 +63,6 @@ const SpecialistCard = () => {
             flexDirection: "row",
           }}
         >
-          {/* <FaBookmark
-            stroke="#F4A261"
-            strokeWidth="40px"
-            color="#F4A261"
-            size="25px"
-            cursor="pointer"
-            style={{
-              float: "right",
-              height: "50px",
-              marginTop: "-17px",
-              marginRight: "10px",
-            }}
-          /> */}
           <FontAwesomeIcon
             icon={faStar}
             style={{
@@ -80,14 +78,22 @@ const SpecialistCard = () => {
         </Grid>
       </Grid>
       <Typography
-        sx={{ fontSize: "18px", textAlign: "center", marginTop: "30px" }}
+        sx={{
+          fontSize: "18px",
+          textAlign: "center",
+          marginTop: "30px",
+          cursor: "pointer",
+        }}
+        onClick={handleClick}
       >
-        <b>Saalvadore de More </b>
+        <b>
+          {specialistObject.firstName} {specialistObject.lastName}
+        </b>
       </Typography>
       <Typography
         sx={{ textAlign: "center", fontSize: "14px", marginTop: "8px" }}
       >
-        Dermatolog
+        {specialistObject.occupation}
       </Typography>
       <Grid
         sx={{

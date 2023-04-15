@@ -2,11 +2,11 @@ import { Box, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import specialistAndChild from "../../../assets/specialistChild.jpg";
 import { useContext, useEffect, useState } from "react";
-import Cards from "../../reccomendation/otherRecommendations/Cards";
 import {
   SpecialistContext,
   SpecialistContextModel,
 } from "../../context/SpecialistContext";
+import Cards from "./Cards";
 const InterestsSection = () => {
   const { specialistObject } = useContext(
     SpecialistContext
@@ -22,11 +22,13 @@ const InterestsSection = () => {
   }, [specialistObject]);
 
   return (
-    <Grid sx={{ width: "1250px", height: "300px" }}>
+    <Grid sx={{ width: "1100px", height: "300px" }}>
       <Typography sx={{ fontSize: "20px" }}>
         <b>About me</b>
       </Typography>
-      <Typography sx={{ fontSize: "16px", marginTop: "10px" }}>
+      <Typography
+        sx={{ fontSize: "16px", marginTop: "10px", textAlign: "justify" }}
+      >
         {specialistObject.description}
       </Typography>
       <Grid sx={{ display: "flex", flexDirection: "row", marginTop: "25px" }}>
@@ -36,7 +38,6 @@ const InterestsSection = () => {
             sx={{
               width: "250px",
               height: "250px",
-              // marginTop: "430px",
             }}
             src={specialistAndChild}
           />
@@ -58,6 +59,7 @@ const InterestsSection = () => {
             {interests.map((element) => {
               return (
                 <Typography
+                  key={element}
                   sx={{ marginRight: "180px", width: "200px" }}
                 >{`\u2022 ${element}`}</Typography>
               );

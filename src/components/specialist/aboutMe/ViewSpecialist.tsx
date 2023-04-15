@@ -14,11 +14,11 @@ const ViewSpecialist = () => {
   const { setSpecialistObject } = useContext(
     SpecialistContext
   ) as SpecialistContextModel;
-  const id = 253;
+  const { id } = useParams();
 
   const fetchSpecialist = useCallback(async () => {
     try {
-      const response = await SpecialistService.getSpecialistById(id);
+      const response = await SpecialistService.getSpecialistById(parseInt(id!));
       const currentSpecialist: SpecialistInterface = {
         firstName: response.data.firstName,
         lastName: response.data.lastName,
@@ -27,7 +27,7 @@ const ViewSpecialist = () => {
         quote: response.data.quote,
         description: response.data.description,
         age: response.data.age,
-        domain: { id: 1, name: "psychology" },
+        domain: response.data.domain,
         image: response.data.image,
         domainOfActivities: response.data.domainOfActivities,
       };
@@ -47,9 +47,13 @@ const ViewSpecialist = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        width: "1250px",
-        height: "1000px",
+        paddingLeft: "40px",
+        paddingRight: "40px",
+
+        width: "1200px",
+        minHeight: "500px",
         marginLeft: "120px",
+        backgroundColor: "white",
       }}
     >
       <AboutMe />

@@ -1,10 +1,5 @@
 import { Grid, Typography } from "@mui/material";
 import Cards from "./otherRecommendations/Cards";
-import { useContext, useEffect } from "react";
-import {
-  RecommendationContext,
-  RecommendationContextModel,
-} from "../context/RecommendationContext";
 
 const OtherRecommendations = () => {
   return (

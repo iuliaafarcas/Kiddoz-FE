@@ -39,9 +39,15 @@ const BottomSection = () => {
     fetchSpecialist();
   }, [fetchSpecialist]);
 
+  const handleClick = () => {
+    window.scrollTo(0, 0);
+    window.location.href = "/specialist/" + RecommendationObject.specialist.id!;
+  };
+
   return (
     <>
       <Grid
+        onClick={handleClick}
         sx={{
           width: "250px",
           height: "65px",

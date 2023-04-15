@@ -1,9 +1,42 @@
 import { Grid, Pagination } from "@mui/material";
 import DomainFilter from "./filters/DomainFilter";
 import SpecialistCard from "./SpecialistCard";
+import { useCallback, useEffect, useState } from "react";
+import SpecialistService from "../../../../api/SpecialistService";
+import { SpecialistContextProvider } from "../../../context/SpecialistContext";
+import SpecialistInterface from "../../../../interfaces/SpecialistInterface";
 
 const Specialists = () => {
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const [specialists, setSpecialists] = useState<SpecialistInterface[]>();
+
+  const fetchSpecialists = useCallback(async () => {
+    try {
+      const response = await SpecialistService.getSpecialistsPaged(page);
+      setSpecialists(response.data[1]);
+      setNoSpecialists(response.data[0]);
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
+
+  const [page, setPage] = useState(1);
+  const [noSpecialists, setNoSpecialists] = useState(0);
+  const [noPages, setNoPages] = useState(0);
+  const noItemsPerPage = 10;
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setPage(value);
+  };
+  useEffect(() => {
+    fetchSpecialists();
+    setNoPages(
+      noSpecialists % noItemsPerPage === 0
+        ? Math.floor(noSpecialists / noItemsPerPage)
+        : Math.floor(noSpecialists / noItemsPerPage) + 1
+    );
+  }, [page, noSpecialists]);
   return (
     <Grid sx={{ display: "flex", flexDirection: "row", marginTop: "50px" }}>
       <Grid
@@ -20,13 +53,14 @@ const Specialists = () => {
       <Grid
         sx={{
           width: "1000px",
-          height: "1200px",
+          minHeight: "200px",
           paddingLeft: "300px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
           marginLeft: "300px",
+          marginTop: "100px",
         }}
       >
         <Grid
@@ -37,16 +71,22 @@ const Specialists = () => {
             flexWrap: "wrap",
           }}
         >
-          {arr.map((element) => {
+          {specialists?.map((specialist: any) => {
             return (
-              <Grid key={"specialist" + element}>
+              <SpecialistContextProvider value={specialist} key={specialist.id}>
                 <SpecialistCard />
-              </Grid>
+              </SpecialistContextProvider>
             );
           })}
         </Grid>
         <Grid sx={{ alignContent: "center", marginBottom: "30px" }}>
-          <Pagination count={5} variant="outlined" color="primary" />
+          <Pagination
+            count={noPages}
+            page={page}
+            onChange={handlePageChange}
+            variant="outlined"
+            color="primary"
+          />
         </Grid>
       </Grid>
     </Grid>
