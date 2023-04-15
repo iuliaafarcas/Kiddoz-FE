@@ -7,13 +7,6 @@ import {
 } from "../context/RecommendationContext";
 
 const OtherRecommendations = () => {
-  const { RecommendationObject } = useContext(
-    RecommendationContext
-  ) as RecommendationContextModel;
-
-  useEffect(() => {
-    console.log(RecommendationObject.id, "hi");
-  });
   return (
     <Grid sx={{ display: "flex", flexDirection: "Column" }}>
       <Typography sx={{ fontSize: "20px", marginTop: "30px" }}>

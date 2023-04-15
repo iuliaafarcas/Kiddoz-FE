@@ -8,6 +8,7 @@ import { RecommendationContextProvider } from "../../context/RecommendationConte
 const Cards = () => {
   const { id } = useParams();
   const [otherRecommendations, setOtherRecommendations] = useState([]);
+
   const fetchOtherRecommendations = useCallback(async () => {
     try {
       const response = await RecommendationService.getOtherRecommendations(
@@ -25,8 +26,8 @@ const Cards = () => {
     setOtherRecommendations,
     fetchOtherRecommendations,
     otherRecommendations,
+    id,
   ]);
-  const arr = [1, 2, 3, 4, 5, 6];
 
   return (
     <Grid

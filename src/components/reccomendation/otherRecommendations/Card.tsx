@@ -1,5 +1,6 @@
 import { Grid, Box, Typography } from "@mui/material";
-import volei from "../../../assets/volei.jpg";
+import { Link } from "react-router-dom";
+
 import { useContext } from "react";
 import {
   RecommendationContext,
@@ -10,15 +11,16 @@ const Card = () => {
   const { RecommendationObject } = useContext(
     RecommendationContext
   ) as RecommendationContextModel;
+
+  const handleClick = () => {
+    window.scrollTo(0, 0);
+    window.location.href = "/recommendation/" + RecommendationObject.id;
+  };
   return (
-    <Link
-        to={"/recommendation/" + RecommendationObject.id}
-        style={{ textDecoration: "none" }}
-      >
     <Grid
       sx={{
-        maxWidth: "200px",
-        height: "220px",
+        maxWidth: "160px",
+        height: "230px",
         borderRadius: "20px",
         marginRight: "15px",
         boxShadow: "3",
@@ -26,37 +28,40 @@ const Card = () => {
         flexDirection: "column",
         padding: "10px",
         textAlign: "center",
-        cursor:"pointer"
+        cursor: "pointer",
       }}
+      onClick={handleClick}
     >
       <Grid
         sx={{
-          width: "130px",
+          width: "140px",
           height: "150px",
-          marginBottom: "5px",
           backgroundColor: "white",
         }}
       >
         <Box
           component="img"
           sx={{
-            width: "130px",
+            width: "140px",
             height: "120px",
-            borderRadius: "20px",
+            borderRadius: "16px",
           }}
           src={RecommendationObject.image}
         />
       </Grid>
-      <Typography sx={{ fontSize: "17px" }}>
-        <b>{RecommendationObject.title}</b>
+      <Typography
+        sx={{ fontSize: "15px", lineHeight: "1rem", marginTop: "-15px" }}
+      >
+        {RecommendationObject.title}
       </Typography>
 
-      <Typography sx={{ fontSize: "14px" }}>
+      <Typography sx={{ fontSize: "12px", marginTop: "2px" }}>
         {RecommendationObject.type}
       </Typography>
-      <Typography>{RecommendationObject.fromAge}+</Typography>
+      <Typography sx={{ fontSize: "12px" }}>
+        {RecommendationObject.fromAge}+
+      </Typography>
     </Grid>
-    </Link>
   );
 };
 export default Card;
