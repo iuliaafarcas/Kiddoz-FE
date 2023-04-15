@@ -1,5 +1,4 @@
 import { Grid, Box } from "@mui/material";
-import volei from "../../../../assets/volei.jpg";
 import {
   RecommendationContext,
   RecommendationContextModel,

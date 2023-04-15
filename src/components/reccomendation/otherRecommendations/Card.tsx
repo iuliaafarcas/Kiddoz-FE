@@ -1,11 +1,23 @@
 import { Grid, Box, Typography } from "@mui/material";
 import volei from "../../../assets/volei.jpg";
+import { useContext } from "react";
+import {
+  RecommendationContext,
+  RecommendationContextModel,
+} from "../../context/RecommendationContext";
 
 const Card = () => {
+  const { RecommendationObject } = useContext(
+    RecommendationContext
+  ) as RecommendationContextModel;
   return (
+    <Link
+        to={"/recommendation/" + RecommendationObject.id}
+        style={{ textDecoration: "none" }}
+      >
     <Grid
       sx={{
-        width: "200px",
+        maxWidth: "200px",
         height: "220px",
         borderRadius: "20px",
         marginRight: "15px",
@@ -14,6 +26,7 @@ const Card = () => {
         flexDirection: "column",
         padding: "10px",
         textAlign: "center",
+        cursor:"pointer"
       }}
     >
       <Grid
@@ -31,16 +44,19 @@ const Card = () => {
             height: "120px",
             borderRadius: "20px",
           }}
-          src={volei}
+          src={RecommendationObject.image}
         />
       </Grid>
       <Typography sx={{ fontSize: "17px" }}>
-        <b>Volley</b>
+        <b>{RecommendationObject.title}</b>
       </Typography>
 
-      <Typography sx={{ fontSize: "14px" }}>Sport</Typography>
-      <Typography>6+</Typography>
+      <Typography sx={{ fontSize: "14px" }}>
+        {RecommendationObject.type}
+      </Typography>
+      <Typography>{RecommendationObject.fromAge}+</Typography>
     </Grid>
+    </Link>
   );
 };
 export default Card;

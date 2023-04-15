@@ -7,6 +7,9 @@ class RecommendationService {
   getRecommendationsPaged(page: number) {
     return httpConfig.get(`/recommendations/paged?pageNumber=${page}`);
   }
+  getOtherRecommendations(id: number) {
+    return httpConfig.get(`/recommendations/otherRecommendations/${id}`);
+  }
 }
 
 export default new RecommendationService();

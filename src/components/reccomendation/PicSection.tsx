@@ -1,5 +1,5 @@
 import { Grid, Box } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import {
   RecommendationContext,
   RecommendationContextModel,
@@ -9,6 +9,7 @@ const PicSection = () => {
   const { RecommendationObject } = useContext(
     RecommendationContext
   ) as RecommendationContextModel;
+
   return (
     <>
       <Grid

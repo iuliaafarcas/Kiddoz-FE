@@ -13,7 +13,6 @@ const Card = () => {
   const { RecommendationObject, setRecommendationObject } = useContext(
     RecommendationContext
   ) as RecommendationContextModel;
-
   return (
     <>
       <Link

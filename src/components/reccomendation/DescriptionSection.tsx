@@ -11,23 +11,21 @@ const DescriptionSection = () => {
     RecommendationContext
   ) as RecommendationContextModel;
   return (
-    <>
-      <Grid>
-        <Typography sx={{ fontSize: "20px" }}>
-          <b> About this topic</b>
-        </Typography>
-        <Typography
-          sx={{
-            marginTop: "10px",
-            width: "1030px",
-            textAlign: "justify",
-          }}
-        >
-          {RecommendationObject.description}
-        </Typography>
-        <OtherRecommendations />
-      </Grid>
-    </>
+    <Grid>
+      <Typography sx={{ fontSize: "20px" }}>
+        <b> About this topic</b>
+      </Typography>
+      <Typography
+        sx={{
+          marginTop: "10px",
+          width: "1030px",
+          textAlign: "justify",
+        }}
+      >
+        {RecommendationObject.description}
+      </Typography>
+      <OtherRecommendations />
+    </Grid>
   );
 };
 export default DescriptionSection;
