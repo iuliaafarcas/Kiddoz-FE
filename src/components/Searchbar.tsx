@@ -10,36 +10,7 @@ import { Link } from "react-router-dom";
 
 const Searchbar = () => {
   return (
-    <Box sx={{ maxHeight: "40px" }}>
-      <TextField
-        id="searchbar"
-        label="Search a recommendation..."
-        size="small"
-        variant="outlined"
-        sx={{
-          width: "600px",
-          height: "40px",
-          marginTop: "15px",
-          marginLeft: "100px",
-          marginBottom: "70px",
-        }}
-        inputProps={{ style: { height: "23px" } }}
-      />
-
-      <Button
-        sx={{
-          width: "40px",
-          height: "40px",
-          marginTop: "15px",
-          marginLeft: "-5px",
-          boxShadow: 0,
-          borderRadius: 0,
-        }}
-        variant="contained"
-      >
-        <FaSearch style={{ color: "white" }} />
-      </Button>
-
+    <Box sx={{ maxHeight: "40px", right: 0, position: "fixed" }}>
       <Link to="/favorites">
         <Button
           sx={{

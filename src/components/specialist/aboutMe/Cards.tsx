@@ -16,7 +16,7 @@ const Cards = () => {
     RecommendationInterface[]
   >([]);
   const { id } = useParams();
-  const fetchOtherRecommendations = useCallback(async () => {
+  const fetchOtherRecommendations = async () => {
     try {
       const response =
         await RecommendationService.getRecommendationsBySpecialist(
@@ -26,16 +26,11 @@ const Cards = () => {
     } catch (e) {
       console.log(e);
     }
-  }, [id]);
+  };
 
   useEffect(() => {
     fetchOtherRecommendations();
-  }, [
-    setOtherRecommendations,
-    fetchOtherRecommendations,
-    otherRecommendations,
-    id,
-  ]);
+  }, [id]);
 
   return (
     <Grid

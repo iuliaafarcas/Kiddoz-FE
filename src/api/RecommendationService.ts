@@ -15,6 +15,12 @@ class RecommendationService {
       `/recommendations/getRecommendationsBySpecialist/${id}`
     );
   }
+
+  getRecommendationsByTitle(pageNumber: number, title: String) {
+    return httpConfig.get(
+      `/recommendations/getRecommendationsByTitle?pageNumber=${pageNumber}&title=${title}`
+    );
+  }
 }
 
 export default new RecommendationService();

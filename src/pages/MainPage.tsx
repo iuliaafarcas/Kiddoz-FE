@@ -6,7 +6,7 @@ import family from "../assets/family.png";
 const MainPage = () => {
   return (
     <Grid sx={{ background: "#F6F6F6" }}>
-      <Box sx={{ width: "360px" }} display="flex" flexDirection="row">
+      <Box sx={{ width: "100%" }} display="flex" flexDirection="row">
         <Filters />
         <Cards />
         <Grid

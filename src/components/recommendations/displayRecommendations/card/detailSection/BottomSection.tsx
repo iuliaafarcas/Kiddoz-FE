@@ -9,15 +9,26 @@ import {
 import { useCallback, useContext, useEffect, useState } from "react";
 import SpecialistService from "../../../../../api/SpecialistService";
 import SpecialistInterface from "../../../../../interfaces/SpecialistInterface";
+import RecommendationRatingService from "../../../../../api/RecommendationRatingService";
 
 const BottomSection = () => {
   const { RecommendationObject } = useContext(
     RecommendationContext
   ) as RecommendationContextModel;
-  const noLikes = 4.5;
+  const [noStars, setNoStars] = useState();
 
   const [specialist, setSpecialist] = useState<SpecialistInterface>();
-
+  const fetchRating = async () => {
+    try {
+      const response =
+        await RecommendationRatingService.getRatingByRecommendationId(
+          RecommendationObject.id!
+        );
+      setNoStars(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   const fetchSpecialist = useCallback(async () => {
     try {
       const response = await SpecialistService.getSpecialistById(
@@ -43,6 +54,7 @@ const BottomSection = () => {
 
   useEffect(() => {
     fetchSpecialist();
+    fetchRating();
   }, [setSpecialist, fetchSpecialist]);
   return (
     <>
@@ -113,7 +125,7 @@ const BottomSection = () => {
             color: "black",
           }}
         >
-          {noLikes}
+          {noStars}
         </Typography>
       </Grid>
     </>

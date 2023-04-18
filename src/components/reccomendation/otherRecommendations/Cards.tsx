@@ -9,7 +9,7 @@ const Cards = () => {
   const { id } = useParams();
   const [otherRecommendations, setOtherRecommendations] = useState([]);
 
-  const fetchOtherRecommendations = useCallback(async () => {
+  const fetchOtherRecommendations = async () => {
     try {
       const response = await RecommendationService.getOtherRecommendations(
         parseInt(id!)
@@ -18,16 +18,11 @@ const Cards = () => {
     } catch (e) {
       console.log(e);
     }
-  }, [id]);
+  };
 
   useEffect(() => {
     fetchOtherRecommendations();
-  }, [
-    setOtherRecommendations,
-    fetchOtherRecommendations,
-    otherRecommendations,
-    id,
-  ]);
+  }, [id]);
 
   return (
     <Grid

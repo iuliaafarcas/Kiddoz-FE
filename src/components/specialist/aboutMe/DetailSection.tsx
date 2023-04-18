@@ -8,12 +8,27 @@ import {
   SpecialistContext,
   SpecialistContextModel,
 } from "../../context/SpecialistContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import SpecialistRatingService from "../../../api/SpecialistRatingService";
 
 const DetailSection = () => {
   const { specialistObject } = useContext(
     SpecialistContext
   ) as SpecialistContextModel;
+  const [noStars, setNoStars] = useState();
+  const fetchRating = async () => {
+    try {
+      const response = await SpecialistRatingService.getRatingBySpecialistId(
+        specialistObject.id!
+      );
+      setNoStars(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    fetchRating();
+  });
   return (
     <Grid
       sx={{
@@ -41,7 +56,9 @@ const DetailSection = () => {
               marginRight: "10px",
             }}
           />
-          <Typography sx={{ fontSize: "20px", float: "right" }}>4.5</Typography>
+          <Typography sx={{ fontSize: "20px", float: "right" }}>
+            {noStars}
+          </Typography>
         </Grid>
       </Grid>
       <Grid sx={{ display: "flex", flexDirection: "row" }}>

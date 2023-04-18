@@ -1,9 +1,44 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Grid, Typography } from "@mui/material";
+import { useContext, useState } from "react";
 import { FaRegStar } from "react-icons/fa";
+import {
+  SpecialistContext,
+  SpecialistContextModel,
+} from "../../context/SpecialistContext";
+import SpecialistRatingService from "../../../api/SpecialistRatingService";
 
 const RateCard = () => {
   const starNo = [1, 2, 3, 4, 5];
+  const { specialistObject } = useContext(
+    SpecialistContext
+  ) as SpecialistContextModel;
+  const [noStar, setNoStar] = useState<number>(0);
+  const parentId = 302;
+
+  const handleClick = (no: number) => {
+    console.log(specialistObject.id);
+    setNoStar(no);
+    fetchRating(specialistObject.id!, parentId, no);
+  };
+
+  const fetchRating = async (
+    specialistId: number,
+    parentId: number,
+    noStar: number
+  ) => {
+    try {
+      const response = await SpecialistRatingService.addSpecialistRating(
+        specialistId,
+        parentId,
+        noStar
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching recommendations:", error);
+    }
+  };
+
   return (
     <>
       <Grid
@@ -11,7 +46,7 @@ const RateCard = () => {
           width: "250px",
           height: "55px",
           borderRadius: "12px",
-          backgroundColor: "#F4A261",
+          backgroundColor: "#264653",
           marginTop: "20px",
         }}
       >
@@ -35,6 +70,8 @@ const RateCard = () => {
           }}
         >
           {starNo.map((element) => {
+            const starColor = element <= noStar ? "#ffff00" : "white"; // Set color to red if element is 5, otherwise white
+
             return (
               <FaRegStar
                 key={element}
@@ -42,9 +79,10 @@ const RateCard = () => {
                   marginTop: "5px",
                   width: "30px",
                   height: "20px",
-                  color: "white",
+                  color: starColor,
                   cursor: "pointer",
                 }}
+                onClick={() => handleClick(element)}
               />
             );
           })}

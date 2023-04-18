@@ -1,4 +1,10 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import Navbar from "../components/Navbar";
 import TypeNavbar from "../components/TypeNavbar";
 import { Grid } from "@mui/material";
@@ -21,12 +27,13 @@ const RecommendationPage = () => {
 
   const { id } = useParams();
 
-  const fetchRecommendation = useCallback(async () => {
+  const fetchRecommendation = async () => {
     try {
       const response = await RecommendationService.getRecommendationById(
         parseInt(id!)
       );
       const currentRecommendation: RecommendationInterface = {
+        id: response.data.id,
         title: response.data.title,
         description: response.data.description,
         fromAge: response.data.fromAge,
@@ -42,11 +49,11 @@ const RecommendationPage = () => {
     } catch (e) {
       console.log(e);
     }
-  }, [setRecommendation, id]);
+  };
 
   useEffect(() => {
     fetchRecommendation();
-  }, [setRecommendation, fetchRecommendation]);
+  }, []);
 
   return (
     <RecommendationFullContextProvider

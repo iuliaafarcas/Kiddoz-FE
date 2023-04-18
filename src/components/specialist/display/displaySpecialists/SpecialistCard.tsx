@@ -7,17 +7,32 @@ import {
   SpecialistContext,
   SpecialistContextModel,
 } from "../../../context/SpecialistContext";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import SpecialistRatingService from "../../../../api/SpecialistRatingService";
 
 const SpecialistCard = () => {
   const { specialistObject } = useContext(
     SpecialistContext
   ) as SpecialistContextModel;
+  const [noStars, setNoStars] = useState();
 
   const handleClick = () => {
     window.scrollTo(0, 0);
     window.location.href = "/specialist/" + specialistObject.id!;
   };
+  const fetchRating = async () => {
+    try {
+      const response = await SpecialistRatingService.getRatingBySpecialistId(
+        specialistObject.id!
+      );
+      setNoStars(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    fetchRating();
+  });
   return (
     <Grid
       sx={{
@@ -67,13 +82,14 @@ const SpecialistCard = () => {
             icon={faStar}
             style={{
               color: "#F4A261",
-              width: "20px",
-              height: "20px",
-              marginLeft: "-2px",
+              width: "15px",
+              height: "15px",
+              marginLeft: "-4px",
+              marginTop: "2px",
             }}
           />
-          <Typography sx={{ marginLeft: "2px", fontSize: "14px" }}>
-            4.5
+          <Typography sx={{ marginLeft: "4px", fontSize: "14px" }}>
+            {noStars}
           </Typography>
         </Grid>
       </Grid>

@@ -20,6 +20,7 @@ const ViewSpecialist = () => {
     try {
       const response = await SpecialistService.getSpecialistById(parseInt(id!));
       const currentSpecialist: SpecialistInterface = {
+        id: response.data.id,
         firstName: response.data.firstName,
         lastName: response.data.lastName,
         email: response.data.email,

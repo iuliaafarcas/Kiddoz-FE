@@ -10,6 +10,7 @@ import RecommendationPage from "../pages/RecommendationPage";
 import SpecialistPage from "../pages/SpecialistPage";
 import CreateRecommendationPage from "../pages/CreateRecommendationPage";
 import SpecialistsPage from "../pages/SpecialistsPage";
+// import IntroPage from "../pages/IntroPage";
 
 export default function AppRouter() {
   return (
@@ -25,6 +26,7 @@ export default function AppRouter() {
       <Route path="favorites" element={<FavoritesPage />} />
       <Route path="profile" element={<ProfilePage />} />
       <Route path="create" element={<CreateRecommendationPage />} />
+      {/* <Route path="kiddoz" element={<IntroPage />} /> */}
     </Routes>
   );
 }
