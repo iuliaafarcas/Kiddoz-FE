@@ -12,10 +12,10 @@ export const TitleStyled = styled(Typography)(() => {
 export const FormControlLabelStyled = styled(Typography)(() => {
   return {
     color: "black",
-    fontSize: "0.8rem",
+    fontSize: "14px",
   };
 });
 
 export const FormControlStyled = styled(FormControlLabel)(() => {
-  return { fontSize: "0.5rem", marginTop: "-10px" };
+  return { fontSize: "12px", marginTop: "-10px" };
 });

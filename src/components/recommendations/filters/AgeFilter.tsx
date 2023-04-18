@@ -2,14 +2,24 @@ import { Grid } from "@mui/material";
 import { FormControlLabelStyled, FormControlStyled } from "./StyledComponents";
 import FormGroup from "@mui/material/FormGroup";
 import Checkbox from "@mui/material/Checkbox";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import { useContext } from "react";
+import { MyContext } from "../../context/FilterContext";
 
 const AgeFilter = () => {
+  const { ageFilter, ageUnitFilter, setAgeFilter, setAgeUnitFilter } =
+    useContext(MyContext);
+
   return (
     <>
       <Grid
         sx={{
           width: "200px",
-          height: "230px",
+          height: "280px",
           background: "white",
         }}
       >
@@ -33,42 +43,49 @@ const AgeFilter = () => {
           </Grid>
         </Grid>
         <Grid sx={{ marginLeft: "20px", marginTop: "15px" }}>
-          <FormGroup>
-            <FormControlStyled
-              control={<Checkbox size="small" />}
-              label={<FormControlLabelStyled>All</FormControlLabelStyled>}
-            />
-            <FormControlStyled
-              control={<Checkbox size="small" />}
-              label={<FormControlLabelStyled>≤ 4</FormControlLabelStyled>}
-            />
-            <FormControlStyled
-              control={<Checkbox size="small" />}
-              label={
-                <FormControlLabelStyled>Between 5 and 7</FormControlLabelStyled>
-              }
-            />
-            <FormControlStyled
-              control={<Checkbox size="small" />}
-              label={
-                <FormControlLabelStyled>
-                  Between 8 and 11
-                </FormControlLabelStyled>
-              }
-            />
-            <FormControlStyled
-              control={<Checkbox size="small" />}
-              label={
-                <FormControlLabelStyled>
-                  Between 12 and 14
-                </FormControlLabelStyled>
-              }
-            />
-            <FormControlStyled
-              control={<Checkbox size="small" />}
-              label={<FormControlLabelStyled>15+</FormControlLabelStyled>}
-            />
-          </FormGroup>
+          <FormControl>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              // defaultValue="female"
+              name="radio-buttons-group"
+            >
+              <FormControlStyled
+                value="0-3 months"
+                control={<Radio />}
+                label="0-3 months"
+              />
+              <FormControlStyled
+                value="4-11 months"
+                control={<Radio />}
+                label="4-11 months"
+              />
+              <FormControlStyled
+                value="1-2 years"
+                control={<Radio />}
+                label="1-2 years"
+              />
+              <FormControlStyled
+                value="3-5 years"
+                control={<Radio />}
+                label="3-5 years"
+              />
+              <FormControlStyled
+                value="6-13 years"
+                control={<Radio />}
+                label="6-13 years"
+              />
+              <FormControlStyled
+                value="14-17 years"
+                control={<Radio />}
+                label="14-17 years"
+              />
+              <FormControlStyled
+                value="18-25 years"
+                control={<Radio />}
+                label="18-25 years"
+              />
+            </RadioGroup>
+          </FormControl>
         </Grid>
       </Grid>
     </>

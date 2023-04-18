@@ -84,7 +84,6 @@ const SpecialistCard = () => {
               color: "#F4A261",
               width: "15px",
               height: "15px",
-              marginLeft: "-4px",
               marginTop: "2px",
             }}
           />

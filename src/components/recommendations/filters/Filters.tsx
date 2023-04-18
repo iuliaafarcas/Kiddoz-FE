@@ -1,10 +1,15 @@
 import { Grid } from "@mui/material";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import AgeFilter from "./AgeFilter";
 import RatingFilter from "./RatingFilter";
 import TypeFilter from "./TypeFilter";
+import { MyContext, MyContextProvider } from "../../context/FilterContext";
 
 const Filters = () => {
+  const { typeFilter, ageFilter, ageUnitFilter, ratingFilter } =
+    useContext(MyContext);
+
+  useEffect(() => {}, [typeFilter, ageFilter, ageUnitFilter, ratingFilter]);
   return (
     <Grid
       sx={{

@@ -10,7 +10,7 @@ export const NavbarStyled = styled(Box)(({ theme }) => {
     display: "flex",
     flexDirection: "row",
     position: "fixed",
-
+    zIndex: 2,
     // justifyContent: "space-between",
   };
 });

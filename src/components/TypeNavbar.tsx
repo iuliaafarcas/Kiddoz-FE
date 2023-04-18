@@ -19,6 +19,7 @@ const TypeNavbar = () => {
         position: "fixed",
         display: "flex",
         flexDirection: "row",
+        zIndex: 2,
       }}
     >
       <Button

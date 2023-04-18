@@ -1,7 +1,10 @@
 import { Grid } from "@mui/material";
 import Stars from "../../specialist/display/displaySpecialists/filters/Stars";
+import { useContext } from "react";
+import { MyContext } from "../../context/FilterContext";
 
 const RatingFilter = () => {
+  const { ratingFilter, setRatingFilter } = useContext(MyContext);
   const noStars = [1, 2, 3, 4, 5];
   return (
     <Grid
@@ -37,6 +40,7 @@ const RatingFilter = () => {
           display: "flex",
           flexDirection: "column",
           marginBottom: "20px",
+          marginLeft: "10px",
         }}
       >
         {noStars.map((element) => {

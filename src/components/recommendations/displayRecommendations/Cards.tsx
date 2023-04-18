@@ -10,48 +10,26 @@ import Navbar from "../../Navbar";
 import TypeNavbar from "../../TypeNavbar";
 import { FaSearch } from "react-icons/fa";
 
-const Cards = () => {
-  const [recommendations, setRecommendations] =
-    useState<RecommendationInterface[]>();
-  const [page, setPage] = useState(1);
-  const [searchTitle, setSearchTitle] = useState("");
-  const [noRecommendations, setNoRecommendations] = useState(0);
-  const [noPages, setNoPages] = useState(0);
-  const noItemsPerPage = 1;
-  const [
-    hasFetchedRecommendationsByTitle,
-    setHasFetchedRecommendationsByTitle,
-  ] = useState(false);
-
+const Cards = ({
+  recommendations,
+  page,
+  setPage,
+  searchTitle,
+  setSearchTitle,
+  noPages,
+  fetchRecommendations,
+}: any) => {
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
     value: number
   ) => {
     setPage(value);
+    window.scrollTo(0, 0);
   };
   const handleClick = () => {
     // window.scrollTo(0, 0);
     if (searchTitle === "") setPage(1);
-    fetchRecommendationsByTitle();
-  };
-
-  const fetchRecommendationsByTitle = async () => {
-    try {
-      const response = await RecommendationService.getRecommendationsByTitle(
-        page,
-        searchTitle
-      );
-      setRecommendations(response.data[1]);
-      setNoRecommendations(response.data[0]);
-      setNoPages(
-        noRecommendations % noItemsPerPage === 0
-          ? Math.floor(noRecommendations / noItemsPerPage)
-          : Math.floor(noRecommendations / noItemsPerPage) + 1
-      );
-      setHasFetchedRecommendationsByTitle(true);
-    } catch (error) {
-      console.error("Error fetching recommendations:", error);
-    }
+    fetchRecommendations();
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -60,34 +38,6 @@ const Cards = () => {
       handleClick();
     }
   };
-  const fetchRecommendations = async () => {
-    try {
-      const response = await RecommendationService.getRecommendationsPaged(
-        page
-      );
-      setRecommendations(response.data[1]);
-      setNoRecommendations(response.data[0]);
-      setNoPages(
-        noRecommendations % noItemsPerPage === 0
-          ? Math.floor(noRecommendations / noItemsPerPage)
-          : Math.floor(noRecommendations / noItemsPerPage) + 1
-      );
-    } catch (error) {
-      console.error("Error fetching recommendations:", error);
-    }
-  };
-
-  useEffect(() => {
-    if (searchTitle === "") {
-      fetchRecommendations();
-      console.log("recc");
-    } else {
-      fetchRecommendationsByTitle();
-      console.log("searchTitle");
-    }
-
-    // Reset the flag back to false
-  }, [page, noRecommendations, noItemsPerPage]);
 
   return (
     <Grid
@@ -113,6 +63,7 @@ const Cards = () => {
           inputProps={{ style: { height: "23px" } }}
           onKeyDown={handleKeyDown}
           onChange={(event) => setSearchTitle(event.target.value)}
+          autoComplete="off"
         />
 
         <Button
@@ -131,7 +82,7 @@ const Cards = () => {
         </Button>
       </Grid>
       <Grid>
-        {recommendations?.map((element) => {
+        {recommendations?.map((element: any) => {
           return (
             <RecommendationContextProvider value={element} key={element.id}>
               <Card />

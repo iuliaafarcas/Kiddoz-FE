@@ -10,6 +10,7 @@ import RecommendationPage from "../pages/RecommendationPage";
 import SpecialistPage from "../pages/SpecialistPage";
 import CreateRecommendationPage from "../pages/CreateRecommendationPage";
 import SpecialistsPage from "../pages/SpecialistsPage";
+import DotSpinner from "../components/spinner/DotSpinner";
 // import IntroPage from "../pages/IntroPage";
 
 export default function AppRouter() {
@@ -27,6 +28,7 @@ export default function AppRouter() {
       <Route path="profile" element={<ProfilePage />} />
       <Route path="create" element={<CreateRecommendationPage />} />
       {/* <Route path="kiddoz" element={<IntroPage />} /> */}
+      {/* <Route path="spin" element={<DotSpinner />} /> */}
     </Routes>
   );
 }

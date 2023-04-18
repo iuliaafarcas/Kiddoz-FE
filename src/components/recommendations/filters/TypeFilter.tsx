@@ -2,13 +2,18 @@ import { Grid } from "@mui/material";
 import { FormControlLabelStyled, FormControlStyled } from "./StyledComponents";
 import FormGroup from "@mui/material/FormGroup";
 import Checkbox from "@mui/material/Checkbox";
+import { useContext } from "react";
+import { MyContext } from "../../context/FilterContext";
+
 const TypeFilter = () => {
+  const { typeFilter, setTypeFilter } = useContext(MyContext);
+
   return (
     <>
       <Grid
         sx={{
           width: "200px",
-          height: "255px",
+          height: "220px",
           background: "white",
         }}
       >
@@ -31,12 +36,13 @@ const TypeFilter = () => {
             <b>Type</b>
           </Grid>
         </Grid>
-        <Grid sx={{ marginLeft: "10px", marginTop: "15px" }}>
-          <FormGroup>
-            <FormControlStyled
-              control={<Checkbox size="small" />}
-              label={<FormControlLabelStyled>All</FormControlLabelStyled>}
-            />
+        <Grid
+          sx={{
+            marginLeft: "10px",
+            marginTop: "15px",
+          }}
+        >
+          <FormGroup sx={{ marginLeft: "10px" }}>
             <FormControlStyled
               control={<Checkbox size="small" />}
               label={<FormControlLabelStyled>Sport</FormControlLabelStyled>}

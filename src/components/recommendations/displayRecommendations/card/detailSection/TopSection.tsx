@@ -1,15 +1,33 @@
 import { Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { FaBookmark } from "react-icons/fa";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   RecommendationContext,
   RecommendationContextModel,
 } from "../../../../context/RecommendationContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import RecommendationRatingService from "../../../../../api/RecommendationRatingService";
 const TopSection = () => {
   const { RecommendationObject } = useContext(
     RecommendationContext
   ) as RecommendationContextModel;
+  const [noStars, setNoStars] = useState();
+  const fetchRating = async () => {
+    try {
+      const response =
+        await RecommendationRatingService.getRatingByRecommendationId(
+          RecommendationObject.id!
+        );
+      setNoStars(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    fetchRating();
+  });
   return (
     <>
       <Grid
@@ -62,7 +80,7 @@ const TopSection = () => {
             {RecommendationObject.type}
           </Typography>
         </Grid>
-        <Grid sx={{ width: "100px", paddingRight: "20px" }}>
+        {/* <Grid sx={{ width: "100px", paddingRight: "20px" }}>
           <FaBookmark
             stroke="black"
             strokeWidth="40px"
@@ -71,7 +89,38 @@ const TopSection = () => {
             cursor="pointer"
             style={{ float: "right" }}
           />
-        </Grid>
+        </Grid> */}
+        {noStars !== 0 && (
+          <Grid
+            sx={{
+              float: "right",
+              display: "flex",
+              marginLeft: "40px",
+              flexDirection: "row",
+              paddingRight: "20px",
+              paddingBottom: "10px",
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faStar}
+              style={{
+                color: "#F4A261",
+                width: "20px",
+                height: "20px",
+                marginRight: "5px",
+                float: "right",
+              }}
+            />
+            <Typography
+              sx={{
+                fontSize: "16px",
+                color: "black",
+              }}
+            >
+              {noStars}
+            </Typography>
+          </Grid>
+        )}
       </Grid>
     </>
   );
