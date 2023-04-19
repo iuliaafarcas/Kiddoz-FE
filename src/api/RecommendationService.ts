@@ -8,6 +8,7 @@ class RecommendationService {
     page: number,
     types: number[],
     fromAge: number,
+    toAge: number,
     fromUnitAge: number,
     starCount: number,
     title: string
@@ -22,8 +23,9 @@ class RecommendationService {
       });
       stringBuilder += typeString;
     }
-    if (fromAge !== 0 && fromUnitAge !== 0) {
+    if (fromAge !== 0 && toAge !== 0 && fromUnitAge !== 0) {
       let fromAgeString = "&fromAge=" + fromAge;
+      fromAgeString += "&toAge=" + toAge;
       fromAgeString += "&fromUnitAge=" + fromUnitAge;
       stringBuilder += fromAgeString;
     }

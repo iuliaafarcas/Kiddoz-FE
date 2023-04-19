@@ -7,7 +7,9 @@ const RatingFilter = () => {
   const { ratingFilter, setRatingFilter } = useContext(MyContext);
 
   const handleClick = (starNumber: number) => {
-    setRatingFilter(starNumber);
+    if (starNumber === -1) {
+      setRatingFilter(0);
+    } else setRatingFilter(starNumber);
     console.log(ratingFilter);
     console.log(ratingFilter);
   };
@@ -17,7 +19,7 @@ const RatingFilter = () => {
       sx={{
         backgroundColor: "white",
         width: "200px",
-        height: "250px",
+        height: "290px",
       }}
     >
       <Grid
@@ -49,6 +51,24 @@ const RatingFilter = () => {
           marginLeft: "10px",
         }}
       >
+        <Grid
+          onClick={() => handleClick(-1)}
+          key={-1}
+          sx={{
+            height: "30px",
+            width: "170px",
+            borderColor: "black",
+            border: 1,
+            marginBottom: "10px",
+            marginLeft: "5px",
+            paddingLeft: "10px",
+            cursor: "pointer",
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
+          <Grid sx={{ width: "20px", height: "20px" }}>All</Grid>
+        </Grid>
         {noStars.map((element) => {
           return (
             <Grid

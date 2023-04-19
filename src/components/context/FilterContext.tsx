@@ -2,12 +2,14 @@ import React, { createContext, useState } from "react";
 
 interface MyContextType {
   typeFilter: number[];
-  ageFilter: number;
+  fromAgeFilter: number;
+  toAgeFilter: number;
   ageUnitFilter: number;
   ratingFilter: number;
   titleFilter: string;
   setTypeFilter: (value: number[]) => void;
-  setAgeFilter: (value: number) => void;
+  setFromAgeFilter: (value: number) => void;
+  setToAgeFilter: (value: number) => void;
   setAgeUnitFilter: (value: number) => void;
   setRatingFilter: (value: number) => void;
   setTitleFilter: (value: string) => void;
@@ -15,12 +17,14 @@ interface MyContextType {
 
 export const MyContext = createContext<MyContextType>({
   typeFilter: [],
-  ageFilter: 0,
+  fromAgeFilter: 0,
+  toAgeFilter: 0,
   ageUnitFilter: 0,
   ratingFilter: 0,
   titleFilter: "",
   setTypeFilter: () => {},
-  setAgeFilter: () => {},
+  setFromAgeFilter: () => {},
+  setToAgeFilter: () => {},
   setAgeUnitFilter: () => {},
   setRatingFilter: () => {},
   setTitleFilter: () => {},
@@ -28,18 +32,21 @@ export const MyContext = createContext<MyContextType>({
 
 export const MyContextProvider = ({ children }: any) => {
   const [typeFilter, setTypeFilter] = useState<number[]>([]);
-  const [ageFilter, setAgeFilter] = useState<number>(0);
+  const [fromAgeFilter, setFromAgeFilter] = useState<number>(0);
+  const [toAgeFilter, setToAgeFilter] = useState<number>(0);
   const [ageUnitFilter, setAgeUnitFilter] = useState<number>(0);
   const [ratingFilter, setRatingFilter] = useState<number>(0);
   const [titleFilter, setTitleFilter] = useState<string>("");
   const contextValue: MyContextType = {
     typeFilter,
-    ageFilter,
+    fromAgeFilter,
+    toAgeFilter,
     ageUnitFilter,
     ratingFilter,
     titleFilter,
     setTypeFilter,
-    setAgeFilter,
+    setFromAgeFilter,
+    setToAgeFilter,
     setAgeUnitFilter,
     setRatingFilter,
     setTitleFilter,

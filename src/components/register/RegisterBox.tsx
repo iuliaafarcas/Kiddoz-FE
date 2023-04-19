@@ -26,10 +26,6 @@ const RegisterBox = () => {
   const [matchPasswordError, setMatchPasswordError] = useState("");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  // useEffect(() => {
-  //   setPassword("");
-  //   setEmail("");
-  // }, []);
   const isValidEmail = (email: string) => {
     if (emailRegex.test(email) === false || email === "")
       setEmailError("Invalid email format");

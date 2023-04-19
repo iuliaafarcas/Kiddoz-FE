@@ -21,6 +21,7 @@ const MainPage = () => {
   const fetchRecommendations = async (
     types: number[],
     fromAge: number,
+    toAge: number,
     fromUnitAge: number,
     starCount: number,
     title: string
@@ -30,6 +31,7 @@ const MainPage = () => {
         page,
         types,
         fromAge,
+        toAge,
         fromUnitAge,
         starCount,
         title

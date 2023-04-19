@@ -18,8 +18,7 @@ export const GridGlobalStyled = styled(Grid)(() => {
     display: "flex",
     alignContent: "center",
     justifyContent: "justify",
-    // marginTop: "1%",
-    // marginBottom: "10%",
+
     marginLeft: "20%",
   };
 });
@@ -28,7 +27,6 @@ export const GridColorStyled = styled(Grid)(({ theme }) => {
   return {
     textAlign: "center",
     color: "black",
-    // marginTop: "10px",
     borderColor: theme.palette.primary.main,
   };
 });
@@ -74,7 +72,6 @@ export const TextFieldStyled = styled(TextField)(() => {
 export const TextFieldRegisterUserStyled = styled(TextFieldStyled)(
   ({ theme }) => {
     return {
-      // paddingTop: "0.5%",
       width: "75%",
       "& fieldset": {
         borderColor: "black",

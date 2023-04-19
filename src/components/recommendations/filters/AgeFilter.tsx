@@ -9,17 +9,34 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useContext } from "react";
 import { MyContext } from "../../context/FilterContext";
+import { childPhases } from "../../../interfaces/AgeIntervals";
+import { AgeUnitEnum } from "../../../interfaces/AgeUnitEnum";
 
 const AgeFilter = () => {
-  const { ageFilter, ageUnitFilter, setAgeFilter, setAgeUnitFilter } =
+  const { setFromAgeFilter, setToAgeFilter, setAgeUnitFilter } =
     useContext(MyContext);
+  const ages = childPhases;
 
+  const handleChange = (element: any) => {
+    if (element === -1) {
+      setFromAgeFilter(0);
+      setToAgeFilter(0);
+      setAgeUnitFilter(0);
+    } else {
+      setFromAgeFilter(element.fromAge);
+      setToAgeFilter(element.toAge);
+      setAgeUnitFilter(element.fromAgeUnit);
+    }
+  };
+  const makeLabel = (fromAge: number, toAge: number, fromUnitAge: number) => {
+    return fromAge + "-" + toAge + " " + AgeUnitEnum[fromUnitAge];
+  };
   return (
     <>
       <Grid
         sx={{
           width: "200px",
-          height: "280px",
+          height: "300px",
           background: "white",
         }}
       >
@@ -46,44 +63,34 @@ const AgeFilter = () => {
           <FormControl>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
-              // defaultValue="female"
               name="radio-buttons-group"
             >
               <FormControlStyled
-                value="0-3 months"
+                key={-1}
+                value={-1}
                 control={<Radio />}
-                label="0-3 months"
+                label="All"
+                onChange={() => handleChange(-1)}
               />
-              <FormControlStyled
-                value="4-11 months"
-                control={<Radio />}
-                label="4-11 months"
-              />
-              <FormControlStyled
-                value="1-2 years"
-                control={<Radio />}
-                label="1-2 years"
-              />
-              <FormControlStyled
-                value="3-5 years"
-                control={<Radio />}
-                label="3-5 years"
-              />
-              <FormControlStyled
-                value="6-13 years"
-                control={<Radio />}
-                label="6-13 years"
-              />
-              <FormControlStyled
-                value="14-17 years"
-                control={<Radio />}
-                label="14-17 years"
-              />
-              <FormControlStyled
-                value="18-25 years"
-                control={<Radio />}
-                label="18-25 years"
-              />
+              {ages.map((element) => {
+                return (
+                  <FormControlStyled
+                    key={element.fromAge}
+                    value={makeLabel(
+                      element.fromAge,
+                      element.toAge,
+                      element.fromAgeUnit
+                    )}
+                    control={<Radio />}
+                    label={makeLabel(
+                      element.fromAge,
+                      element.toAge,
+                      element.fromAgeUnit
+                    )}
+                    onChange={() => handleChange(element)}
+                  />
+                );
+              })}
             </RadioGroup>
           </FormControl>
         </Grid>
