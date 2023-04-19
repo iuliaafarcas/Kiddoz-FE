@@ -114,7 +114,7 @@ const MyComponent = () => {
               sx={{
                 marginLeft: "50px",
                 width: "500px",
-                marginTop: "-20px",
+                marginTop: "-25px",
                 fontWeight: "10",
               }}
               // fontFamily="'Lato', sans-serif"
@@ -132,7 +132,7 @@ const MyComponent = () => {
               width: "350px",
               height: "300px",
               borderRadius: "20px",
-              marginTop: "-30px",
+              marginTop: "-40px",
               marginLeft: "-50px",
             }}
             src={communication}
