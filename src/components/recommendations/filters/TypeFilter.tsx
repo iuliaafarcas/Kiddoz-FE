@@ -4,10 +4,26 @@ import FormGroup from "@mui/material/FormGroup";
 import Checkbox from "@mui/material/Checkbox";
 import { useContext } from "react";
 import { MyContext } from "../../context/FilterContext";
+import { TypeEnum } from "../../../interfaces/TypeEnum";
 
 const TypeFilter = () => {
   const { typeFilter, setTypeFilter } = useContext(MyContext);
 
+  const types = (
+    Object.keys(TypeEnum).filter((v) =>
+      isNaN(Number(v))
+    ) as (keyof typeof TypeEnum)[]
+  ).map((key, index) => {
+    return TypeEnum[key];
+  });
+  const handleClick = (type: number) => {
+    if (typeFilter.includes(type)) {
+      setTypeFilter(typeFilter.filter((num) => num !== type));
+    } else {
+      setTypeFilter([...typeFilter, type]);
+      console.log(typeFilter);
+    }
+  };
   return (
     <>
       <Grid
@@ -43,34 +59,22 @@ const TypeFilter = () => {
           }}
         >
           <FormGroup sx={{ marginLeft: "10px" }}>
-            <FormControlStyled
-              control={<Checkbox size="small" />}
-              label={<FormControlLabelStyled>Sport</FormControlLabelStyled>}
-            />
-            <FormControlStyled
-              control={<Checkbox size="small" />}
-              label={<FormControlLabelStyled>Movie</FormControlLabelStyled>}
-            />
-            <FormControlStyled
-              control={<Checkbox size="small" />}
-              label={<FormControlLabelStyled>Book</FormControlLabelStyled>}
-            />
-            <FormControlStyled
-              control={<Checkbox size="small" />}
-              label={
-                <FormControlLabelStyled>Food Recipe</FormControlLabelStyled>
-              }
-            />
-            <FormControlStyled
-              control={<Checkbox size="small" />}
-              label={
-                <FormControlLabelStyled>Entertainment</FormControlLabelStyled>
-              }
-            />
-            <FormControlStyled
-              control={<Checkbox size="small" />}
-              label={<FormControlLabelStyled>Other</FormControlLabelStyled>}
-            />
+            {types.map((element) => {
+              return (
+                <FormControlStyled
+                  key={element}
+                  control={<Checkbox size="small" />}
+                  label={
+                    <FormControlLabelStyled>
+                      {TypeEnum[element] === "FoodRecipe"
+                        ? "Food recipe"
+                        : TypeEnum[element]}
+                    </FormControlLabelStyled>
+                  }
+                  onChange={() => handleClick(element)}
+                />
+              );
+            })}
           </FormGroup>
         </Grid>
       </Grid>

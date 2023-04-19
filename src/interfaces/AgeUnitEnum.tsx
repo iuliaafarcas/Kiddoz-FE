@@ -1,6 +1,5 @@
 export enum AgeUnitEnum {
-    days="days",
-    months="months",
-    years="years"
-  }
-  
+  Days = 0,
+  Months = 1,
+  Years = 2,
+}

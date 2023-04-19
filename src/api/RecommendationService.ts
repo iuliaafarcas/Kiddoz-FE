@@ -4,8 +4,39 @@ class RecommendationService {
   getRecommendationById(id: number) {
     return httpConfig.get(`/recommendations/${id}`);
   }
-  getRecommendationsPaged(page: number) {
-    return httpConfig.get(`/recommendations/paged?pageNumber=${page}`);
+  getRecommendationsPaged(
+    page: number,
+    types: number[],
+    fromAge: number,
+    fromUnitAge: number,
+    starCount: number,
+    title: string
+  ) {
+    let stringBuilder: string = `/recommendations/filter?pageNumber=${page}`;
+    if (types.length !== 0) {
+      let typeString = "&types=";
+      types.map((type, index) => {
+        return index === types.length - 1
+          ? (typeString = typeString + type)
+          : (typeString = typeString + type + ",");
+      });
+      stringBuilder += typeString;
+    }
+    if (fromAge !== 0 && fromUnitAge !== 0) {
+      let fromAgeString = "&fromAge=" + fromAge;
+      fromAgeString += "&fromUnitAge=" + fromUnitAge;
+      stringBuilder += fromAgeString;
+    }
+    if (starCount !== 0) {
+      let starString = "&starCount=" + starCount;
+      stringBuilder += starString;
+    }
+    if (title !== undefined) {
+      let titleString = "&title=" + title;
+      stringBuilder += titleString;
+    }
+
+    return httpConfig.get(stringBuilder);
   }
   getOtherRecommendations(id: number) {
     return httpConfig.get(`/recommendations/otherRecommendations/${id}`);

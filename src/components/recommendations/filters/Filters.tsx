@@ -5,11 +5,13 @@ import RatingFilter from "./RatingFilter";
 import TypeFilter from "./TypeFilter";
 import { MyContext, MyContextProvider } from "../../context/FilterContext";
 
-const Filters = () => {
+const Filters = ({ fetchRecommendations }: any) => {
   const { typeFilter, ageFilter, ageUnitFilter, ratingFilter } =
     useContext(MyContext);
 
-  useEffect(() => {}, [typeFilter, ageFilter, ageUnitFilter, ratingFilter]);
+  useEffect(() => {
+    fetchRecommendations(typeFilter, ageFilter, ageUnitFilter, ratingFilter);
+  }, [typeFilter, ageFilter, ageUnitFilter, ratingFilter]);
   return (
     <Grid
       sx={{

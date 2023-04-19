@@ -27,7 +27,6 @@ const Cards = ({
     window.scrollTo(0, 0);
   };
   const handleClick = () => {
-    // window.scrollTo(0, 0);
     if (searchTitle === "") setPage(1);
     fetchRecommendations();
   };

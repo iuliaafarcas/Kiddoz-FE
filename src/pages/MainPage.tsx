@@ -6,6 +6,7 @@ import family from "../assets/family.png";
 import { MyContextProvider } from "../components/context/FilterContext";
 import RecommendationService from "../api/RecommendationService";
 import RecommendationInterface from "../interfaces/RecommendationInterface";
+import DotSpinner from "../components/spinner/DotSpinner";
 
 const MainPage = () => {
   const [recommendations, setRecommendations] = useState<
@@ -17,11 +18,23 @@ const MainPage = () => {
   const [noPages, setNoPages] = useState(0);
   const noItemsPerPage = 10;
 
-  const fetchRecommendations = async () => {
+  const fetchRecommendations = async (
+    types: number[],
+    fromAge: number,
+    fromUnitAge: number,
+    starCount: number,
+    title: string
+  ) => {
     try {
       const response = await RecommendationService.getRecommendationsPaged(
-        page
+        page,
+        types,
+        fromAge,
+        fromUnitAge,
+        starCount,
+        title
       );
+
       setRecommendations(response.data[1]);
       setNoRecommendations(response.data[0]);
       setNoPages(
@@ -34,15 +47,11 @@ const MainPage = () => {
     }
   };
 
-  useEffect(() => {
-    fetchRecommendations();
-  }, []);
-
   return (
     <Grid sx={{ background: "#F6F6F6" }}>
       <Box sx={{ width: "100%" }} display="flex" flexDirection="row">
         <MyContextProvider>
-          <Filters />
+          <Filters fetchRecommendations={fetchRecommendations} />
         </MyContextProvider>
 
         <Cards
@@ -52,7 +61,6 @@ const MainPage = () => {
           searchTitle={searchTitle}
           setSearchTitle={setSearchTitle}
           noPages={noPages}
-          fetchRecommendations={fetchRecommendations}
         />
         <Grid
           sx={{ display: "flex", justify: "flexEnd", alignItems: "flexEnd" }}

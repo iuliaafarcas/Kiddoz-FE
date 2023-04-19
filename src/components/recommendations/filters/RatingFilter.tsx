@@ -5,6 +5,12 @@ import { MyContext } from "../../context/FilterContext";
 
 const RatingFilter = () => {
   const { ratingFilter, setRatingFilter } = useContext(MyContext);
+
+  const handleClick = (starNumber: number) => {
+    setRatingFilter(starNumber);
+    console.log(ratingFilter);
+    console.log(ratingFilter);
+  };
   const noStars = [1, 2, 3, 4, 5];
   return (
     <Grid
@@ -46,6 +52,7 @@ const RatingFilter = () => {
         {noStars.map((element) => {
           return (
             <Grid
+              onClick={() => handleClick(element)}
               key={element}
               sx={{
                 height: "30px",
