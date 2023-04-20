@@ -13,8 +13,7 @@ const BottomSection = () => {
     RecommendationContext
   ) as RecommendationContextModel;
 
-  const [specialistFirstName, setSpecialistFirstName] = useState("");
-  const [specialistLastName, setSpecialistLastName] = useState("");
+  const [specialistName, setSpecialistName] = useState("");
   const [specialistOcupation, setSpecialistOcupation] = useState("");
   const [specialistImage, setSpecialistImage] = useState("");
 
@@ -25,8 +24,7 @@ const BottomSection = () => {
         const response = await SpecialistService.getSpecialistById(
           RecommendationObject.specialist.id!
         );
-        setSpecialistFirstName(response.data.firstName);
-        setSpecialistLastName(response.data.lastName);
+        setSpecialistName(response.data.name);
         setSpecialistOcupation(response.data.occupation);
         setSpecialistImage(response.data.image);
       } catch (e) {
@@ -86,7 +84,7 @@ const BottomSection = () => {
           <Grid sx={{ marginLeft: "5px" }}>
             <Link to="/specialist" style={{ textDecoration: "none" }}>
               <Typography sx={{ fontSize: "12px", color: "black" }}>
-                {specialistFirstName} {specialistLastName}
+                {specialistName}
               </Typography>
             </Link>
             <Typography

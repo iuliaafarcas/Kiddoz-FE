@@ -35,8 +35,7 @@ const BottomSection = () => {
         RecommendationObject.specialist.id!
       );
       const currentSpecialist: SpecialistInterface = {
-        firstName: response.data.firstName,
-        lastName: response.data.lastName,
+        name: response.data.name,
         email: response.data.email,
         occupation: response.data.occupation,
         quote: response.data.quote,
@@ -85,7 +84,7 @@ const BottomSection = () => {
 
           <Grid sx={{ marginLeft: "5px" }}>
             <Typography sx={{ fontSize: "12px", color: "black" }}>
-              {specialist?.firstName} {specialist?.lastName}
+              {specialist?.name}
             </Typography>
             <Typography
               sx={{

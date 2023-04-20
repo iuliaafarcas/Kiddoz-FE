@@ -4,7 +4,9 @@ import Box from "@mui/material/Box";
 import SvgIcon from "@mui/material/SvgIcon";
 import { Button, Grid, Typography } from "@mui/material";
 import logo from "../../assets/logo.jpeg";
-import communication from "../../assets/Communication.png";
+import communication from "../../assets/mainPage.png";
+import { Link } from "react-router-dom";
+import IntroSection from "./Intro";
 
 const CustomShapeDividerTop = styled(Box)({
   position: "absolute",
@@ -39,6 +41,7 @@ const Root = styled(Button)({
   fontFamily: "Cairoli Now Heavy",
   fontSize: "18px",
   position: "relative",
+  color: "black",
   //   backgroundColor: "transparent",
   transition: ".2s cubic-bezier(0.19, 1, 0.22, 1)",
   //   opacity: 0.6,
@@ -85,11 +88,21 @@ const MyComponent = () => {
         <Grid
           sx={{ marginLeft: "100px", display: "flex", flexDirection: "row" }}
         >
-          <Root>Recommendations</Root>
-          <Root>Specialists</Root>
-          <Root>Register </Root>
-
-          <Root>Login </Root>
+          <Link
+            to="/recommendations"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <Root>Recommendations</Root>
+          </Link>
+          <Link to="/specialists" style={{ textDecoration: "none" }}>
+            <Root>Specialists</Root>
+          </Link>
+          <Link to="/register" style={{ textDecoration: "none" }}>
+            <Root sx={{ marginLeft: "-40px" }}>Register </Root>
+          </Link>
+          <Link to="/login" style={{ textDecoration: "none" }}>
+            <Root sx={{ marginLeft: "-60px" }}>Login </Root>
+          </Link>
         </Grid>
         <Grid sx={{ display: "flex", flexDirection: "row" }}>
           <Grid
@@ -132,12 +145,13 @@ const MyComponent = () => {
               width: "350px",
               height: "300px",
               borderRadius: "20px",
-              marginTop: "-40px",
-              marginLeft: "-50px",
+              marginTop: "-60px",
+              marginLeft: "-85px",
             }}
             src={communication}
           />
         </Grid>
+        <IntroSection />
       </CustomShapeDividerTop>
     </Grid>
   );

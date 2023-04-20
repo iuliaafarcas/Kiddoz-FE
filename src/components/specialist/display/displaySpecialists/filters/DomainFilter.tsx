@@ -1,9 +1,35 @@
 import { Grid, TextField, Typography } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
 
 import Button from "@mui/material/Button";
 import Stars from "./Stars";
+import { SpecialistFilterContext } from "../../../../context/SpecialistFilterContext";
 
-const DomainFilter = () => {
+const DomainFilter = ({ fetchSpecialists }: any) => {
+  const [maxAge, setMaxAge] = useState<number>(0);
+  const [minAge, setMinAge] = useState<number>(0);
+  const {
+    fromAgeFilter,
+    toAgeFilter,
+    domainNameFilter,
+    ratingFilter,
+    nameFilter,
+    setFromAgeFilter,
+    setToAgeFilter,
+    setdomainNameFilter,
+    setRatingFilter,
+  } = useContext(SpecialistFilterContext);
+
+  useEffect(() => {
+    fetchSpecialists(
+      fromAgeFilter,
+      toAgeFilter,
+      nameFilter,
+      domainNameFilter,
+      ratingFilter
+    );
+  }, [fromAgeFilter, nameFilter, toAgeFilter, domainNameFilter, ratingFilter]);
+
   const domains = [
     "Dermatology",
     "Kinetotherapy",
@@ -13,6 +39,19 @@ const DomainFilter = () => {
     "Dentistry",
     "Psychology",
   ];
+
+  const handleDomain = (element: string) => {
+    setdomainNameFilter(element);
+  };
+  const handleNoStars = (element: number) => {
+    setRatingFilter(element);
+  };
+  const handleMaxAge = (event: any) => setMaxAge(event?.target.value);
+  const handleMinAge = (event: any) => setMinAge(event?.target.value);
+  const handleSearchClick = () => {
+    setFromAgeFilter(minAge);
+    setToAgeFilter(maxAge);
+  };
   const noStars = [1, 2, 3, 4, 5];
   return (
     <>
@@ -56,6 +95,9 @@ const DomainFilter = () => {
               if (element !== "Psychology")
                 return (
                   <Button
+                    onClick={() => {
+                      handleDomain(element);
+                    }}
                     key={element}
                     variant="contained"
                     sx={{
@@ -77,6 +119,9 @@ const DomainFilter = () => {
               else {
                 return (
                   <Button
+                    onClick={() => {
+                      handleDomain(element);
+                    }}
                     key={"domain" + element}
                     variant="contained"
                     sx={{
@@ -140,6 +185,7 @@ const DomainFilter = () => {
                       display: "flex",
                       flexDirection: "row",
                     }}
+                    onClick={() => handleNoStars(element)}
                   >
                     <Grid sx={{ width: "20px", height: "20px" }}>
                       {element}
@@ -192,8 +238,12 @@ const DomainFilter = () => {
                     heigth: "20px",
                   }}
                 >
-                  <Typography>Minimum age: </Typography>
+                  <Typography sx={{ marginLeft: "20px" }}>
+                    Minimum age:{" "}
+                  </Typography>
                   <TextField
+                    value={minAge}
+                    onChange={handleMinAge}
                     type="number"
                     inputProps={{
                       style: {
@@ -201,7 +251,7 @@ const DomainFilter = () => {
                         padding: "1px",
                       },
                     }}
-                    sx={{ width: "40px", marginLeft: "35px" }}
+                    sx={{ width: "40px", marginLeft: "15px" }}
                   ></TextField>
                 </Grid>
 
@@ -213,8 +263,12 @@ const DomainFilter = () => {
                     heigth: "20px",
                   }}
                 >
-                  <Typography>Maximum age: </Typography>
+                  <Typography sx={{ marginLeft: "20px" }}>
+                    Maximum age:{" "}
+                  </Typography>
                   <TextField
+                    value={maxAge}
+                    onChange={handleMaxAge}
                     type="number"
                     inputProps={{
                       style: {
@@ -222,9 +276,27 @@ const DomainFilter = () => {
                         padding: "1px",
                       },
                     }}
-                    sx={{ width: "40px", marginLeft: "30px" }}
+                    sx={{ width: "40px", marginLeft: "10px" }}
                   ></TextField>
                 </Grid>
+                <Button
+                  onClick={handleSearchClick}
+                  sx={{
+                    marginLeft: "115px",
+                    height: "30px",
+                    width: "30px",
+                    textTransform: "none",
+                    color: "white",
+                    backgroundColor: "#264653",
+                    variant: "contained",
+                    ":hover": {
+                      color: "white",
+                      backgroundColor: "#264653",
+                    },
+                  }}
+                >
+                  Search
+                </Button>
               </Grid>
             </Grid>
           </Grid>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Cards from "../components/recommendations/displayRecommendations/Cards";
 import Filters from "../components/recommendations/filters/Filters";
 import family from "../assets/family.png";
-import { MyContextProvider } from "../components/context/FilterContext";
+import { MyContextProvider } from "../components/context/RecommendationFilterContext";
 import RecommendationService from "../api/RecommendationService";
 import RecommendationInterface from "../interfaces/RecommendationInterface";
 import DotSpinner from "../components/spinner/DotSpinner";

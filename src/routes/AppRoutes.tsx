@@ -30,7 +30,7 @@ export default function AppRouter() {
       <Route path="profile" element={<ProfilePage />} />
       <Route path="create" element={<CreateRecommendationPage />} />
       <Route path="home" element={<Home />} />
-      <Route path="background" element={<MyComponent />} />
+      <Route path="kiddoz" element={<MyComponent />} />
       {/* <Route path="spin" element={<DotSpinner />} /> */}
     </Routes>
   );

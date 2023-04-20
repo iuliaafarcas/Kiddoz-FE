@@ -41,9 +41,7 @@ const DetailSection = () => {
       <Grid sx={{ display: "flex", flexDirection: "row" }}>
         <Grid sx={{ width: "470px" }}>
           <Typography sx={{ fontSize: "30px" }}>
-            <b>
-              {specialistObject.firstName} {specialistObject.lastName}
-            </b>
+            <b>{specialistObject.name}</b>
           </Typography>
         </Grid>
         <Grid sx={{ marginTop: "10px" }}>

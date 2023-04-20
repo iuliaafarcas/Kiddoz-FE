@@ -28,17 +28,28 @@ const FooterButton = styled("button")({
 const IntroSection = () => {
   return (
     <Root>
-      <Container maxWidth="md">
+      <Container maxWidth="md" sx={{ marginTop: "20px" }}>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={4}>
-            <StyledCard>
+            <StyledCard sx={{ backgroundColor: "#F4A261" }}>
               <CardHeader
-                avatar={
-                  <Icon>
-                    <SettingsIcon />
-                  </Icon>
+                // avatar={
+                //   <Icon>
+                //     <SettingsIcon />
+                //   </Icon>
+                // }
+                title={
+                  <Typography
+                    sx={{
+                      // fontFamily: "Cairoli Now Heavy",
+                      color: "black",
+                      textAlign: "center",
+                      fontSize: "24px",
+                    }}
+                  >
+                    <b>Are you a parent?</b>
+                  </Typography>
                 }
-                title="Ipsum consequat"
               />
               <CardContent>
                 <Typography variant="body1">
@@ -49,17 +60,30 @@ const IntroSection = () => {
             </StyledCard>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <StyledCard>
+            <StyledCard sx={{ backgroundColor: "#e9c46a" }}>
               <CardHeader
-                avatar={
-                  <Icon>
-                    <BoltIcon />
-                  </Icon>
+                // avatar={
+                //   <Icon>
+                //     <BoltIcon />
+                //   </Icon>
+                // }
+                title={
+                  <Typography
+                    sx={{
+                      // fontFamily: "Cairoli Now Heavy",
+                      color: "black",
+                      textAlign: "center",
+                      fontSize: "24px",
+                      lineHeight: 1.1,
+                      // lineHeight: 1.1;
+                    }}
+                  >
+                    <b>Are you curious about child development?</b>
+                  </Typography>
                 }
-                title="Magna etiam dolor"
               />
               <CardContent>
-                <Typography variant="body1">
+                <Typography variant="body1" sx={{ textAlign: "justify" }}>
                   Nisl amet dolor sit ipsum veroeros sed blandit consequat
                   veroeros et magna tempus.
                 </Typography>
@@ -67,14 +91,25 @@ const IntroSection = () => {
             </StyledCard>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <StyledCard>
+            <StyledCard sx={{ backgroundColor: "#E76F51" }}>
               <CardHeader
-                avatar={
-                  <Icon>
-                    <StarIcon />
-                  </Icon>
+                // avatar={
+                //   <Icon>
+                //     <StarIcon />
+                //   </Icon>
+                // }
+                title={
+                  <Typography
+                    sx={{
+                      // fontFamily: "Cairoli Now Heavy",
+                      color: "black",
+                      textAlign: "center",
+                      fontSize: "24px",
+                    }}
+                  >
+                    <b>Are you an expert?</b>
+                  </Typography>
                 }
-                title="Tempus adipiscing"
               />
               <CardContent>
                 <Typography variant="body1">
@@ -85,9 +120,6 @@ const IntroSection = () => {
             </StyledCard>
           </Grid>
         </Grid>
-        <footer>
-          <FooterButton color="primary">Get Started</FooterButton>
-        </footer>
       </Container>
     </Root>
   );

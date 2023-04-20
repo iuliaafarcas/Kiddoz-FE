@@ -3,7 +3,7 @@ import { FormControlLabelStyled, FormControlStyled } from "./StyledComponents";
 import FormGroup from "@mui/material/FormGroup";
 import Checkbox from "@mui/material/Checkbox";
 import { useContext } from "react";
-import { MyContext } from "../../context/FilterContext";
+import { MyContext } from "../../context/RecommendationFilterContext";
 import { TypeEnum } from "../../../interfaces/TypeEnum";
 
 const TypeFilter = () => {

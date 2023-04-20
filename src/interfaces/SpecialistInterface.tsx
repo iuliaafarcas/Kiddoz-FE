@@ -2,8 +2,7 @@ import DomainCategory, { emptyDomainCategory } from "./DomainCategory";
 
 export default interface SpecialistInterface {
   readonly id?: number;
-  readonly firstName: string;
-  readonly lastName: string;
+  readonly name: string;
   readonly email: string;
   readonly occupation: string;
   readonly quote: string;
@@ -15,8 +14,7 @@ export default interface SpecialistInterface {
 }
 export const emptySpecialist: SpecialistInterface = {
   id: 0,
-  firstName: "",
-  lastName: "",
+  name: "",
   email: "",
   occupation: "",
   quote: "",

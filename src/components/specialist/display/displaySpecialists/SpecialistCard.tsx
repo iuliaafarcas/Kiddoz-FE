@@ -70,27 +70,30 @@ const SpecialistCard = () => {
             src={specialistObject.image}
           />
         </Grid>
-        <Grid
-          sx={{
-            height: "30px",
-            width: "45px",
-            display: "flex",
-            flexDirection: "row",
-          }}
-        >
-          <FontAwesomeIcon
-            icon={faStar}
-            style={{
-              color: "#F4A261",
-              width: "15px",
-              height: "15px",
-              marginTop: "2px",
+
+        {noStars !== 0 && (
+          <Grid
+            sx={{
+              height: "30px",
+              width: "45px",
+              display: "flex",
+              flexDirection: "row",
             }}
-          />
-          <Typography sx={{ marginLeft: "4px", fontSize: "14px" }}>
-            {noStars}
-          </Typography>
-        </Grid>
+          >
+            <FontAwesomeIcon
+              icon={faStar}
+              style={{
+                color: "#F4A261",
+                width: "15px",
+                height: "15px",
+                marginTop: "2px",
+              }}
+            />
+            <Typography sx={{ marginLeft: "4px", fontSize: "14px" }}>
+              {noStars}
+            </Typography>
+          </Grid>
+        )}
       </Grid>
       <Typography
         sx={{
@@ -101,9 +104,7 @@ const SpecialistCard = () => {
         }}
         onClick={handleClick}
       >
-        <b>
-          {specialistObject.firstName} {specialistObject.lastName}
-        </b>
+        <b>{specialistObject.name}</b>
       </Typography>
       <Typography
         sx={{ textAlign: "center", fontSize: "14px", marginTop: "8px" }}

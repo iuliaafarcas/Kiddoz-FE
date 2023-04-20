@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import Stars from "../../specialist/display/displaySpecialists/filters/Stars";
 import { useContext } from "react";
-import { MyContext } from "../../context/FilterContext";
+import { MyContext } from "../../context/RecommendationFilterContext";
 
 const RatingFilter = () => {
   const { ratingFilter, setRatingFilter } = useContext(MyContext);

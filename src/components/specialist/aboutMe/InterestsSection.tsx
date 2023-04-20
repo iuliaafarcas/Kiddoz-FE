@@ -53,14 +53,20 @@ const InterestsSection = () => {
               display: "flex",
               flexDirection: "column",
               flexWrap: "wrap",
-              height: "180px",
+              height: "250px",
+              weigth: "600px",
             }}
           >
             {interests.map((element) => {
               return (
                 <Typography
                   key={element}
-                  sx={{ marginRight: "180px", width: "200px" }}
+                  sx={{
+                    marginRight: "50px",
+                    width: "350px",
+                    textAlign: "justify",
+                    marginBottom: "10px",
+                  }}
                 >{`\u2022 ${element}`}</Typography>
               );
             })}

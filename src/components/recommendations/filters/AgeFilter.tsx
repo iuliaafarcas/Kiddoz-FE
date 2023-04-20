@@ -8,7 +8,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useContext } from "react";
-import { MyContext } from "../../context/FilterContext";
+import { MyContext } from "../../context/RecommendationFilterContext";
 import { childPhases } from "../../../interfaces/AgeIntervals";
 import { AgeUnitEnum } from "../../../interfaces/AgeUnitEnum";
 

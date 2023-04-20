@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <NavbarStyled>
-      <Link to="/recommendations">
+      <Link to="/kiddoz">
         <LogoStyled src={logo} />
       </Link>
       <Searchbar />

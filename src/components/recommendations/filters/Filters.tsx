@@ -3,7 +3,10 @@ import React, { useContext, useEffect } from "react";
 import AgeFilter from "./AgeFilter";
 import RatingFilter from "./RatingFilter";
 import TypeFilter from "./TypeFilter";
-import { MyContext, MyContextProvider } from "../../context/FilterContext";
+import {
+  MyContext,
+  MyContextProvider,
+} from "../../context/RecommendationFilterContext";
 
 const Filters = ({ fetchRecommendations }: any) => {
   const {

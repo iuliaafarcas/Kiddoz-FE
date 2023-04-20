@@ -1,27 +1,23 @@
-import { Grid, Pagination } from "@mui/material";
+import { Button, Grid, Pagination, TextField } from "@mui/material";
 import DomainFilter from "./filters/DomainFilter";
 import SpecialistCard from "./SpecialistCard";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import SpecialistService from "../../../../api/SpecialistService";
 import { SpecialistContextProvider } from "../../../context/SpecialistContext";
 import SpecialistInterface from "../../../../interfaces/SpecialistInterface";
+import {
+  SpecialistFilterContext,
+  SpecialistFilterContextProvider,
+} from "../../../context/SpecialistFilterContext";
+import { FaSearch } from "react-icons/fa";
 
 const Specialists = () => {
+  const { nameFilter, setnameFilter } = useContext(SpecialistFilterContext);
   const [specialists, setSpecialists] = useState<SpecialistInterface[]>();
-
-  const fetchSpecialists = useCallback(async () => {
-    try {
-      const response = await SpecialistService.getSpecialistsPaged(page);
-      setSpecialists(response.data[1]);
-      setNoSpecialists(response.data[0]);
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
-
   const [page, setPage] = useState(1);
   const [noSpecialists, setNoSpecialists] = useState(0);
   const [noPages, setNoPages] = useState(0);
+  const [searchName, setSearchName] = useState<string>("");
   const noItemsPerPage = 10;
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -29,14 +25,49 @@ const Specialists = () => {
   ) => {
     setPage(value);
   };
-  useEffect(() => {
-    fetchSpecialists();
-    setNoPages(
-      noSpecialists % noItemsPerPage === 0
-        ? Math.floor(noSpecialists / noItemsPerPage)
-        : Math.floor(noSpecialists / noItemsPerPage) + 1
-    );
-  }, [page, noSpecialists]);
+
+  const fetchSpecialists = useCallback(
+    async (
+      fromAge: number,
+      toAge: number,
+      name: string,
+      domainName: string,
+      starCount: number
+    ) => {
+      try {
+        const response = await SpecialistService.getSpecialistsPaged(
+          page,
+          fromAge,
+          toAge,
+          name,
+          domainName,
+          starCount
+        );
+        setSpecialists(response.data[1]);
+        setNoSpecialists(response.data[0]);
+        setNoPages(
+          noSpecialists % noItemsPerPage === 0
+            ? Math.floor(noSpecialists / noItemsPerPage)
+            : Math.floor(noSpecialists / noItemsPerPage) + 1
+        );
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    []
+  );
+
+  const handleClick = () => {
+    setnameFilter(searchName);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleClick();
+    }
+  };
+
   return (
     <Grid sx={{ display: "flex", flexDirection: "row", marginTop: "50px" }}>
       <Grid
@@ -48,7 +79,9 @@ const Specialists = () => {
           position: "fixed",
         }}
       >
-        <DomainFilter />
+        <SpecialistFilterContextProvider>
+          <DomainFilter fetchSpecialists={fetchSpecialists} />
+        </SpecialistFilterContextProvider>
       </Grid>
       <Grid
         sx={{
@@ -63,6 +96,39 @@ const Specialists = () => {
           marginTop: "100px",
         }}
       >
+        <Grid
+          sx={{ width: "900px", marginBottom: "40px", marginLeft: "-100px" }}
+        >
+          <TextField
+            id="searchbar"
+            label="Search a specialist..."
+            size="small"
+            variant="outlined"
+            sx={{
+              width: "700px",
+              height: "40px",
+            }}
+            inputProps={{ style: { height: "23px" } }}
+            onKeyDown={handleKeyDown}
+            onChange={(event) => setSearchName(event.target.value)}
+            autoComplete="off"
+          />
+
+          <Button
+            sx={{
+              width: "40px",
+              height: "40px",
+
+              marginLeft: "-5px",
+              boxShadow: 0,
+              borderRadius: 0,
+            }}
+            variant="contained"
+            onClick={handleClick}
+          >
+            <FaSearch style={{ color: "white" }} />
+          </Button>
+        </Grid>
         <Grid
           sx={{
             width: "1000px",
