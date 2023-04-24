@@ -52,8 +52,7 @@ const MiddleSection = () => {
           sx={{
             fontSize: "12px",
             color: "black",
-            fontFamily:
-              'system-ui,"Segoe UI",roboto,"Noto Sans",oxygen,ubuntu,cantarell,"Fira Sans","Droid Sans","Helvetica Neue",arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
+            fontFamily: "Arial",
           }}
         >
           {description}

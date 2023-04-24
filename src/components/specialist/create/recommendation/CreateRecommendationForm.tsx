@@ -7,14 +7,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { TypeEnum } from "../../../../interfaces/TypeEnum";
 import { AgeUnitEnum } from "../../../../interfaces/AgeUnitEnum";
 import Benefit, { Benefits } from "../../../../interfaces/Benefits";
+import RecommendationService from "../../../../api/RecommendationService";
 
 const CreateRecommendationForm = () => {
   const [type, setType] = useState("");
-  const [benefit, setBenefit] = useState("");
+  const [benefit, setBenefit] = useState<Benefit[]>([]);
 
   const filterIndexedEnumsKeys = (obj: any) => {
     return Object.keys(obj).filter((currentKey) => isNaN(parseInt(currentKey)));
@@ -39,31 +40,42 @@ const CreateRecommendationForm = () => {
       );
     });
   }, []);
-
-  const benefitOptions = useMemo(() => {
-    return Benefits.map((benefit: Benefit) => {
-      return (
-        <Grid
-          item
-          key={benefit.id}
-          sx={{
-            fontSize: "11px",
-            color: "white ",
-            height: "22px",
-            marginRight: "10px",
-            maxWidth: "100px",
-            background: "#2A9D8F",
-            paddingLeft: "10px",
-            paddingRight: "10px",
-            paddingTop: "3px",
-            borderRadius: "20px",
-          }}
-        >
-          {benefit.name}
-        </Grid>
-      );
-    });
+  const fetchBenefits = async () => {
+    try {
+      const response = await RecommendationService.getBenefits();
+      console.log(response.data);
+      setBenefit(response.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    fetchBenefits();
   }, []);
+  // const benefitOptions = useMemo(() => {
+  //   return Benefits.map((benefit: Benefit) => {
+  //     return (
+  //       <Grid
+  //         item
+  //         key={benefit.id}
+  //         sx={{
+  //           fontSize: "11px",
+  //           color: "white ",
+  //           height: "22px",
+  //           marginRight: "10px",
+  //           maxWidth: "100px",
+  //           background: "#2A9D8F",
+  //           paddingLeft: "10px",
+  //           paddingRight: "10px",
+  //           paddingTop: "3px",
+  //           borderRadius: "20px",
+  //         }}
+  //       >
+  //         {benefit.name}
+  //       </Grid>
+  //     );
+  //   });
+  // }, []);
 
   return (
     <>
@@ -132,7 +144,14 @@ const CreateRecommendationForm = () => {
             rows={10}
             placeholder="Description"
           />
-
+          <InputLabel sx={{ marginTop: "20px", marginBottom: "20px" }}>
+            {" "}
+            Image{" "}
+          </InputLabel>
+          <TextField
+            sx={{ width: "750px", marginRight: "20px" }}
+            placeholder="Image adress"
+          ></TextField>
           <InputLabel sx={{ marginTop: "20px", marginBottom: "20px" }}>
             {" "}
             Benefits{" "}
@@ -140,14 +159,40 @@ const CreateRecommendationForm = () => {
 
           <Grid
             sx={{
-              height: "300px",
+              height: "250px",
+              overflowY: "scroll",
+
               marginTop: "10px",
             }}
             display="flex"
             flexDirection="row"
             flexWrap="wrap"
           >
-            {benefitOptions}
+            {benefit.map((element: Benefit) => {
+              return (
+                <Grid
+                  item
+                  key={element.id}
+                  sx={{
+                    fontSize: "11px",
+                    color: "white ",
+                    height: "22px",
+                    marginRight: "10px",
+                    minWidth: "70px",
+                    background: "#2A9D8F",
+                    paddingLeft: "10px",
+                    paddingRight: "10px",
+                    borderRadius: "20px",
+                    textAlign: "center",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {element.name}
+                </Grid>
+              );
+            })}
           </Grid>
         </Grid>
       </Grid>

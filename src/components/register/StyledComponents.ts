@@ -35,7 +35,7 @@ export const GridColorStyled = styled(Grid)(({ theme }) => {
 
 export const TitleStyled = styled(Typography)(() => {
   return {
-    fontFamily: "Inter",
+    fontFamily: "Arial",
     fontWeight: "25px",
     fontStyle: "regular",
   };

@@ -28,7 +28,7 @@ const FooterButton = styled("button")({
 const IntroSection = () => {
   return (
     <Root>
-      <Container maxWidth="md" sx={{ marginTop: "20px" }}>
+      <Container maxWidth="md">
         <Grid container spacing={4}>
           <Grid item xs={12} sm={4}>
             <StyledCard sx={{ backgroundColor: "#F4A261" }}>
@@ -41,7 +41,7 @@ const IntroSection = () => {
                 title={
                   <Typography
                     sx={{
-                      // fontFamily: "Cairoli Now Heavy",
+                      fontFamily: "Arial",
                       color: "black",
                       textAlign: "center",
                       fontSize: "24px",
@@ -52,9 +52,13 @@ const IntroSection = () => {
                 }
               />
               <CardContent>
-                <Typography variant="body1">
-                  Nisl amet dolor sit ipsum veroeros sed blandit consequat
-                  veroeros et magna tempus.
+                <Typography
+                  variant="body1"
+                  sx={{ textAlign: "center", fontFamily: "Arial" }}
+                >
+                  Unlock your child's full potential and gain access to expert
+                  insights and evidence-based strategies to help you navigate
+                  the joys and challenges of parenting
                 </Typography>
               </CardContent>
             </StyledCard>
@@ -71,6 +75,7 @@ const IntroSection = () => {
                   <Typography
                     sx={{
                       // fontFamily: "Cairoli Now Heavy",
+                      fontFamily: "Arial",
                       color: "black",
                       textAlign: "center",
                       fontSize: "24px",
@@ -83,9 +88,13 @@ const IntroSection = () => {
                 }
               />
               <CardContent>
-                <Typography variant="body1" sx={{ textAlign: "justify" }}>
-                  Nisl amet dolor sit ipsum veroeros sed blandit consequat
-                  veroeros et magna tempus.
+                <Typography
+                  variant="body1"
+                  sx={{ textAlign: "center", fontFamily: "Arial" }}
+                >
+                  Unleash your curiosity with expert insights - based
+                  recommendations, perfect for educators, caregivers, and anyone
+                  passionate about helping children thrive!
                 </Typography>
               </CardContent>
             </StyledCard>
@@ -101,6 +110,7 @@ const IntroSection = () => {
                 title={
                   <Typography
                     sx={{
+                      fontFamily: "Arial",
                       // fontFamily: "Cairoli Now Heavy",
                       color: "black",
                       textAlign: "center",
@@ -112,9 +122,13 @@ const IntroSection = () => {
                 }
               />
               <CardContent>
-                <Typography variant="body1">
-                  Nisl amet dolor sit ipsum veroeros sed blandit consequat
-                  veroeros et magna tempus.
+                <Typography
+                  variant="body1"
+                  sx={{ textAlign: "center", fontFamily: "Arial" }}
+                >
+                  Join our community of child development experts and share your
+                  knowledge with parents worldwide, while showcasing your
+                  expertise and boosting your professional profile!
                 </Typography>
               </CardContent>
             </StyledCard>

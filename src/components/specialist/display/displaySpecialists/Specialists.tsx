@@ -5,14 +5,11 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import SpecialistService from "../../../../api/SpecialistService";
 import { SpecialistContextProvider } from "../../../context/SpecialistContext";
 import SpecialistInterface from "../../../../interfaces/SpecialistInterface";
-import {
-  SpecialistFilterContext,
-  SpecialistFilterContextProvider,
-} from "../../../context/SpecialistFilterContext";
+import { SpecialistFilterContextProvider } from "../../../context/SpecialistFilterContext";
 import { FaSearch } from "react-icons/fa";
 
 const Specialists = () => {
-  const { nameFilter, setnameFilter } = useContext(SpecialistFilterContext);
+  const [nameFilter, setNameFilter] = useState<string>("");
   const [specialists, setSpecialists] = useState<SpecialistInterface[]>();
   const [page, setPage] = useState(1);
   const [noSpecialists, setNoSpecialists] = useState(0);
@@ -46,9 +43,9 @@ const Specialists = () => {
         setSpecialists(response.data[1]);
         setNoSpecialists(response.data[0]);
         setNoPages(
-          noSpecialists % noItemsPerPage === 0
-            ? Math.floor(noSpecialists / noItemsPerPage)
-            : Math.floor(noSpecialists / noItemsPerPage) + 1
+          response.data[1] % noItemsPerPage === 0
+            ? Math.floor(response.data[1] / noItemsPerPage)
+            : Math.floor(response.data[1] / noItemsPerPage) + 1
         );
       } catch (e) {
         console.log(e);
@@ -58,7 +55,7 @@ const Specialists = () => {
   );
 
   const handleClick = () => {
-    setnameFilter(searchName);
+    setNameFilter(searchName);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -79,7 +76,9 @@ const Specialists = () => {
           position: "fixed",
         }}
       >
-        <SpecialistFilterContextProvider>
+        <SpecialistFilterContextProvider
+          nameValue={[nameFilter, setNameFilter]}
+        >
           <DomainFilter fetchSpecialists={fetchSpecialists} />
         </SpecialistFilterContextProvider>
       </Grid>

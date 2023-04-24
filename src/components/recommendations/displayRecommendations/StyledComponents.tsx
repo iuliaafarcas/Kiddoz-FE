@@ -3,7 +3,7 @@ import { styled } from "@mui/system";
 
 export const TitleStyled = styled(Typography)(() => {
   return {
-    fontFamily: "Inter",
+    fontFamily: "Arial",
     fontWeight: "25px",
     fontStyle: "regular",
   };

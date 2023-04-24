@@ -5,12 +5,11 @@ interface SpecialistFilterContextType {
   toAgeFilter: number;
   domainNameFilter: string;
   ratingFilter: number;
-  nameFilter: string;
   setFromAgeFilter: (value: number) => void;
   setToAgeFilter: (value: number) => void;
   setdomainNameFilter: (value: string) => void;
   setRatingFilter: (value: number) => void;
-  setnameFilter: (value: string) => void;
+  nameValue: [string, (value: string) => void];
 }
 
 export const SpecialistFilterContext =
@@ -19,33 +18,32 @@ export const SpecialistFilterContext =
     toAgeFilter: 0,
     domainNameFilter: "",
     ratingFilter: 0,
-    nameFilter: "",
     setFromAgeFilter: () => {},
     setToAgeFilter: () => {},
     setdomainNameFilter: () => {},
     setRatingFilter: () => {},
-    setnameFilter: () => {},
+    nameValue: ["", () => {}],
   });
 
-export const SpecialistFilterContextProvider = ({ children }: any) => {
+export const SpecialistFilterContextProvider = ({
+  children,
+  nameValue,
+}: any | null) => {
   const [fromAgeFilter, setFromAgeFilter] = useState<number>(0);
   const [toAgeFilter, setToAgeFilter] = useState<number>(0);
   const [domainNameFilter, setdomainNameFilter] = useState<string>("");
   const [ratingFilter, setRatingFilter] = useState<number>(0);
-  const [nameFilter, setnameFilter] = useState<string>("");
-  const [lastNameFilter, setLastNameFilter] = useState<string>("");
 
   const contextValue: SpecialistFilterContextType = {
     fromAgeFilter,
     toAgeFilter,
     domainNameFilter,
     ratingFilter,
-    nameFilter,
     setFromAgeFilter,
     setToAgeFilter,
     setdomainNameFilter,
     setRatingFilter,
-    setnameFilter,
+    nameValue,
   };
 
   return (

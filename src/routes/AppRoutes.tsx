@@ -18,7 +18,6 @@ import MyComponent from "../components/home/Background";
 export default function AppRouter() {
   return (
     <Routes>
-      <Route path="/" element={<RecommendationsPage />} />
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
       <Route path="chat" element={<ChatPage />} />
@@ -30,7 +29,7 @@ export default function AppRouter() {
       <Route path="profile" element={<ProfilePage />} />
       <Route path="create" element={<CreateRecommendationPage />} />
       <Route path="home" element={<Home />} />
-      <Route path="kiddoz" element={<MyComponent />} />
+      <Route path="/" element={<MyComponent />} />
       {/* <Route path="spin" element={<DotSpinner />} /> */}
     </Routes>
   );

@@ -21,7 +21,7 @@ class EventService {
       stringBuilder += "&toAge=" + toAge;
     }
     if (name !== "") {
-      stringBuilder += "&Name=" + name;
+      stringBuilder += "&name=" + name;
     }
 
     if (domainName !== undefined && domainName !== "") {

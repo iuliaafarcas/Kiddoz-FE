@@ -54,6 +54,9 @@ class RecommendationService {
       `/recommendations/getRecommendationsByTitle?pageNumber=${pageNumber}&title=${title}`
     );
   }
+  getBenefits() {
+    return httpConfig.get(`/benefits`);
+  }
 }
 
 export default new RecommendationService();

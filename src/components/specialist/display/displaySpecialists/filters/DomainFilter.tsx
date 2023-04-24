@@ -13,22 +13,28 @@ const DomainFilter = ({ fetchSpecialists }: any) => {
     toAgeFilter,
     domainNameFilter,
     ratingFilter,
-    nameFilter,
     setFromAgeFilter,
     setToAgeFilter,
     setdomainNameFilter,
     setRatingFilter,
+    nameValue,
   } = useContext(SpecialistFilterContext);
 
   useEffect(() => {
     fetchSpecialists(
       fromAgeFilter,
       toAgeFilter,
-      nameFilter,
+      nameValue[0],
       domainNameFilter,
       ratingFilter
     );
-  }, [fromAgeFilter, nameFilter, toAgeFilter, domainNameFilter, ratingFilter]);
+  }, [
+    fromAgeFilter,
+    nameValue[0],
+    toAgeFilter,
+    domainNameFilter,
+    ratingFilter,
+  ]);
 
   const domains = [
     "Dermatology",

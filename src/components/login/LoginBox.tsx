@@ -114,7 +114,7 @@ const LoginBox = () => {
         xs={4}
         sx={{
           marginTop: "20px",
-          fontFamily: "Inter",
+          fontFamily: "Arial",
           fontWeight: "25px",
           fontStyle: "regular",
           color: "#0F3597",

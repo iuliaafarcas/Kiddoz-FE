@@ -38,8 +38,8 @@ const Root = styled(Button)({
   textTransform: "none",
   letterSpacing: "1px",
   border: "none",
-  fontFamily: "Cairoli Now Heavy",
-  fontSize: "18px",
+  fontFamily: "Arial",
+  fontSize: "16px",
   position: "relative",
   color: "black",
   //   backgroundColor: "transparent",
@@ -92,23 +92,23 @@ const MyComponent = () => {
             to="/recommendations"
             style={{ textDecoration: "none", color: "black" }}
           >
-            <Root>Recommendations</Root>
+            <Root sx={{ width: "150px" }}>Recommendations</Root>
           </Link>
           <Link to="/specialists" style={{ textDecoration: "none" }}>
             <Root>Specialists</Root>
           </Link>
           <Link to="/register" style={{ textDecoration: "none" }}>
-            <Root sx={{ marginLeft: "-40px" }}>Register </Root>
+            <Root sx={{ width: "100px" }}>Register </Root>
           </Link>
           <Link to="/login" style={{ textDecoration: "none" }}>
-            <Root sx={{ marginLeft: "-60px" }}>Login </Root>
+            <Root sx={{ width: "100px" }}>Login </Root>
           </Link>
         </Grid>
         <Grid sx={{ display: "flex", flexDirection: "row" }}>
           <Grid
             sx={{
-              marginTop: "50px",
-              marginLeft: "470px",
+              marginTop: "20px",
+              marginLeft: "550px",
               display: "flex",
               flexDirection: "column",
             }}
@@ -119,7 +119,7 @@ const MyComponent = () => {
                 width: "500px",
                 height: "200px",
                 borderRadius: "20px",
-                marginRight: "10px",
+                marginRight: "50px",
               }}
               src={logo}
             />
@@ -131,8 +131,8 @@ const MyComponent = () => {
                 fontWeight: "10",
               }}
               // fontFamily="'Lato', sans-serif"
-              fontFamily="Cairoli Now Heavy"
-              fontSize={18}
+              fontFamily="Arial"
+              fontSize={16}
               fontWeight="bold"
               color="black"
             >
@@ -142,11 +142,11 @@ const MyComponent = () => {
           <Box
             component="img"
             sx={{
-              width: "350px",
-              height: "300px",
+              width: "250px",
+              height: "200px",
               borderRadius: "20px",
-              marginTop: "-60px",
-              marginLeft: "-85px",
+              marginTop: "-14px",
+              marginLeft: "-50px",
             }}
             src={communication}
           />

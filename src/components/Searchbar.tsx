@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const Searchbar = () => {
   return (
     <Box sx={{ maxHeight: "40px", right: 0, position: "fixed" }}>
-      <Link to="/favorites">
+      {/* <Link to="/favorites">
         <Button
           sx={{
             width: "40px",
@@ -31,7 +31,7 @@ const Searchbar = () => {
             }}
           />
         </Button>
-      </Link>
+      </Link> */}
 
       <Link to="/chat">
         <Button
