@@ -22,8 +22,8 @@ const TypeNavbar = () => {
         zIndex: 2,
       }}
     >
-      <Button
-        onClick={() => handleClick("kiddoz")}
+      {/* <Button
+        onClick={() => handleClick("/")}
         sx={{
           color: "white",
           marginLeft: "120px",
@@ -33,35 +33,15 @@ const TypeNavbar = () => {
       >
         {" "}
         Home
-      </Button>
-      <Button
-        onClick={() => handleClick("login")}
-        sx={{
-          color: "white",
-          paddingTop: "10px",
-          textTransform: "unset",
-        }}
-      >
-        {" "}
-        Login
-      </Button>
-      <Button
-        onClick={() => handleClick("register")}
-        sx={{
-          color: "white",
-          paddingTop: "10px",
-          textTransform: "unset",
-        }}
-      >
-        {" "}
-        Register
-      </Button>
+      </Button> */}
+
       <Button
         onClick={() => handleClick("recommendations")}
         sx={{
           color: "white",
           paddingTop: "10px",
           textTransform: "unset",
+          marginLeft: "120px",
         }}
       >
         {" "}

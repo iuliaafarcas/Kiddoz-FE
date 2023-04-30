@@ -66,8 +66,7 @@ const AgeFilter = () => {
               name="radio-buttons-group"
             >
               <FormControlStyled
-                key={-1}
-                value={-1}
+                value={9999}
                 control={<Radio />}
                 label="All"
                 onChange={() => handleChange(-1)}

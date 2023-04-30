@@ -11,29 +11,46 @@ import { Link } from "react-router-dom";
 const Searchbar = () => {
   return (
     <Box sx={{ maxHeight: "40px", right: 0, position: "fixed" }}>
-      {/* <Link to="/favorites">
+      <Link to="/favorites">
         <Button
           sx={{
-            width: "40px",
+            width: "100px",
             height: "40px",
             marginTop: "15px",
             marginLeft: "100px",
             boxShadow: 0,
-            borderRadius: 0,
+            borderRadius: "40px",
+            textTransform: "none",
+            color: "#26465",
+            border: "1px solid #26465",
           }}
+          variant="outlined"
         >
-          <FontAwesomeIcon
-            icon={faStar}
-            style={{
-              color: "#2A9D8F",
-              width: "40px",
-              height: "40px",
-            }}
-          />
+          Login
         </Button>
-      </Link> */}
+      </Link>
 
-      <Link to="/chat">
+      <Link to="/favorites">
+        <Button
+          sx={{
+            width: "100px",
+            height: "40px",
+            marginTop: "15px",
+            marginLeft: "10px",
+            marginRight: "50px",
+            boxShadow: 0,
+            borderRadius: "40px",
+            textTransform: "none",
+            color: "white",
+            backgroundColor: "#26465",
+          }}
+          variant="contained"
+        >
+          Register
+        </Button>
+      </Link>
+
+      {/* <Link to="/chat">
         <Button
           sx={{
             width: "40px",
@@ -53,31 +70,7 @@ const Searchbar = () => {
             }}
           />
         </Button>
-      </Link>
-
-      <Link to="/profile">
-        <Button
-          sx={{
-            width: "40px",
-            height: "40px",
-            marginTop: "15px",
-            marginLeft: "5px",
-            marginRight: "70px",
-
-            boxShadow: 0,
-            borderRadius: 0,
-          }}
-        >
-          <FontAwesomeIcon
-            icon={faUser}
-            style={{
-              color: "#2A9D8F",
-              width: "40px",
-              height: "40px",
-            }}
-          />
-        </Button>
-      </Link>
+      </Link> */}
     </Box>
   );
 };

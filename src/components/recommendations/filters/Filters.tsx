@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Grid } from "@mui/material";
 import React, { useContext, useEffect } from "react";
 import AgeFilter from "./AgeFilter";
@@ -26,6 +27,7 @@ const Filters = ({ fetchRecommendations }: any) => {
       ratingFilter
     );
   }, [typeFilter, fromAgeFilter, toAgeFilter, ageUnitFilter, ratingFilter]);
+
   return (
     <Grid
       sx={{

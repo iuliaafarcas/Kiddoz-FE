@@ -4,15 +4,14 @@ import { useContext } from "react";
 import { MyContext } from "../../context/RecommendationFilterContext";
 
 const RatingFilter = () => {
-  const { ratingFilter, setRatingFilter } = useContext(MyContext);
+  const { setRatingFilter } = useContext(MyContext);
 
   const handleClick = (starNumber: number) => {
     if (starNumber === -1) {
       setRatingFilter(0);
     } else setRatingFilter(starNumber);
-    console.log(ratingFilter);
-    console.log(ratingFilter);
   };
+
   const noStars = [1, 2, 3, 4, 5];
   return (
     <Grid

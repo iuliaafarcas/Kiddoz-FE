@@ -5,11 +5,21 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import SpecialistService from "../../../../api/SpecialistService";
 import { SpecialistContextProvider } from "../../../context/SpecialistContext";
 import SpecialistInterface from "../../../../interfaces/SpecialistInterface";
-import { SpecialistFilterContextProvider } from "../../../context/SpecialistFilterContext";
+import {
+  SpecialistFilterContext,
+  SpecialistFilterContextProvider,
+} from "../../../context/SpecialistFilterContext";
 import { FaSearch } from "react-icons/fa";
 
 const Specialists = () => {
-  const [nameFilter, setNameFilter] = useState<string>("");
+  const {
+    toAgeFilter,
+    fromAgeFilter,
+    nameFilter,
+    ratingFilter,
+    domainNameFilter,
+    setNameFilter,
+  } = useContext(SpecialistFilterContext);
   const [specialists, setSpecialists] = useState<SpecialistInterface[]>();
   const [page, setPage] = useState(1);
   const [noSpecialists, setNoSpecialists] = useState(0);
@@ -64,6 +74,15 @@ const Specialists = () => {
       handleClick();
     }
   };
+  useEffect(() => {
+    fetchSpecialists(
+      fromAgeFilter,
+      toAgeFilter,
+      nameFilter,
+      domainNameFilter,
+      ratingFilter
+    );
+  }, [fromAgeFilter, nameFilter, toAgeFilter, domainNameFilter, ratingFilter]);
 
   return (
     <Grid sx={{ display: "flex", flexDirection: "row", marginTop: "50px" }}>
@@ -76,11 +95,7 @@ const Specialists = () => {
           position: "fixed",
         }}
       >
-        <SpecialistFilterContextProvider
-          nameValue={[nameFilter, setNameFilter]}
-        >
-          <DomainFilter fetchSpecialists={fetchSpecialists} />
-        </SpecialistFilterContextProvider>
+        <DomainFilter fetchSpecialists={fetchSpecialists} />
       </Grid>
       <Grid
         sx={{
@@ -104,7 +119,7 @@ const Specialists = () => {
             size="small"
             variant="outlined"
             sx={{
-              width: "700px",
+              width: "830px",
               height: "40px",
             }}
             inputProps={{ style: { height: "23px" } }}

@@ -25,60 +25,57 @@ const TypeFilter = () => {
     }
   };
   return (
-    <>
+    <Grid
+      sx={{
+        width: "200px",
+        height: "220px",
+        background: "white",
+      }}
+    >
       <Grid
         sx={{
-          width: "200px",
-          height: "220px",
-          background: "white",
+          height: "30px",
+          width: "100%",
+          borderColor: "black",
+          border: 1,
+          marginBottom: "10px",
+          paddingLeft: "10px",
+          cursor: "pointer",
+          display: "flex",
+          flexDirection: "row",
+          color: "white",
+          backgroundColor: "#264653",
         }}
       >
-        <Grid>
-          <Grid
-            sx={{
-              height: "30px",
-              width: "100%",
-              borderColor: "black",
-              border: 1,
-              marginBottom: "10px",
-              paddingLeft: "10px",
-              cursor: "pointer",
-              display: "flex",
-              flexDirection: "row",
-              color: "white",
-              backgroundColor: "#264653",
-            }}
-          >
-            <b>Type</b>
-          </Grid>
-        </Grid>
-        <Grid
-          sx={{
-            marginLeft: "10px",
-            marginTop: "15px",
-          }}
-        >
-          <FormGroup sx={{ marginLeft: "10px" }}>
-            {types.map((element) => {
-              return (
-                <FormControlStyled
-                  key={element}
-                  control={<Checkbox size="small" />}
-                  label={
-                    <FormControlLabelStyled>
-                      {TypeEnum[element] === "FoodRecipe"
-                        ? "Food recipe"
-                        : TypeEnum[element]}
-                    </FormControlLabelStyled>
-                  }
-                  onChange={() => handleClick(element)}
-                />
-              );
-            })}
-          </FormGroup>
-        </Grid>
+        <b>Type</b>
       </Grid>
-    </>
+      <Grid
+        sx={{
+          marginLeft: "10px",
+          marginTop: "15px",
+          paddingLeft: "10px",
+        }}
+      >
+        <FormGroup>
+          {types.map((element) => {
+            return (
+              <FormControlStyled
+                key={element}
+                control={<Checkbox size="small" />}
+                label={
+                  <FormControlLabelStyled>
+                    {TypeEnum[element] === "FoodRecipe"
+                      ? "Food recipe"
+                      : TypeEnum[element]}
+                  </FormControlLabelStyled>
+                }
+                onChange={() => handleClick(element)}
+              />
+            );
+          })}
+        </FormGroup>
+      </Grid>
+    </Grid>
   );
 };
 export default TypeFilter;

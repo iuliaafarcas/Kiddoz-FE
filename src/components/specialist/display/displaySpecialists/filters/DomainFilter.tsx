@@ -9,32 +9,11 @@ const DomainFilter = ({ fetchSpecialists }: any) => {
   const [maxAge, setMaxAge] = useState<number>(0);
   const [minAge, setMinAge] = useState<number>(0);
   const {
-    fromAgeFilter,
-    toAgeFilter,
-    domainNameFilter,
-    ratingFilter,
     setFromAgeFilter,
     setToAgeFilter,
     setdomainNameFilter,
     setRatingFilter,
-    nameValue,
   } = useContext(SpecialistFilterContext);
-
-  useEffect(() => {
-    fetchSpecialists(
-      fromAgeFilter,
-      toAgeFilter,
-      nameValue[0],
-      domainNameFilter,
-      ratingFilter
-    );
-  }, [
-    fromAgeFilter,
-    nameValue[0],
-    toAgeFilter,
-    domainNameFilter,
-    ratingFilter,
-  ]);
 
   const domains = [
     "Dermatology",

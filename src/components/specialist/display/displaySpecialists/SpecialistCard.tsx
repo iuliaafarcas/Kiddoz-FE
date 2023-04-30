@@ -43,7 +43,7 @@ const SpecialistCard = () => {
         display: "flex",
         flexDirection: "column",
         boxShadow: 3,
-        marginRight: "40px",
+        marginRight: "30px",
         marginBottom: "40px",
       }}
     >

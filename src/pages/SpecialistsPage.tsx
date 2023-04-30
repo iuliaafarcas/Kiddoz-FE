@@ -3,13 +3,16 @@ import Navbar from "../components/Navbar";
 import TypeNavbar from "../components/TypeNavbar";
 import { Grid } from "@mui/material";
 import Specialists from "../components/specialist/display/displaySpecialists/Specialists";
+import { SpecialistFilterContextProvider } from "../components/context/SpecialistFilterContext";
 const SpecialistsPage = () => {
   return (
     <>
       <Grid sx={{ background: "#F6F6F6" }}>
         <Navbar />
         <TypeNavbar />
-        <Specialists />
+        <SpecialistFilterContextProvider>
+          <Specialists />
+        </SpecialistFilterContextProvider>
       </Grid>
     </>
   );
