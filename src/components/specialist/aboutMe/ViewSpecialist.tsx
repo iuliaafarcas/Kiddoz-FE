@@ -29,7 +29,7 @@ const ViewSpecialist = () => {
         age: response.data.age,
         domain: response.data.domain,
         image: response.data.image,
-        domainOfActivities: response.data.domainOfActivities,
+        domainsInterest: response.data.domainsInterest,
       };
 
       setSpecialistObject?.(currentSpecialist);

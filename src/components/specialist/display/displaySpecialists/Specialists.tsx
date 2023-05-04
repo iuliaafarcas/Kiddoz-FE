@@ -1,4 +1,4 @@
-import { Button, Grid, Pagination, TextField } from "@mui/material";
+import { Button, Grid, Pagination, TextField, Typography } from "@mui/material";
 import DomainFilter from "./filters/DomainFilter";
 import SpecialistCard from "./SpecialistCard";
 import { useCallback, useContext, useEffect, useState } from "react";
@@ -111,7 +111,7 @@ const Specialists = () => {
         }}
       >
         <Grid
-          sx={{ width: "900px", marginBottom: "40px", marginLeft: "-100px" }}
+          sx={{ width: "900px", marginBottom: "40px", marginLeft: "-30px" }}
         >
           <TextField
             id="searchbar"
@@ -149,15 +149,31 @@ const Specialists = () => {
             display: "flex",
             flexDirection: "row",
             flexWrap: "wrap",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          {specialists?.map((specialist: any) => {
-            return (
-              <SpecialistContextProvider value={specialist} key={specialist.id}>
-                <SpecialistCard />
-              </SpecialistContextProvider>
-            );
-          })}
+          {specialists?.length ? (
+            specialists?.map((specialist: any) => {
+              return (
+                <SpecialistContextProvider
+                  value={specialist}
+                  key={specialist.id}
+                >
+                  <SpecialistCard />
+                </SpecialistContextProvider>
+              );
+            })
+          ) : (
+            <Typography
+              sx={{
+                marginBottom: "20px",
+                color: "grey",
+              }}
+            >
+              No results found
+            </Typography>
+          )}
         </Grid>
         <Grid sx={{ alignContent: "center", marginBottom: "30px" }}>
           <Pagination

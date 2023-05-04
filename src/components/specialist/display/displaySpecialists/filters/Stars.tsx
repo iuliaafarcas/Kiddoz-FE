@@ -11,6 +11,7 @@ const Stars = (noStars: number) => {
         flexDirection: "row",
       }}
     >
+      
       {[...Array(noStars)].map((e, i) => {
         return (
           <FontAwesomeIcon

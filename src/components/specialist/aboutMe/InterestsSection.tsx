@@ -17,10 +17,6 @@ const InterestsSection = () => {
     return trimmedStrList;
   }
 
-  useEffect(() => {
-    setInterests(trimStringByComma(specialistObject.domainOfActivities));
-  }, [specialistObject]);
-
   return (
     <Grid sx={{ width: "1100px", height: "300px" }}>
       <Typography sx={{ fontSize: "20px" }}>
@@ -57,17 +53,17 @@ const InterestsSection = () => {
               weigth: "600px",
             }}
           >
-            {interests.map((element) => {
+            {specialistObject.domainsInterest.map((element) => {
               return (
                 <Typography
-                  key={element}
+                  key={element.id}
                   sx={{
                     marginRight: "50px",
                     width: "350px",
                     textAlign: "justify",
                     marginBottom: "10px",
                   }}
-                >{`\u2022 ${element}`}</Typography>
+                >{`\u2022 ${element.name}`}</Typography>
               );
             })}
           </Grid>

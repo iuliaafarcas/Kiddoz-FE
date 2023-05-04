@@ -1,4 +1,4 @@
-import { Button, Pagination, TextField } from "@mui/material";
+import { Button, Pagination, TextField, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Card from "./Card";
 import { useEffect, useState } from "react";
@@ -81,13 +81,19 @@ const Cards = ({
         </Button>
       </Grid>
       <Grid>
-        {recommendations?.map((element: any) => {
-          return (
-            <RecommendationContextProvider value={element} key={element.id}>
-              <Card />
-            </RecommendationContextProvider>
-          );
-        })}
+        {recommendations.length ? (
+          recommendations?.map((element: any) => {
+            return (
+              <RecommendationContextProvider value={element} key={element.id}>
+                <Card />
+              </RecommendationContextProvider>
+            );
+          })
+        ) : (
+          <Typography sx={{ marginBottom: "20px", color: "grey" }}>
+            No results found
+          </Typography>
+        )}
       </Grid>
       <Grid sx={{ alignContent: "center", marginBottom: "30px" }}>
         <Pagination

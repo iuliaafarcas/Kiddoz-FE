@@ -43,7 +43,7 @@ const BottomSection = () => {
         age: response.data.age,
         domain: { id: 1, name: "psychology" },
         image: response.data.image,
-        domainOfActivities: response.data.domainOfActivities,
+        domainsInterest: response.data.domainsInterest,
       };
       setSpecialist(currentSpecialist);
     } catch (e) {

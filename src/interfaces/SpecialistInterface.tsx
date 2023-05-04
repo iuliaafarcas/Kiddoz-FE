@@ -1,4 +1,5 @@
 import DomainCategory, { emptyDomainCategory } from "./DomainCategory";
+import DomainInterest from "./DomainInterest";
 
 export default interface SpecialistInterface {
   readonly id?: number;
@@ -10,7 +11,7 @@ export default interface SpecialistInterface {
   readonly description: string;
   readonly domain: DomainCategory;
   readonly image: string;
-  readonly domainOfActivities: string;
+  readonly domainsInterest: DomainInterest[];
 }
 export const emptySpecialist: SpecialistInterface = {
   id: 0,
@@ -22,5 +23,5 @@ export const emptySpecialist: SpecialistInterface = {
   age: 0,
   domain: emptyDomainCategory,
   image: "",
-  domainOfActivities: "",
+  domainsInterest: [],
 };

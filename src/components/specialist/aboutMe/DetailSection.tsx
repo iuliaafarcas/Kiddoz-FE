@@ -44,20 +44,22 @@ const DetailSection = () => {
             <b>{specialistObject.name}</b>
           </Typography>
         </Grid>
-        <Grid sx={{ marginTop: "10px" }}>
-          <FontAwesomeIcon
-            icon={faStar}
-            style={{
-              color: "#F4A261",
-              width: "25px",
-              height: "25px",
-              marginRight: "10px",
-            }}
-          />
-          <Typography sx={{ fontSize: "20px", float: "right" }}>
-            {noStars}
-          </Typography>
-        </Grid>
+        {noStars !== 0 && (
+          <Grid sx={{ marginTop: "10px" }}>
+            <FontAwesomeIcon
+              icon={faStar}
+              style={{
+                color: "#F4A261",
+                width: "25px",
+                height: "25px",
+                marginRight: "10px",
+              }}
+            />
+            <Typography sx={{ fontSize: "20px", float: "right" }}>
+              {noStars}
+            </Typography>
+          </Grid>
+        )}
       </Grid>
       <Grid sx={{ display: "flex", flexDirection: "row" }}>
         <Grid>

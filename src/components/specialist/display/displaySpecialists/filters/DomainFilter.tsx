@@ -16,6 +16,7 @@ const DomainFilter = ({ fetchSpecialists }: any) => {
   } = useContext(SpecialistFilterContext);
 
   const domains = [
+    "All",
     "Dermatology",
     "Kinetotherapy",
     "Neonatology",
@@ -26,7 +27,8 @@ const DomainFilter = ({ fetchSpecialists }: any) => {
   ];
 
   const handleDomain = (element: string) => {
-    setdomainNameFilter(element);
+    if (element === "All") setdomainNameFilter("");
+    else setdomainNameFilter(element);
   };
   const handleNoStars = (element: number) => {
     setRatingFilter(element);
@@ -37,12 +39,18 @@ const DomainFilter = ({ fetchSpecialists }: any) => {
     setFromAgeFilter(minAge);
     setToAgeFilter(maxAge);
   };
+  const handleResetClick = () => {
+    setFromAgeFilter(0);
+    setToAgeFilter(0);
+    setMaxAge(0);
+    setMinAge(0);
+  };
   const noStars = [1, 2, 3, 4, 5];
   return (
     <>
       <Grid
         sx={{
-          height: "600px",
+          height: "620px",
           width: "230px",
           borderRadius: "10px",
           backgroundColor: "white",
@@ -149,12 +157,28 @@ const DomainFilter = ({ fetchSpecialists }: any) => {
             <Grid
               sx={{
                 width: "250px",
-                height: "230px",
+                height: "250px",
                 marginTop: "15px",
                 display: "flex",
                 flexDirection: "column",
               }}
             >
+              <Grid
+                sx={{
+                  height: "30px",
+                  width: "75%",
+                  borderColor: "black",
+                  border: 1,
+                  marginBottom: "10px",
+                  paddingLeft: "10px",
+                  cursor: "pointer",
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+                onClick={() => handleNoStars(0)}
+              >
+                <Grid sx={{ width: "20px", height: "20px" }}>All</Grid>
+              </Grid>
               {noStars.map((element) => {
                 return (
                   <Grid
@@ -264,24 +288,44 @@ const DomainFilter = ({ fetchSpecialists }: any) => {
                     sx={{ width: "40px", marginLeft: "10px" }}
                   ></TextField>
                 </Grid>
-                <Button
-                  onClick={handleSearchClick}
-                  sx={{
-                    marginLeft: "115px",
-                    height: "30px",
-                    width: "30px",
-                    textTransform: "none",
-                    color: "white",
-                    backgroundColor: "#264653",
-                    variant: "contained",
-                    ":hover": {
+                <Grid sx={{ display: "flex", flexDirection: "row" }}>
+                  <Button
+                    onClick={handleResetClick}
+                    sx={{
+                      height: "30px",
+                      width: "85px",
+                      marginLeft: "20px",
+                      textTransform: "none",
+                      color: "white",
+                      backgroundColor: "#E76F51",
+                      variant: "contained",
+                      ":hover": {
+                        color: "white",
+                        backgroundColor: "#E76F51",
+                      },
+                    }}
+                  >
+                    Reset age
+                  </Button>
+                  <Button
+                    onClick={handleSearchClick}
+                    sx={{
+                      height: "30px",
+                      width: "30px",
+                      marginLeft: "10px",
+                      textTransform: "none",
                       color: "white",
                       backgroundColor: "#264653",
-                    },
-                  }}
-                >
-                  Search
-                </Button>
+                      variant: "contained",
+                      ":hover": {
+                        color: "white",
+                        backgroundColor: "#264653",
+                      },
+                    }}
+                  >
+                    Search
+                  </Button>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>

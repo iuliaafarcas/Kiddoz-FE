@@ -9,12 +9,12 @@ import {
   TextFieldRegisterUserStyled,
   GridStyled,
 } from "./StyledComponents";
+import ParentService from "../../api/ParentService";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const RegisterBox = () => {
   const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -22,7 +22,6 @@ const RegisterBox = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [firstNameError, setFirstNameError] = useState("");
-  const [lastNameError, setLastNameError] = useState("");
   const [matchPasswordError, setMatchPasswordError] = useState("");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -42,10 +41,6 @@ const RegisterBox = () => {
     else setFirstNameError("");
   };
 
-  const isValidLastName = (name: string) => {
-    if (name === "") setLastNameError("Last name is required");
-    else setLastNameError("");
-  };
   const doesPasswordsMatch = (password: string, confirmPassword: string) => {
     if (password != confirmPassword)
       setMatchPasswordError("Passwords don't match");
@@ -53,50 +48,39 @@ const RegisterBox = () => {
   };
 
   const handleSubmit = (event: any) => {
-    if (email === "") setEmailError("Field must not be empty");
-    if (password === "") setPasswordError("Field must not be empty");
-    if (firstName === "") setFirstNameError("Field must not be empty");
-    if (lastName === "") setLastNameError("Field must not be empty");
+    // if (email === "") setEmailError("Field must not be empty");
+    // if (password === "") setPasswordError("Field must not be empty");
+    // if (firstName === "") setFirstNameError("Field must not be empty");
+    // if (lastName === "") setLastNameError("Field must not be empty");
 
     if (email !== "") setEmailError("");
     if (password !== "") setPasswordError("");
     if (firstName !== "") setFirstNameError("");
-    if (lastName !== "") setLastNameError("");
 
     isValidEmail(email);
     isValidPassword(password);
     isValidFirstName(firstName);
-    isValidLastName(lastName);
     doesPasswordsMatch(password, confirmPassword);
 
     if (
       email !== "" &&
       firstName !== "" &&
-      lastName !== "" &&
       password !== "" &&
       confirmPassword !== "" &&
       emailError === "" &&
       passwordError === "" &&
       firstNameError === "" &&
-      lastNameError === "" &&
       matchPasswordError === ""
-    )
-      window.location.href = "/recommendations";
+    ) {
+      try {
+        const response = ParentService.addParent(firstName, email, password);
+        window.location.href = "/login";
+      } catch (error) {
+        console.error("Error register:", error);
+      }
+    }
   };
-  const onInputChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (event.target.name === "email") setEmail(event.target.value);
-      else if (event.target.name === "firstName")
-        setFirstName(event.target.value);
-      else if (event.target.name === "lastName")
-        setLastName(event.target.value);
-      else if (event.target.name === "password")
-        setPassword(event.target.value);
-      else if (event.target.name === "confirmPassword")
-        setConfirmPassword(event.target.value);
-    },
-    []
-  );
+
   return (
     <GridGlobalStyled container spacing={2} columns={2} id="loginForm">
       <Grid
@@ -125,7 +109,7 @@ const RegisterBox = () => {
           <TextFieldRegisterUserStyled
             id="firstNameFormEmailField"
             required
-            label="First name"
+            label="Name"
             helperText={firstNameError}
             onChange={(event) => {
               setFirstName(event.target.value);
@@ -137,25 +121,6 @@ const RegisterBox = () => {
           />
         </GridColorStyled>
 
-        <GridColorStyled
-          item
-          xs={4}
-          sx={{ marginLeft: "-40px", marginTop: "20px" }}
-        >
-          <TextFieldRegisterUserStyled
-            id="lastNameFormEmailField"
-            required
-            label="Last name"
-            helperText={lastNameError}
-            onChange={(event) => {
-              setLastName(event.target.value);
-            }}
-            onBlur={(event) => isValidLastName(event.target.value)}
-            variant="outlined"
-            placeholder="Doe"
-            autoComplete="off"
-          />
-        </GridColorStyled>
         <GridColorStyled
           item
           xs={4}
