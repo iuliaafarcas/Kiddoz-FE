@@ -16,6 +16,7 @@ const Filters = ({ fetchRecommendations }: any) => {
     toAgeFilter,
     ageUnitFilter,
     ratingFilter,
+    titleFilter,
   } = useContext(MyContext);
 
   useEffect(() => {
@@ -24,9 +25,17 @@ const Filters = ({ fetchRecommendations }: any) => {
       fromAgeFilter,
       toAgeFilter,
       ageUnitFilter,
-      ratingFilter
+      ratingFilter,
+      titleFilter
     );
-  }, [typeFilter, fromAgeFilter, toAgeFilter, ageUnitFilter, ratingFilter]);
+  }, [
+    typeFilter,
+    fromAgeFilter,
+    toAgeFilter,
+    ageUnitFilter,
+    ratingFilter,
+    titleFilter,
+  ]);
 
   return (
     <Grid

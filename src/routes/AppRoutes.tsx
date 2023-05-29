@@ -1,15 +1,12 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import ChatPage from "../pages/ChatPage";
-import RecommendationsPage from "../pages/RecommendationsPage";
-import FavoritesPage from "../pages/FavoritesPage";
-import ProfilePage from "../pages/ProfilePage";
-import Login from "../pages/LoginPage";
-import Register from "../pages/RegisterPage";
-import RecommendationPage from "../pages/RecommendationPage";
-import SpecialistPage from "../pages/SpecialistPage";
-import CreateRecommendationPage from "../pages/CreateRecommendationPage";
-import SpecialistsPage from "../pages/SpecialistsPage";
+import RecommendationsPage from "../pages/recommendation/RecommendationsPage";
+import Login from "../pages/registration/LoginPage";
+import Register from "../pages/registration/RegisterPage";
+import RecommendationPage from "../pages/recommendation/RecommendationPage";
+import SpecialistPage from "../pages/specialist/SpecialistPage";
+import CreateRecommendationPage from "../pages/recommendation/CreateRecommendationPage";
+import SpecialistsPage from "../pages/specialist/SpecialistsPage";
 import DotSpinner from "../components/spinner/DotSpinner";
 import Home from "../components/home/Home";
 import MyComponent from "../components/home/Background";
@@ -20,13 +17,10 @@ export default function AppRouter() {
     <Routes>
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
-      <Route path="chat" element={<ChatPage />} />
       <Route path="recommendations" element={<RecommendationsPage />} />
       <Route path="recommendation/:id" element={<RecommendationPage />} />
       <Route path="specialist/:id" element={<SpecialistPage />} />
       <Route path="specialists" element={<SpecialistsPage />} />
-      <Route path="favorites" element={<FavoritesPage />} />
-      <Route path="profile" element={<ProfilePage />} />
       <Route path="create" element={<CreateRecommendationPage />} />
       <Route path="home" element={<Home />} />
       <Route path="/" element={<MyComponent />} />

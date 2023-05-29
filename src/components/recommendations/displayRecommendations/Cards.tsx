@@ -3,13 +3,14 @@ import Grid from "@mui/material/Grid";
 import Card from "./Card";
 import { useEffect, useState } from "react";
 import { RecommendationContextProvider } from "../../context/RecommendationContext";
-import RecommendationService from "../../../api/RecommendationService";
+import RecommendationService from "../../../api/recommendation/RecommendationService";
 import RecommendationInterface from "../../../interfaces/RecommendationInterface";
-import Searchbar from "../../Searchbar";
-import Navbar from "../../Navbar";
-import TypeNavbar from "../../TypeNavbar";
+import Searchbar from "../../bar/Searchbar";
+import Navbar from "../../bar/Navbar";
+import TypeNavbar from "../../bar/TypeNavbar";
 import { FaSearch } from "react-icons/fa";
-
+import { MyContext } from "../../context/RecommendationFilterContext";
+import { useContext } from "react";
 const Cards = ({
   recommendations,
   page,
@@ -19,6 +20,16 @@ const Cards = ({
   noPages,
   fetchRecommendations,
 }: any) => {
+  const {
+    typeFilter,
+    fromAgeFilter,
+    toAgeFilter,
+    ageUnitFilter,
+    ratingFilter,
+    titleFilter,
+    setTitleFilter,
+  } = useContext(MyContext);
+
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
     value: number
@@ -27,8 +38,7 @@ const Cards = ({
     window.scrollTo(0, 0);
   };
   const handleClick = () => {
-    if (searchTitle === "") setPage(1);
-    fetchRecommendations();
+    setTitleFilter(searchTitle);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -37,6 +47,16 @@ const Cards = ({
       handleClick();
     }
   };
+  useEffect(() => {
+    fetchRecommendations(
+      typeFilter,
+      fromAgeFilter,
+      toAgeFilter,
+      ageUnitFilter,
+      ratingFilter,
+      titleFilter
+    );
+  }, [page]);
 
   return (
     <Grid
@@ -61,7 +81,9 @@ const Cards = ({
           }}
           inputProps={{ style: { height: "23px" } }}
           onKeyDown={handleKeyDown}
-          onChange={(event) => setSearchTitle(event.target.value)}
+          onChange={(event) => {
+            setSearchTitle(event.target.value);
+          }}
           autoComplete="off"
         />
 

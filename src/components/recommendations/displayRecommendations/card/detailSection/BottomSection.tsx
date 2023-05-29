@@ -7,9 +7,9 @@ import {
   RecommendationContextModel,
 } from "../../../../context/RecommendationContext";
 import { useCallback, useContext, useEffect, useState } from "react";
-import SpecialistService from "../../../../../api/SpecialistService";
+import SpecialistService from "../../../../../api/specialist/SpecialistService";
 import SpecialistInterface from "../../../../../interfaces/SpecialistInterface";
-import RecommendationRatingService from "../../../../../api/RecommendationRatingService";
+import RecommendationRatingService from "../../../../../api/recommendation/RecommendationRatingService";
 
 const BottomSection = () => {
   const { RecommendationObject } = useContext(

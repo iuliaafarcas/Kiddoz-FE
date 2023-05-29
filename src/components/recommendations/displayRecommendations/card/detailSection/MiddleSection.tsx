@@ -14,7 +14,7 @@ const MiddleSection = () => {
   const [benefits, setBenefits] = useState<Benefit[]>([]);
 
   function trimStringTo20Characters(inputString: string): string {
-    const maxLength = 125; // Maximum length of 20 characters
+    const maxLength = 118; // Maximum length of 20 characters
     let trimmedString = inputString.trim(); // Trim leading and trailing whitespace
 
     if (trimmedString.length > maxLength) {
@@ -30,10 +30,30 @@ const MiddleSection = () => {
     });
     return benefits;
   }
+  function chooseStrings(strings: Benefit[], maxLength: number) {
+    let chosenStrings = [];
+    let combinedLength = 0;
+
+    for (let i = 0; i < strings.length; i++) {
+      let string = strings[i];
+
+      if (combinedLength + string.name.length <= maxLength) {
+        chosenStrings.push(string);
+        combinedLength += string.name.length;
+      }
+    }
+
+    return chosenStrings;
+  }
 
   useEffect(() => {
     setDescription(trimStringTo20Characters(RecommendationObject.description));
-    setBenefits(chooseBenefits(RecommendationObject.benefits).slice(0, 5));
+    setBenefits(
+      chooseStrings(
+        chooseBenefits(RecommendationObject.benefits).slice(0, 5),
+        100
+      )
+    );
   }, [RecommendationObject]);
 
   return (

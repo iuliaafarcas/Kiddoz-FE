@@ -6,7 +6,7 @@ import {
   RecommendationContextModel,
 } from "../../context/RecommendationContext";
 import { useCallback, useContext, useEffect, useState } from "react";
-import SpecialistService from "../../../api/SpecialistService";
+import SpecialistService from "../../../api/specialist/SpecialistService";
 
 const BottomSection = () => {
   const { RecommendationObject } = useContext(

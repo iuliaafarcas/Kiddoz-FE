@@ -1,12 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as React from "react";
 import { Button, Grid, Typography } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaRegStar } from "react-icons/fa";
 import {
   SpecialistContext,
   SpecialistContextModel,
 } from "../../context/SpecialistContext";
-import SpecialistRatingService from "../../../api/SpecialistRatingService";
+import SpecialistRatingService from "../../../api/specialist/SpecialistRatingService";
+import ParentService from "../../../api/parent/ParentService";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 
 const RateCard = () => {
   const starNo = [1, 2, 3, 4, 5];
@@ -14,12 +18,35 @@ const RateCard = () => {
     SpecialistContext
   ) as SpecialistContextModel;
   const [noStar, setNoStar] = useState<number>(0);
-  const parentId = 302;
+  const [parentId, setParentId] = useState(0);
+  const [isOpenSnackbar, setIsSnackbarOpen] = useState(false);
+  const getParentId = () => {
+    if (
+      localStorage.getItem("token") === "" ||
+      localStorage.getItem("token") === null
+    ) {
+      setIsSnackbarOpen(true);
+      setNoStar(0);
+    } else {
+      try {
+        const logg = ParentService.getUserData();
+        logg.then((response) => {
+          setParentId(response.data.id);
+          fetchRating(specialistObject.id!, parentId, noStar);
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+
+  // useEffect(() => {
+  //   getParentId();
+  // }, [parentId]);
 
   const handleClick = (no: number) => {
-    console.log(specialistObject.id);
     setNoStar(no);
-    fetchRating(specialistObject.id!, parentId, no);
+    getParentId();
   };
 
   const fetchRating = async (
@@ -33,10 +60,25 @@ const RateCard = () => {
         parentId,
         noStar
       );
-      console.log(response.data);
     } catch (error) {
       console.error("Error fetching recommendations:", error);
     }
+  };
+  const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref
+  ) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setIsSnackbarOpen(false);
   };
 
   return (
@@ -50,6 +92,19 @@ const RateCard = () => {
           marginTop: "20px",
         }}
       >
+        <Snackbar
+          open={isOpenSnackbar}
+          autoHideDuration={6000}
+          onClose={handleClose}
+        >
+          <Alert
+            onClose={handleClose}
+            severity="warning"
+            sx={{ width: "100%" }}
+          >
+            You can not rate a specialist if you are not loged in!
+          </Alert>
+        </Snackbar>
         <Typography
           sx={{
             color: "white",

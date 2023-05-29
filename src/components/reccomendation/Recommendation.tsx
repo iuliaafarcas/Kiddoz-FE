@@ -8,7 +8,7 @@ import {
   RecommendationContext,
   RecommendationContextModel,
 } from "../context/RecommendationContext";
-import RecommendationService from "../../api/RecommendationService";
+import RecommendationService from "../../api/recommendation/RecommendationService";
 import RecommendationInterface from "../../interfaces/RecommendationInterface";
 
 const Recommendation = () => {

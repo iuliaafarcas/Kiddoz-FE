@@ -8,12 +8,12 @@ import {
   RecommendationContextModel,
 } from "../../../../context/RecommendationContext";
 import { useContext, useEffect, useState } from "react";
-import RecommendationRatingService from "../../../../../api/RecommendationRatingService";
+import RecommendationRatingService from "../../../../../api/recommendation/RecommendationRatingService";
 const TopSection = () => {
   const { RecommendationObject } = useContext(
     RecommendationContext
   ) as RecommendationContextModel;
-  const [noStars, setNoStars] = useState();
+  const [noStars, setNoStars] = useState(0);
   const fetchRating = async () => {
     try {
       const response =
@@ -49,7 +49,7 @@ const TopSection = () => {
           }}
         >
           <Typography sx={{ fontSize: "10px", color: "white" }}>
-            <b>Age</b>
+            <b>{RecommendationObject.fromUnitAge}</b>
           </Typography>
 
           <Typography sx={{ fontSize: "20px", color: "white" }}>
@@ -80,16 +80,7 @@ const TopSection = () => {
             {RecommendationObject.type}
           </Typography>
         </Grid>
-        {/* <Grid sx={{ width: "100px", paddingRight: "20px" }}>
-          <FaBookmark
-            stroke="black"
-            strokeWidth="40px"
-            color="white"
-            size="25px"
-            cursor="pointer"
-            style={{ float: "right" }}
-          />
-        </Grid> */}
+
         {noStars !== 0 && (
           <Grid
             sx={{
@@ -117,7 +108,7 @@ const TopSection = () => {
                 color: "black",
               }}
             >
-              {noStars}
+              {noStars.toFixed(1)}
             </Typography>
           </Grid>
         )}

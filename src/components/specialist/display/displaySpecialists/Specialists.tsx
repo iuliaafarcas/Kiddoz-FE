@@ -2,7 +2,7 @@ import { Button, Grid, Pagination, TextField, Typography } from "@mui/material";
 import DomainFilter from "./filters/DomainFilter";
 import SpecialistCard from "./SpecialistCard";
 import { useCallback, useContext, useEffect, useState } from "react";
-import SpecialistService from "../../../../api/SpecialistService";
+import SpecialistService from "../../../../api/specialist/SpecialistService";
 import { SpecialistContextProvider } from "../../../context/SpecialistContext";
 import SpecialistInterface from "../../../../interfaces/SpecialistInterface";
 import {
@@ -25,7 +25,7 @@ const Specialists = () => {
   const [noSpecialists, setNoSpecialists] = useState(0);
   const [noPages, setNoPages] = useState(0);
   const [searchName, setSearchName] = useState<string>("");
-  const noItemsPerPage = 10;
+  const noItemsPerPage = 12;
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
     value: number
@@ -33,36 +33,28 @@ const Specialists = () => {
     setPage(value);
   };
 
-  const fetchSpecialists = useCallback(
-    async (
-      fromAge: number,
-      toAge: number,
-      name: string,
-      domainName: string,
-      starCount: number
-    ) => {
-      try {
-        const response = await SpecialistService.getSpecialistsPaged(
-          page,
-          fromAge,
-          toAge,
-          name,
-          domainName,
-          starCount
-        );
-        setSpecialists(response.data[1]);
-        setNoSpecialists(response.data[0]);
-        setNoPages(
-          response.data[1] % noItemsPerPage === 0
-            ? Math.floor(response.data[1] / noItemsPerPage)
-            : Math.floor(response.data[1] / noItemsPerPage) + 1
-        );
-      } catch (e) {
-        console.log(e);
-      }
-    },
-    []
-  );
+  const fetchSpecialists = async (
+    fromAge: number,
+    toAge: number,
+    name: string,
+    domainName: string,
+    starCount: number
+  ) => {
+    try {
+      const response = await SpecialistService.getSpecialistsPaged(
+        page,
+        fromAge,
+        toAge,
+        name,
+        domainName,
+        starCount
+      );
+      setSpecialists(response.data[1]);
+      setNoSpecialists(response.data[0]);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const handleClick = () => {
     setNameFilter(searchName);
@@ -75,6 +67,11 @@ const Specialists = () => {
     }
   };
   useEffect(() => {
+    setNoPages(
+      noSpecialists % noItemsPerPage === 0
+        ? Math.floor(noSpecialists / noItemsPerPage)
+        : Math.floor(noSpecialists / noItemsPerPage) + 1
+    );
     fetchSpecialists(
       fromAgeFilter,
       toAgeFilter,
@@ -82,7 +79,16 @@ const Specialists = () => {
       domainNameFilter,
       ratingFilter
     );
-  }, [fromAgeFilter, nameFilter, toAgeFilter, domainNameFilter, ratingFilter]);
+  }, [
+    fromAgeFilter,
+    nameFilter,
+    toAgeFilter,
+    domainNameFilter,
+    ratingFilter,
+    page,
+    noSpecialists,
+    specialists,
+  ]);
 
   return (
     <Grid sx={{ display: "flex", flexDirection: "row", marginTop: "50px" }}>

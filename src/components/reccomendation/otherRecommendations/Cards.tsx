@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import Card from "./Card";
 import { useCallback, useContext, useEffect, useState } from "react";
-import RecommendationService from "../../../api/RecommendationService";
+import RecommendationService from "../../../api/recommendation/RecommendationService";
 import { useParams } from "react-router-dom";
 import { RecommendationContextProvider } from "../../context/RecommendationContext";
 

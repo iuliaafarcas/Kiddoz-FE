@@ -11,7 +11,7 @@ import { useEffect, useMemo, useState } from "react";
 import { TypeEnum } from "../../../../interfaces/TypeEnum";
 import { AgeUnitEnum } from "../../../../interfaces/AgeUnitEnum";
 import Benefit, { Benefits } from "../../../../interfaces/Benefits";
-import RecommendationService from "../../../../api/RecommendationService";
+import RecommendationService from "../../../../api/recommendation/RecommendationService";
 
 const CreateRecommendationForm = () => {
   const [type, setType] = useState("");

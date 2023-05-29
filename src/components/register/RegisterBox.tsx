@@ -9,7 +9,7 @@ import {
   TextFieldRegisterUserStyled,
   GridStyled,
 } from "./StyledComponents";
-import ParentService from "../../api/ParentService";
+import ParentService from "../../api/parent/ParentService";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 

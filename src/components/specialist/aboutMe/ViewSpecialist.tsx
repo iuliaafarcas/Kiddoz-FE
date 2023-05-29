@@ -7,7 +7,7 @@ import {
   SpecialistContextModel,
 } from "../../context/SpecialistContext";
 import { useParams } from "react-router-dom";
-import SpecialistService from "../../../api/SpecialistService";
+import SpecialistService from "../../../api/specialist/SpecialistService";
 import SpecialistInterface from "../../../interfaces/SpecialistInterface";
 
 const ViewSpecialist = () => {

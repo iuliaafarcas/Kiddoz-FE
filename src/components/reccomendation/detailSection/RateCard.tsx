@@ -5,9 +5,13 @@ import {
   RecommendationContext,
   RecommendationContextModel,
 } from "../../context/RecommendationContext";
-import { useContext, useState } from "react";
-import RecommendationRatingService from "../../../api/RecommendationRatingService";
+import * as React from "react";
+import { useContext, useEffect, useState } from "react";
+import RecommendationRatingService from "../../../api/recommendation/RecommendationRatingService";
 import { useParams } from "react-router-dom";
+import ParentService from "../../../api/parent/ParentService";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 
 const RateCard = () => {
   const starNo = [1, 2, 3, 4, 5];
@@ -15,12 +19,48 @@ const RateCard = () => {
     RecommendationContext
   ) as RecommendationContextModel;
   const [noStar, setNoStar] = useState<number>(0);
-  const parentId = 352;
+  const [parentId, setParentId] = useState(0);
+  const [isOpenSnackbar, setIsSnackbarOpen] = useState(false);
+
+  const getParentId = () => {
+    if (
+      localStorage.getItem("token") === "" ||
+      localStorage.getItem("token") === null
+    ) {
+      setIsSnackbarOpen(true);
+      setNoStar(0);
+    } else {
+      try {
+        const logg = ParentService.getUserData();
+        logg.then((response) => {
+          setParentId(response.data.id);
+          fetchRating(RecommendationObject.id!, parentId, noStar);
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
 
   const handleClick = (no: number) => {
-    console.log(RecommendationObject.id);
     setNoStar(no);
-    fetchRating(RecommendationObject.id!, parentId, no);
+    getParentId();
+  };
+  const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+    props,
+    ref
+  ) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setIsSnackbarOpen(false);
   };
   const fetchRating = async (
     recommendationId: number,
@@ -52,6 +92,20 @@ const RateCard = () => {
           marginTop: "20px",
         }}
       >
+        <Snackbar
+          open={isOpenSnackbar}
+          autoHideDuration={6000}
+          onClose={handleClose}
+        >
+          <Alert
+            onClose={handleClose}
+            severity="warning"
+            sx={{ width: "100%" }}
+          >
+            You can not rate a recommendation if you are not loged in!
+          </Alert>
+        </Snackbar>
+
         <Typography
           sx={{
             color: "white",

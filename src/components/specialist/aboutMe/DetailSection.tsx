@@ -9,7 +9,7 @@ import {
   SpecialistContextModel,
 } from "../../context/SpecialistContext";
 import { useContext, useEffect, useState } from "react";
-import SpecialistRatingService from "../../../api/SpecialistRatingService";
+import SpecialistRatingService from "../../../api/specialist/SpecialistRatingService";
 
 const DetailSection = () => {
   const { specialistObject } = useContext(

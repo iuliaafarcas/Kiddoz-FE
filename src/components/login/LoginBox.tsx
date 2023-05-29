@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Grid } from "@mui/material";
 import { Button } from "@mui/material";
 import {
@@ -10,6 +10,7 @@ import {
   GridStyled,
 } from "./StyledComponents";
 import { Link } from "react-router-dom";
+import ParentService from "../../api/parent/ParentService";
 
 const LoginBox = () => {
   const [email, setEmail] = useState("");
@@ -39,15 +40,29 @@ const LoginBox = () => {
 
     isValidEmail(email);
     isValidPassword(password);
-    console.log("email:", email, "pa:", password, emailError, passwordError);
+
     if (
       emailError === "" &&
       passwordError === "" &&
       email !== "" &&
       password !== ""
-    )
-      window.location.href = "/recommendations";
+    ) {
+      try {
+        const logg = ParentService.login(email, password);
+        logg.then((response) => {
+          localStorage.setItem("token", response.data);
+          window.location.href = "/recommendations";
+        });
+
+        // response.headers.getAuthorization;
+      } catch (e) {
+        console.log(e);
+      }
+    }
   };
+  // localStorage.setItem(token)
+
+  //window.location.href = "/recommendations";
 
   return (
     <GridGlobalStyled container spacing={2} columns={2} id="loginForm">

@@ -31,6 +31,21 @@ const AgeFilter = () => {
   const makeLabel = (fromAge: number, toAge: number, fromUnitAge: number) => {
     return fromAge + "-" + toAge + " " + AgeUnitEnum[fromUnitAge];
   };
+  function shuffle(array: any) {
+    let currentIndex = array.length;
+    let temporaryValue, randomIndex;
+
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
   return (
     <>
       <Grid
@@ -74,7 +89,7 @@ const AgeFilter = () => {
               {ages.map((element) => {
                 return (
                   <FormControlStyled
-                    key={element.fromAge}
+                    key={element.fromAge + element.toAge}
                     value={makeLabel(
                       element.fromAge,
                       element.toAge,
