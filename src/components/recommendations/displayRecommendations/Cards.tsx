@@ -11,6 +11,7 @@ import TypeNavbar from "../../bar/TypeNavbar";
 import { FaSearch } from "react-icons/fa";
 import { MyContext } from "../../context/RecommendationFilterContext";
 import { useContext } from "react";
+import MyDialog from "./Formular";
 const Cards = ({
   recommendations,
   page,
@@ -29,6 +30,8 @@ const Cards = ({
     titleFilter,
     setTitleFilter,
   } = useContext(MyContext);
+
+  const [showFormular, setShowFormular] = useState(false);
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -57,6 +60,10 @@ const Cards = ({
       titleFilter
     );
   }, [page]);
+
+  const handleFormularClick = () => {
+    setShowFormular(true);
+  };
 
   return (
     <Grid
@@ -101,8 +108,27 @@ const Cards = ({
         >
           <FaSearch style={{ color: "white" }} />
         </Button>
+        <Button
+          sx={{
+            variant: "contained",
+            height: "40px",
+            width: "150px",
+            backgroundColor: "#F4A261",
+            marginLeft: "20px",
+            textTransform: "none",
+            color: "white",
+            ":hover": {
+              bgcolor: "#264653",
+            },
+          }}
+          onClick={handleFormularClick}
+        >
+          Take the quiz!
+        </Button>
+
+        <MyDialog open={showFormular} onClose={() => setShowFormular(false)} />
       </Grid>
-      <Grid>
+      <Grid sx={{ marginLeft: "-180px" }}>
         {recommendations.length ? (
           recommendations?.map((element: any) => {
             return (

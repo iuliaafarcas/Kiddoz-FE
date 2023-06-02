@@ -4,6 +4,12 @@ class RecommendationService {
   getRecommendationById(id: number) {
     return httpConfig.get(`/recommendations/${id}`);
   }
+  getRecommendationsGeneratedByAI(answers: any[]) {
+    console.log(answers);
+    return httpConfig.post(`/recommendations/answers`, {
+      answers,
+    });
+  }
   getRecommendationsPaged(
     page: number,
     types: number[],

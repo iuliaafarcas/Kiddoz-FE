@@ -3,6 +3,5 @@ export enum TypeEnum {
   Movie = 1,
   Book = 2,
   FoodRecipe = 3,
-  Entertainment = 4,
-  Other = 5,
+  Other = 4,
 }

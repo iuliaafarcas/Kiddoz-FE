@@ -59,7 +59,7 @@ const TopSection = () => {
 
         <Grid
           sx={{
-            width: "200px",
+            width: "230px",
             height: "60px",
             marginLeft: "20px",
             marginTop: "5px",
