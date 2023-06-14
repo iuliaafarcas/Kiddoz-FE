@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -30,6 +30,8 @@ const DialogComponent: React.FC<DialogComponentProps> = ({ open, onClose }) => {
   const questions = FormQuestions;
   const [isOpened, setIsOpened] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
+  const [predictions, setPredictions] = useState([]);
+  const [message, setMessage] = useState("");
   const [noRecommendations, setNoRecommendations] = useState(0);
   const [showGeneratedRecommendations, setShowGeneratedRecommendations] =
     useState(false);
@@ -76,14 +78,14 @@ const DialogComponent: React.FC<DialogComponentProps> = ({ open, onClose }) => {
   ];
 
   const fetchRecommendationsByAi = async (answers: any) => {
-    console.log(answers);
     try {
       const response =
         await RecommendationService.getRecommendationsGeneratedByAI(answers);
-      setRecommendations(response.data[1]);
+      console.log(response);
+      setPredictions(response.data[1]);
+      setRecommendations(response.data[2]);
       setNoRecommendations(response.data[0]);
       setShowGeneratedRecommendations(true);
-      console.log(response);
     } catch (error) {
       console.log("Error at generation AI recommendations", error);
     }
@@ -96,7 +98,9 @@ const DialogComponent: React.FC<DialogComponentProps> = ({ open, onClose }) => {
     if (areAllAnswered) {
       changeValuesFromIndexes();
       await fetchRecommendationsByAi(answers);
+      console.log("Random");
       setIsOpened(false);
+      onClose();
       setShowGeneratedRecommendations(true);
     } else {
       setIsOpened(true);
@@ -110,6 +114,79 @@ const DialogComponent: React.FC<DialogComponentProps> = ({ open, onClose }) => {
       return newAnswers;
     });
   };
+
+  const buildMessage = () => {
+    const veryGood = [];
+    const needMoreAttention = [];
+    var message = "";
+    console.log("predictions: ", predictions);
+
+    if (predictions[0] > 0.55) needMoreAttention.push("nutrition");
+    else veryGood.push("good nutrition");
+
+    if (predictions[1] > 0.55) needMoreAttention.push("lack of confidence");
+    else veryGood.push("a high confidence level");
+
+    if (predictions[2] > 0.55) needMoreAttention.push("communication skills");
+    else veryGood.push("good communication skills");
+
+    if (predictions[3] > 0.55) needMoreAttention.push("concentration level");
+    else veryGood.push("good concentration level");
+
+    if (predictions[4] > 0.55) needMoreAttention.push("active life");
+    else veryGood.push("a very active life");
+
+    //you should take some action on your child's
+    console.log(veryGood);
+    console.log(needMoreAttention);
+
+    if (veryGood.length !== 0) {
+      message = "Congratulations! It looks like your child has ";
+      veryGood.map((element, index) => {
+        if (veryGood.length === 1) {
+          message += element;
+          message += "! Although, you should take some action on your child's ";
+        } else if (index !== veryGood.length - 1) {
+          message += element;
+          message += ", ";
+        } else {
+          message += " and ";
+          message += element;
+          message += "! Although, you should take some action on your child's ";
+        }
+      });
+
+      needMoreAttention.map((element, index) => {
+        if (needMoreAttention.length === 1) {
+          message += element;
+        } else if (index != needMoreAttention.length - 1) {
+          message += element;
+          message += ", ";
+        } else {
+          message += " and ";
+          message += element;
+        }
+      });
+    } else {
+      message = "You should take some action on your child's ";
+      needMoreAttention.map((element, index) => {
+        if (index != needMoreAttention.length - 1) {
+          message += element;
+          message += ", ";
+        } else {
+          message += "and ";
+          message += element;
+        }
+      });
+    }
+
+    setMessage(message);
+  };
+
+  useEffect(() => {
+    buildMessage();
+  }, [predictions]);
+
   return (
     <Grid>
       <Dialog open={open} onClose={onClose}>
@@ -259,6 +336,7 @@ const DialogComponent: React.FC<DialogComponentProps> = ({ open, onClose }) => {
         onClose={() => setShowGeneratedRecommendations(false)}
         noRecommendations={noRecommendations}
         recommendations={recommendations}
+        message={message}
       />
     </Grid>
   );

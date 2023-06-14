@@ -22,6 +22,7 @@ type DialogComponentProps = {
   onClose: () => void;
   noRecommendations: number;
   recommendations: any;
+  message: string;
 };
 
 const DialogRecommendation: React.FC<DialogComponentProps> = ({
@@ -29,6 +30,7 @@ const DialogRecommendation: React.FC<DialogComponentProps> = ({
   onClose,
   noRecommendations,
   recommendations,
+  message,
 }) => {
   const [isOpened, setIsOpened] = useState(false);
 
@@ -48,7 +50,11 @@ const DialogRecommendation: React.FC<DialogComponentProps> = ({
       <DialogTitle sx={{ color: "#264653" }}>
         <b>Based on your answers, we recommend these activities</b>
       </DialogTitle>
+
       <DialogContent>
+        <Typography maxWidth="650px" sx={{ marginBottom: "30px" }}>
+          {message}
+        </Typography>
         <Grid>
           {noRecommendations ? (
             recommendations?.map((element: any) => {
