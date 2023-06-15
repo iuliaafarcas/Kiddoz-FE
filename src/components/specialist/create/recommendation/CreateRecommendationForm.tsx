@@ -22,6 +22,8 @@ import RecommendationService from "../../../../api/recommendation/Recommendation
 import { SelectChangeEvent } from "@mui/material/Select";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import React from "react";
+import ParentService from "../../../../api/parent/ParentService";
+import SpecialistService from "../../../../api/specialist/SpecialistService";
 
 function fetchBenefits(): Promise<Benefit[]> {
   return RecommendationService.getBenefits().then((response) => {
@@ -31,7 +33,7 @@ function fetchBenefits(): Promise<Benefit[]> {
 
 const CreateRecommendationForm = () => {
   const [type, setType] = useState("");
-  const [benefitMap, setBenefitMap] = useState(new Map());
+  const [benefitMap, setBenefitMap] = useState(new Map<Benefit, number>());
   const [fromAge, setFromAge] = useState(0);
   const [fromUnitAge, setFromUnitAge] = useState("");
   const [toAge, setToAge] = useState(0);
@@ -42,6 +44,20 @@ const CreateRecommendationForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isOpened, setIsOpened] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
+  const [specialistId, setSpecialistId] = useState(0);
+
+  const getSpecialistId = () => {
+    try {
+      const logg = ParentService.getUserData();
+      logg.then((response) => {
+        if (response.data.role === "Specialist")
+          setSpecialistId(response.data.id);
+        else setErrorMessage("Something went wrong!");
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const filterIndexedEnumsKeys = (obj: any) => {
     return Object.keys(obj).filter((currentKey) => isNaN(parseInt(currentKey)));
@@ -79,13 +95,24 @@ const CreateRecommendationForm = () => {
   };
 
   const validateBenefits = () => {
-    var a = 0;
-    Array.from(benefitMap).map((element, value) => {
-      // if (element[1] === 1) {
-      //   a = element[1];
-      // }
-      console.log(element[1]);
+    var a = Array.from(benefitMap).reduce(
+      (sum, element) => sum + element[1],
+      0
+    );
+    console.log("a");
+    return a;
+  };
+
+  const takeChoosenRecommendations = () => {
+    const selectedRecommendations: any = [];
+
+    Array.from(benefitMap).forEach(([id, value]) => {
+      if (value === 1) {
+        selectedRecommendations.push(id.id);
+      }
     });
+
+    return selectedRecommendations;
   };
 
   const handleFromUnitAge = (event: SelectChangeEvent) => {
@@ -96,7 +123,6 @@ const CreateRecommendationForm = () => {
   };
 
   const validateEmptyFields = () => {
-    console.log("image: ");
     if (title === "") {
       setErrorMessage("Title must not be empty");
       return;
@@ -139,17 +165,18 @@ const CreateRecommendationForm = () => {
       return;
     }
     if (image === "") {
-      // setErrorMessage("Image adress must not be empty");
-      // return;
-      console.log("empty");
+      setErrorMessage("Image adress must not be empty");
+      return;
     }
     if (validatePhotoAddress(image) === false) {
       setErrorMessage("Invalid image adress");
       return;
     }
-    //validateBenefits();
-    // if (validateBenefits() === 0)
-    //   setErrorMessage("You should select some benefits for the recommendation");
+    if (validateBenefits() === 0) {
+      setErrorMessage("You should select some benefits for the recommendation");
+      return;
+    }
+    setErrorMessage("");
   };
 
   const validatePhotoAddress = (address: string): boolean => {
@@ -204,20 +231,70 @@ const CreateRecommendationForm = () => {
     };
 
     fetchDataAsync();
+    getSpecialistId();
+  }, []);
+
+  useEffect(() => {
     validateEmptyFields();
-  }, [title, description, type, fromUnitAge, toUnitAge, image]);
+  }, [title, description, type, fromUnitAge, toUnitAge, image, benefitMap]);
+
+  const fetchRecommendation = async (
+    title: string,
+    description: string,
+    fromAge: number,
+    fromUnitAge: string,
+    toAge: number,
+    toUnitAge: string,
+    type: string,
+    image: string,
+    specialistId: number,
+    benefits: Array<number>[]
+  ) => {
+    try {
+      const response = await SpecialistService.addRecommendation(
+        title,
+        description,
+        fromAge,
+        fromUnitAge,
+        toAge,
+        toUnitAge,
+        type,
+        image,
+        specialistId,
+        benefits
+      );
+      setErrorMessage("Recommendation added succesfully!");
+    } catch (error) {
+      console.error("Error fetching recommendations:", error);
+    }
+  };
 
   const createRecommendation = () => {
-    console.log(
-      errorMessage,
+    const benefits = takeChoosenRecommendations();
+    fetchRecommendation(
       title,
-      type,
-      fromUnitAge,
-      toUnitAge,
       description,
+      fromAge,
+      fromUnitAge,
+      toAge,
+      toUnitAge,
+      type,
       image,
-      validateBenefits()
+      specialistId,
+      benefits
     );
+    // console.log(
+    //   title,
+    //   type,
+    //   fromAge,
+    //   fromUnitAge,
+    //   toAge,
+    //   toUnitAge,
+    //   description,
+    //   image,
+    //   list_,
+    //   specialistId
+    // );
   };
 
   const displayDialog = () => {
@@ -232,10 +309,6 @@ const CreateRecommendationForm = () => {
     event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
-    if (reason === "clickaway") {
-      setIsOpened(false);
-      return;
-    }
     setIsOpened(false);
   };
   const handleDialogClose = () => {
@@ -303,8 +376,10 @@ const CreateRecommendationForm = () => {
             {errorMessage}
           </Alert>
         </Snackbar>
-        <Typography sx={{ fontSize: "20px", marginTop: "50px" }}>
-          Recommend something interesting and help others!
+        <Typography
+          sx={{ fontSize: "30px", marginTop: "50px", color: "#264653 " }}
+        >
+          <b>Recommend something interesting and help others!</b>
         </Typography>
 
         <InputLabel sx={{ marginTop: "30px" }}> Title </InputLabel>
@@ -396,7 +471,7 @@ const CreateRecommendationForm = () => {
         </InputLabel>
         <TextField
           sx={{ width: "750px", marginRight: "20px" }}
-          placeholder="Image adress"
+          placeholder="Image address"
           value={image}
           onChange={(event) => {
             setImage(event.target.value);

@@ -1,6 +1,31 @@
 import httpConfig from "../../utils/http-common";
 
 class EventService {
+  addRecommendation(
+    title: string,
+    description: string,
+    fromAge: number,
+    fromUnitAge: string,
+    toAge: number,
+    toUnitAge: string,
+    type: string,
+    image: string,
+    specialistId: number,
+    benefits: Array<number>[]
+  ) {
+    return httpConfig.post(`/recommendations`, {
+      title,
+      description,
+      fromAge,
+      fromUnitAge,
+      toAge,
+      toUnitAge,
+      type,
+      image,
+      specialistId,
+      benefits,
+    });
+  }
   getSpecialistById(id: number) {
     return httpConfig.get(`/specialists/${id}`);
   }

@@ -17,9 +17,6 @@ const Searchbar = () => {
   };
   const getFirstLetters = (name: string) => {
     let nameSeparator = name.split(" ");
-    // return nameSeparator
-    //   .map((element) => element[0])
-    //   .reduce((element, acc) => element + acc);
     return nameSeparator[0];
   };
   const getInitials = () => {
