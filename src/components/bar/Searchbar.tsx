@@ -8,8 +8,11 @@ const Searchbar = () => {
   const [initials, setInitials] = useState("");
   useEffect(() => {
     const token = localStorage.getItem("token");
-    token === "" || token == null ? setIsToken(false) : setIsToken(true);
-    getInitials();
+    if (token === "" || token == null) setIsToken(false);
+    else {
+      setIsToken(true);
+      getInitials();
+    }
   }, [isToken]);
   const logOut = () => {
     localStorage.removeItem("token");
@@ -21,6 +24,7 @@ const Searchbar = () => {
   };
   const getInitials = () => {
     try {
+      console.log("get initials");
       const logg = ParentService.getUserData();
       logg.then((response) => {
         setInitials(

@@ -17,6 +17,7 @@ const TypeNavbar = () => {
   }, [isToken]);
   const getInitials = () => {
     try {
+      console.log("bar");
       const logg = ParentService.getUserData();
       logg.then((response) => {
         if (response.data.role === "Specialist") setIsSpecialist(true);

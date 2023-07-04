@@ -52,6 +52,7 @@ const RecommendationPage = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchRecommendation();
   }, []);
 

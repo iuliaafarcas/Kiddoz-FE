@@ -199,7 +199,6 @@ const CreateRecommendationForm = () => {
     if (fromAge <= 0 || toAge <= 0) return false;
     const fromAgeInDays = convertToDays(fromAge, fromUnitAge);
     const toAgeInDays = convertToDays(toAge, toUnitAge);
-    console.log(fromAgeInDays, toAgeInDays);
     if (fromAgeInDays >= toAgeInDays) return false;
   };
 
@@ -250,6 +249,7 @@ const CreateRecommendationForm = () => {
     specialistId: number,
     benefits: Array<number>[]
   ) => {
+    console.log("Age:", fromAge, toUnitAge);
     try {
       const response = await SpecialistService.addRecommendation(
         title,

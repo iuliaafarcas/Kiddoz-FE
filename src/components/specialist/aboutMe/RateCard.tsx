@@ -25,14 +25,13 @@ const RateCard = () => {
       localStorage.getItem("token") === "" ||
       localStorage.getItem("token") === null
     ) {
-      setIsSnackbarOpen(true);
       setNoStar(0);
     } else {
       try {
+        console.log(localStorage.getItem("token"));
         const logg = ParentService.getUserData();
         logg.then((response) => {
           setParentId(response.data.id);
-          fetchRating(specialistObject.id!, parentId, noStar);
         });
       } catch (e) {
         console.log(e);
@@ -40,13 +39,19 @@ const RateCard = () => {
     }
   };
 
-  // useEffect(() => {
-  //   getParentId();
-  // }, [parentId]);
+  useEffect(() => {
+    getParentId();
+  }, []);
 
   const handleClick = (no: number) => {
-    setNoStar(no);
-    getParentId();
+    if (parentId === 0) setIsSnackbarOpen(true);
+    else {
+      setNoStar(no);
+      console.log("parent: ");
+
+      console.log(parentId);
+      fetchRating(specialistObject.id!, parentId, no);
+    }
   };
 
   const fetchRating = async (
