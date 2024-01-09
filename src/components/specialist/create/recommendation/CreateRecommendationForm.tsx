@@ -249,7 +249,6 @@ const CreateRecommendationForm = () => {
     specialistId: number,
     benefits: Array<number>[]
   ) => {
-    console.log("Age:", fromAge, toUnitAge);
     try {
       const response = await SpecialistService.addRecommendation(
         title,
@@ -263,7 +262,8 @@ const CreateRecommendationForm = () => {
         specialistId,
         benefits
       );
-      setErrorMessage("Recommendation added succesfully!");
+
+      window.location.href = "/recommendations";
     } catch (error) {
       console.error("Error fetching recommendations:", error);
     }

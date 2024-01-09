@@ -51,6 +51,11 @@ const Specialists = () => {
       );
       setSpecialists(response.data[1]);
       setNoSpecialists(response.data[0]);
+      setNoPages(
+        noSpecialists % noItemsPerPage === 0
+          ? Math.floor(noSpecialists / noItemsPerPage)
+          : Math.floor(noSpecialists / noItemsPerPage) + 1
+      );
     } catch (e) {
       console.log(e);
     }
@@ -67,11 +72,6 @@ const Specialists = () => {
     }
   };
   useEffect(() => {
-    setNoPages(
-      noSpecialists % noItemsPerPage === 0
-        ? Math.floor(noSpecialists / noItemsPerPage)
-        : Math.floor(noSpecialists / noItemsPerPage) + 1
-    );
     fetchSpecialists(
       fromAgeFilter,
       toAgeFilter,
@@ -86,8 +86,6 @@ const Specialists = () => {
     domainNameFilter,
     ratingFilter,
     page,
-    noSpecialists,
-    specialists,
   ]);
 
   return (
