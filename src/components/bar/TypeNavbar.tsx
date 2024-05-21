@@ -43,38 +43,7 @@ const TypeNavbar = () => {
         flexDirection: "row",
         zIndex: 2,
       }}
-    >
-      <Button
-        onClick={() => handleClick("recommendations")}
-        sx={{
-          color: "white",
-          paddingTop: "10px",
-          textTransform: "unset",
-          marginLeft: "120px",
-        }}
-      >
-        {" "}
-        Recommendations
-      </Button>
-
-      <Button
-        onClick={() => handleClick("specialists")}
-        sx={{ color: "white", paddingTop: "10px", textTransform: "unset" }}
-      >
-        {" "}
-        Specialists
-      </Button>
-
-      {isSpecialist && (
-        <Button
-          onClick={() => handleClick("create")}
-          sx={{ color: "white", paddingTop: "10px", textTransform: "unset" }}
-        >
-          {" "}
-          Create recommendation
-        </Button>
-      )}
-    </Box>
+    ></Box>
   );
 };
 export default TypeNavbar;

@@ -1,7 +1,6 @@
 import React from "react";
 import { NavbarStyled, LogoStyled } from "./StyledComponents";
-import logo from "../../assets/logo.jpeg";
-import Searchbar from "./Searchbar";
+import logo from "../../assets/logoRH.jpg";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -10,7 +9,6 @@ const Navbar = () => {
       <Link to="/">
         <LogoStyled src={logo} />
       </Link>
-      <Searchbar />
     </NavbarStyled>
   );
 };

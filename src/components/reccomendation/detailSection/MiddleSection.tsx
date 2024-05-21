@@ -1,54 +1,51 @@
-import { Grid } from "@mui/material";
 import {
-  RecommendationContext,
-  RecommendationContextModel,
-} from "../../context/RecommendationContext";
-import { useContext } from "react";
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  Grid,
+  Typography,
+} from "@mui/material";
+import {
+  HookContext,
+  HookContextModel,
+} from "../../context/HookContext";
+import { useContext, useState } from "react";
+import React from "react";
 
 const MiddleSection = () => {
-  const { RecommendationObject } = useContext(
-    RecommendationContext
-  ) as RecommendationContextModel;
-  var arr = RecommendationObject.benefits;
+  const { HookObject } = useContext(
+    HookContext
+  ) as HookContextModel;
+  const [openDialog, setOpenDialog] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const displayDialog = () => {
+    if (errorMessage !== "") {
+      setIsOpened(true);
+      return;
+    }
+    setOpenDialog(true);
+  };
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    setIsOpened(false);
+  };
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+  };
 
   return (
     <>
       <Grid
         sx={{
-          height: "100px",
           maxWidth: "540px",
-          marginTop: "10px",
-          marginLeft: "30px",
         }}
-        display="flex"
-        flexDirection="row"
-        flexWrap="wrap"
       >
-        {arr.map((element) => {
-          return (
-            <Grid
-              item
-              key={element.id}
-              sx={{
-                fontSize: "12px",
-                color: "white ",
-                marginRight: "10px",
-                minWidth: "70px",
-                background: "#2A9D8F",
-                paddingLeft: "10px",
-                paddingRight: "10px",
-                borderRadius: "20px",
-                marginBottom: "3px",
-                textAlign: "center",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              {element.name}
-            </Grid>
-          );
-        })}
+      
       </Grid>
     </>
   );

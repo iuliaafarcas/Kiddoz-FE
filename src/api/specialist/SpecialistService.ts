@@ -1,29 +1,43 @@
 import httpConfig from "../../utils/http-common";
 
 class EventService {
-  addRecommendation(
+  addInternship(
+    employerId: number,
     title: string,
+    domain: string,
     description: string,
-    fromAge: number,
-    fromUnitAge: string,
-    toAge: number,
-    toUnitAge: string,
-    type: string,
-    image: string,
-    specialistId: number,
-    benefits: Array<number>[]
+    location: string,
+    candidateDescription: string,
+    benefits: string,
+    organisationMethod: string,
+    startDate: Date,
+    endDate: Date,
+    paidPosition: boolean,
+    startingSalary: number,
+    highestSalary: number,
+    currency: string,
+    hiringPossibility: boolean,
+    postDate: Date,
+    closingDate: Date
   ) {
-    return httpConfig.post(`/recommendations`, {
+    return httpConfig.post(`/internships`, {
+      employerId,
       title,
+      domain,
       description,
-      fromAge,
-      fromUnitAge,
-      toAge,
-      toUnitAge,
-      type,
-      image,
-      specialistId,
+      location,
+      candidateDescription,
       benefits,
+      organisationMethod,
+      startDate,
+      endDate,
+      paidPosition,
+      startingSalary,
+      highestSalary,
+      currency,
+      hiringPossibility,
+      postDate,
+      closingDate,
     });
   }
   getSpecialistById(id: number) {
